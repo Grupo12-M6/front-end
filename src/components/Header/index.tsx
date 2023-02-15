@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <Flex
       w='100vw'
-      h='80px'
+      minH='80px'
       p='0 60px'
       minW='768'
       alignItems='center'
