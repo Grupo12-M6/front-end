@@ -100,10 +100,7 @@ export const HeaderMobile = () => {
                 </Button>
               </VStack>
 
-              {/* <VStack p='4 2' justifyContent='space-between'>
-                    / user image
-                    / user name
-              </VStack> */}
+              {/* if token -> <UserMenu/> instead of last VStack */}
             </AccordionPanel>
           </>
         )}
