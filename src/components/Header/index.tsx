@@ -1,99 +1,86 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Breadcrumb,
-  Button,
-  Heading,
-  Text,
-  VStack,
-} from "@chakra-ui/react"
+import { Button, Flex, Heading, HStack, Text, VStack } from "@chakra-ui/react"
 
-import { HiMenu } from "react-icons/hi"
-import { CgClose } from "react-icons/cg"
-import { CustomBreadcrumbLink } from "./CustomBreadcrumbLink"
+import { CustomLink } from "./CustomLink"
 
 export const Header = () => {
   function handleClickLogin() {}
   function handleClickRegister() {}
 
   return (
-    <Accordion w='100vw'>
-      <AccordionItem w='100%' bg='white'>
-        {({ isExpanded }) => (
-          <>
-            <Heading p='4 2'>
-              <Box as='span' flex='1' textAlign='left'>
-                Motors Shop
-              </Box>
+    <Flex
+      w='100vw'
+      h='80px'
+      p='0 60px'
+      minW='768'
+      alignItems='center'
+      justifyContent='space-between'
+      borderBottom='2px'
+      borderColor='grey.6'
+      boxShadow='-webkit-box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);
+      -moz-box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);
+      box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);'
+    >
+      <Heading fontSize='md'>Motors Shop</Heading>
 
-              <AccordionButton>
-                {isExpanded ? (
-                  <CgClose fontSize='12px' color='grey.1' />
-                ) : (
-                  <HiMenu fontSize='12px' color='grey.1' />
-                )}
-              </AccordionButton>
-            </Heading>
+      <Flex
+        h='100%'
+        w='45%'
+        minW='382px'
+        alignItems='center'
+        justifyContent='space-between'
+      >
+        <HStack
+          h='100%'
+          w='50%'
+          p='0 5% 0 0'
+          gap='2%'
+          borderRight='2px'
+          borderColor='grey.6'
+          justifyContent='space-between'
+        >
+          <CustomLink href='#cars' content='Carros' />
+          <CustomLink href='#motorcycles' content='Motos' />
+          <CustomLink href='#auction' content='Leilão' />
+        </HStack>
 
-            <AccordionPanel>
-              <Breadcrumb
-                p='4 2'
-                borderTop='1px solid grey.4'
-                borderBottom='1px solid grey.4'
-                display='flex'
-                flexDir='column'
-                justifyContent='space-between'
-                alignItems='flex-start'
-              >
-                <CustomBreadcrumbLink href='#cars' content='Carros' />
-                <CustomBreadcrumbLink href='#motorcycles' content='Motos' />
-                <CustomBreadcrumbLink href='#auction' content='Leilão' />
-              </Breadcrumb>
-
-              <VStack p='4 2' justifyContent='space-between'>
-                <Text
-                  as='button'
-                  color='grey.2'
-                  fontSize='xs'
-                  fontWeight='600'
-                  fontFamily='body'
-                  _hover={{ color: "brand.1" }}
-                  _focus={{ color: "brand.1" }}
-                  onClick={() => handleClickLogin()}
-                >
-                  Fazer Login
-                </Text>
-                <Button
-                  w='100%'
-                  h='48px'
-                  color='grey.0'
-                  fontSize='xs'
-                  fontWeight='600'
-                  fontFamily='body'
-                  border='1.5px solid grey.4'
-                  borderRadius='4px'
-                  bg='transparent'
-                  _hover={{
-                    color: "grey.10",
-                    bg: "grey.1",
-                  }}
-                  onClick={() => handleClickRegister()}
-                >
-                  Cadastrar
-                </Button>
-              </VStack>
-
-              {/* <VStack p='4 2' justifyContent='space-between'>
-                    / user image
-                    / user name
-              </VStack> */}
-            </AccordionPanel>
-          </>
-        )}
-      </AccordionItem>
-    </Accordion>
+        <HStack w='50%' gap='2%' p='0 0 0 5%' justifyContent='space-between'>
+          <Text
+            as='button'
+            color='grey.2'
+            fontSize='xs'
+            textAlign='left'
+            fontWeight='600'
+            fontFamily='body'
+            _hover={{ color: "brand.1" }}
+            _focus={{ color: "brand.1" }}
+            onClick={() => handleClickLogin()}
+          >
+            Fazer Login
+          </Text>
+          <Button
+            h='48px'
+            p='0'
+            w='130px'
+            color='grey.0'
+            bg='transparent'
+            margin='0'
+            fontSize='xs'
+            fontWeight='600'
+            fontFamily='body'
+            border='2px'
+            borderColor='grey.4'
+            borderRadius='4px'
+            _hover={{
+              bg: "grey.1",
+              color: "grey.10",
+              borderColor: "grey.10",
+            }}
+            onClick={() => handleClickRegister()}
+          >
+            Cadastrar
+          </Button>
+        </HStack>
+      </Flex>
+    </Flex>
   )
 }
