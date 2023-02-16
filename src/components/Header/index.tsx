@@ -61,20 +61,9 @@ export const Header = () => {
             h='48px'
             p='0'
             w='130px'
-            color='grey.0'
-            bg='transparent'
             margin='0'
             fontSize='xs'
-            fontWeight='600'
-            fontFamily='body'
-            border='2px'
-            borderColor='grey.4'
-            borderRadius='4px'
-            _hover={{
-              bg: "grey.1",
-              color: "grey.10",
-              borderColor: "grey.10",
-            }}
+            variant='outline2'
             onClick={() => handleClickRegister()}
           >
             Cadastrar
