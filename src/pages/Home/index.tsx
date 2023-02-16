@@ -11,7 +11,6 @@ const Home = () => {
     <Flex w='100vw' h='100vh' flexDirection='column'>
       {width >= 768 ? <Header /> : <HeaderMobile />}
     </Flex>
-
   )
 }
 
