@@ -21,6 +21,19 @@ import {
 import { IconType } from "react-icons"
 import { CgDanger } from "react-icons/cg"
 
+/* 
+  ----EXEMPLO DE USO DO INPUT-----
+<Input
+  placeholder='INSIRA AQUI O PLACEHOLDER'
+  icon={FaLock} --OPCIONAL
+  name="nameInput"
+  label='LABEL'
+  type='password'
+  error={errors.password} --OPCIONAL
+  {...register("password")} --OPCIONAL
+/> 
+*/
+
 interface InputProps extends ChakraInputProps {
     name: string
     label?: string
