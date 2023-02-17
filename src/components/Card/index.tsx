@@ -47,6 +47,7 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
       w='312px'
       h={isMine ? "380px" : "350px"}
       variant='unstyled'
+      _hover={{ cursor: "pointer" }}
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
     >
@@ -63,14 +64,22 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
           {isActive ? "Active" : "Inactive"}
         </Box>
       )}
-      <Image
-        src={image}
+      <Box
         w='100%'
         h='150px'
         border='2px'
         borderRadius='4px'
         borderColor={isOnHover ? "brand.1" : "transparent"}
-      />
+        overflow='hidden'
+      >
+        <Image
+          src={image}
+          w='100%'
+          h='100%'
+          transform={isOnHover ? "scale(1.2)" : "scale(1)"}
+          transitionDuration='500ms'
+        />
+      </Box>
       <CardBody
         p='2'
         display='flex'
@@ -84,7 +93,7 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
             fontSize='sm'
             fontWeight='600'
             fontFamily='heading'
-            overflow='hidden'
+            isTruncated
           >
             {title}
           </Heading>
@@ -96,8 +105,7 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
             fontSize='0.875rem'
             fontWeight='400'
             fontFamily='body'
-            overflow='hidden'
-            textOverflow='ellipsis'
+            noOfLines={2}
           >
             {description}
           </Text>

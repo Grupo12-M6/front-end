@@ -16,9 +16,7 @@ export const Header = () => {
       justifyContent='space-between'
       borderBottom='2px'
       borderColor='grey.6'
-      boxShadow='-webkit-box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);
-      -moz-box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);
-      box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);'
+      boxShadow='md'
     >
       <Heading fontSize='md'>Motors Shop</Heading>
 
