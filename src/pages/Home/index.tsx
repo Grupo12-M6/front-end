@@ -1,18 +1,19 @@
-import { Flex } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react";
 
-import { UseGetScreenWidth } from "../../hooks"
-import { Header } from "../../components/Header"
-import { HeaderMobile } from "../../components/Header/HeaderMobile"
+import { UseGetScreenWidth } from "../../hooks";
+import { Header } from "../../components/Header";
+import { HeaderMobile } from "../../components/Header/HeaderMobile";
+import { FooterDesktop } from "../../components/footer/footer";
 
 const Home = () => {
-  const [, width] = UseGetScreenWidth()
+  const [, width] = UseGetScreenWidth();
 
   return (
-    <Flex w='100vw' h='100vh' flexDirection='column'>
+    <Flex w="100vw" h="100vh" flexDirection="column">
       {width >= 768 ? <Header /> : <HeaderMobile />}
+      <FooterDesktop />
     </Flex>
+  );
+};
 
-  )
-}
-
-export default Home
+export default Home;
