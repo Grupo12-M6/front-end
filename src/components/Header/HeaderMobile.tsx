@@ -18,11 +18,8 @@ export const HeaderMobile = () => {
   function handleClickRegister() {}
 
   return (
-    <Accordion
-      w='100vw'
-      allowToggle
-    >
-      <AccordionItem w='100%' bg='white'>
+    <Accordion w='100vw' allowToggle>
+      <AccordionItem w='100%' bg='white' boxShadow='md'>
         {({ isExpanded }) => (
           <>
             <Flex
@@ -81,19 +78,8 @@ export const HeaderMobile = () => {
                   h='48px'
                   p='0'
                   margin='0'
-                  color='grey.0'
                   fontSize='xs'
-                  fontWeight='600'
-                  fontFamily='body'
-                  border='2px'
-                  borderColor='grey.4'
-                  borderRadius='4px'
-                  bg='transparent'
-                  _hover={{
-                    bg: "grey.1",
-                    color: "grey.10",
-                    borderColor: "grey.10",
-                  }}
+                  variant='outline1'
                   onClick={() => handleClickRegister()}
                 >
                   Cadastrar

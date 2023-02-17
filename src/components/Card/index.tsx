@@ -10,6 +10,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react"
+import { useState } from "react"
 
 interface IAdProps {
   image: string
@@ -29,6 +30,7 @@ interface ICustomCardProps {
 
 export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
   const { image, description, mileage, price, title, userName, year } = ad
+  const [isOnHover, setIsOnHover] = useState(false)
 
   const formattedPrice = () => {
     return Intl.NumberFormat("pt-BR", {
@@ -44,9 +46,10 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
     <Card
       w='312px'
       h={isMine ? "380px" : "350px"}
-      border='2px'
-      borderColor='transparent'
-      _hover={{ borderColor: "brand.1" }}
+      variant='unstyled'
+      _hover={{ cursor: "pointer" }}
+      onMouseOver={() => setIsOnHover(true)}
+      onMouseOut={() => setIsOnHover(false)}
     >
       {isActive !== undefined && (
         <Box
@@ -61,7 +64,22 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
           {isActive ? "Active" : "Inactive"}
         </Box>
       )}
-      <Image src={image} w='100%' h='150px' />
+      <Box
+        w='100%'
+        h='150px'
+        border='2px'
+        borderRadius='4px'
+        borderColor={isOnHover ? "brand.1" : "transparent"}
+        overflow='hidden'
+      >
+        <Image
+          src={image}
+          w='100%'
+          h='100%'
+          transform={isOnHover ? "scale(1.2)" : "scale(1)"}
+          transitionDuration='500ms'
+        />
+      </Box>
       <CardBody
         p='2'
         display='flex'
@@ -75,7 +93,7 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
             fontSize='sm'
             fontWeight='600'
             fontFamily='heading'
-            overflow='hidden'
+            isTruncated
           >
             {title}
           </Heading>
@@ -87,8 +105,7 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
             fontSize='0.875rem'
             fontWeight='400'
             fontFamily='body'
-            overflow='hidden'
-            textOverflow='ellipsis'
+            noOfLines={2}
           >
             {description}
           </Text>
@@ -135,35 +152,17 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
         {isMine && (
           <CardFooter p='0' paddingTop='4' gap='2'>
             <Button
-              bg='grey.10'
-              color='grey.0'
               fontSize='0.875rem'
               fontWeight='600'
-              border='2px'
-              borderColor='grey.0'
-              borderRadius='4px'
-              _hover={{
-                bg: "grey.1",
-                color: "grey.10",
-                borderColor: "grey.10",
-              }}
+              variant='outline1'
               onClick={() => handleEdit()}
             >
               Editar
             </Button>
             <Button
-              bg='grey.10'
-              color='grey.0'
               fontSize='0.875rem'
               fontWeight='600'
-              border='2px'
-              borderColor='grey.0'
-              borderRadius='4px'
-              _hover={{
-                bg: "grey.1",
-                color: "grey.10",
-                borderColor: "grey.10",
-              }}
+              variant='outline1'
               onClick={() => handleSeeMore()}
             >
               Ver como
