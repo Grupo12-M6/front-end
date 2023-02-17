@@ -3,7 +3,7 @@ import { Flex } from "@chakra-ui/react";
 import { UseGetScreenWidth } from "../../hooks";
 import { Header } from "../../components/Header";
 import { HeaderMobile } from "../../components/Header/HeaderMobile";
-import { FooterDesktop } from "../../components/footer/footer";
+import { FooterDesktop } from "../../components/Footer";
 
 const Home = () => {
   const [, width] = UseGetScreenWidth();
