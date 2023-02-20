@@ -2,6 +2,7 @@ import { Button, Flex, HStack, Text } from "@chakra-ui/react"
 
 import { CustomLink } from "./CustomLink"
 import { DefaultLogo } from "../../utils/defaultLogo"
+import { UserMenu } from "../Menu/UserMenu"
 
 export const Header = () => {
   function handleClickLogin() {}
@@ -27,12 +28,12 @@ export const Header = () => {
         w='45%'
         minW='382px'
         alignItems='center'
-        justifyContent='space-between'
+        justifyContent='flex-end'
       >
         <HStack
           h='100%'
           w='50%'
-          p='0 5% 0 0'
+          p='0 30px 0 0'
           gap='2%'
           borderRight='2px'
           borderColor='grey.6'
@@ -43,9 +44,10 @@ export const Header = () => {
           <CustomLink href='#auction' content='Leilão' />
         </HStack>
 
-        <HStack w='50%' gap='2%' p='0 0 0 5%' justifyContent='space-between'>
+        <HStack w='45%' gap='4' justifyContent='space-between' pl='30px'>
           <Text
             as='button'
+            w='max-content'
             color='grey.2'
             fontSize='xs'
             textAlign='left'
@@ -58,18 +60,15 @@ export const Header = () => {
             Fazer Login
           </Text>
           <Button
+            m='0'
             h='48px'
-            p='0'
             w='130px'
-            color='grey.0'
-            bg='transparent'
+            minW='100px'
             margin='0'
             fontSize='xs'
             fontWeight='600'
             fontFamily='body'
-            border='2px'
-            borderColor='grey.4'
-            borderRadius='4px'
+            variant='outline1'
             _hover={{
               bg: "grey.1",
               color: "grey.10",
@@ -80,6 +79,8 @@ export const Header = () => {
             Cadastrar
           </Button>
         </HStack>
+        {/* if token -> <UserMenu/> instead of last VStack */}
+        {/* <UserMenu name={}/> */}
       </Flex>
     </Flex>
   )

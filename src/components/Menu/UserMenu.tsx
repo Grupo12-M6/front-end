@@ -1,5 +1,6 @@
 import { Component } from "react"
 import {
+  Avatar,
   Box,
   Menu,
   MenuButton,
@@ -10,11 +11,10 @@ import {
 import { CustomMenuItem } from "./CustomMenuItem"
 
 interface IUserMenuProps {
-  Icon: Component
   name: string
 }
 
-export const UserMenu = ({ Icon, name }: IUserMenuProps) => {
+export const UserMenu = ({ name }: IUserMenuProps) => {
   function handleEditProfile() {}
   function handleEditAddress() {}
   function handleSeeAds() {}
@@ -22,14 +22,14 @@ export const UserMenu = ({ Icon, name }: IUserMenuProps) => {
 
   return (
     <Menu>
-      <MenuButton>
-        <Box>
-          {/* <Icon/> */}
+      <MenuButton p={['32px 16px', '32px 16px', '0', '0']}>
+        <Box display='flex' gap='6' alignItems='center' w='max-content'>
+          <Avatar name={name} size='sm'/>
           <Text
             color='grey.2'
             fontSize='xs'
             textAlign='left'
-            fontWeight='400'
+            fontWeight='500'
             fontFamily='body'
           >
             {name}
