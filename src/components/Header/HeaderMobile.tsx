@@ -13,6 +13,7 @@ import { HiMenu } from "react-icons/hi"
 import { CgClose } from "react-icons/cg"
 import { CustomLink } from "./CustomLink"
 import { DefaultLogo } from "../../utils/defaultLogo"
+import { UserMenu } from "../Menu/UserMenu"
 
 export const HeaderMobile = () => {
   function handleClickLogin() {}
@@ -88,6 +89,7 @@ export const HeaderMobile = () => {
               </VStack>
 
               {/* if token -> <UserMenu/> instead of last VStack */}
+              {/* <UserMenu name={}/> */}
             </AccordionPanel>
           </>
         )}
