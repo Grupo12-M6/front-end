@@ -11,9 +11,10 @@ export const Header = () => {
   return (
     <Flex
       w='100vw'
+      minW='768'
       minH='80px'
       p='0 60px'
-      minW='768'
+      bg='grey.10'
       alignItems='center'
       justifyContent='space-between'
       borderBottom='2px'
@@ -69,11 +70,6 @@ export const Header = () => {
             fontWeight='600'
             fontFamily='body'
             variant='outline1'
-            _hover={{
-              bg: "grey.1",
-              color: "grey.10",
-              borderColor: "grey.10",
-            }}
             onClick={() => handleClickRegister()}
           >
             Cadastrar
