@@ -21,7 +21,7 @@ export const HeaderMobile = () => {
 
   return (
     <Accordion w='100vw' allowToggle>
-      <AccordionItem w='100%' bg='white' boxShadow='md'>
+      <AccordionItem w='100%' bg='grey.10' boxShadow='md'>
         {({ isExpanded }) => (
           <>
             <Flex
