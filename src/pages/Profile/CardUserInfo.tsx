@@ -1,42 +1,12 @@
-import { useEffect, useState } from "react"
 import { Avatar, Button, Flex, HStack, Tag, Text } from "@chakra-ui/react"
-
-import { api } from "../../services/api"
+import { IUser } from "../../interfaces/user"
 
 interface ICardUserProps {
-  id: string
+  userInfo: IUser
 }
 
-interface IUser {
-  id: string
-  name: string
-  email: string
-  cpf: string
-  phone_number: string
-  birthday: Date
-  description: string
-  is_seller: boolean
-  address: string
-}
-
-export const CardUserInfo = ({ id }: ICardUserProps) => {
-  const [userInfo, setUserInfo] = useState<IUser>({} as IUser)
-  // const token = useContext()
-  // const {userId} = useContext
-
-  useEffect(() => {
-    api
-      .get(
-        `/users/${id}/ads` /* {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          } */
-      )
-      .then((res) => setUserInfo(res.data))
-      .catch((err) => console.log(err))
-  }, [])
-
+export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
+  // const { userId } = useContext()
   const handleClick = () => {}
 
   return (
@@ -44,10 +14,10 @@ export const CardUserInfo = ({ id }: ICardUserProps) => {
       <Avatar name={userInfo.name} />
       <HStack>
         <Text> {userInfo.name} </Text>
+        {!!userInfo.is_seller && <Tag> Anunciante </Tag>}
       </HStack>
-      {!!userInfo.is_seller && <Tag> Anunciante </Tag>}
       <Text> {userInfo.description} </Text>
-      {/* {id === userId && (
+      {/* {userinfo.id === userId && (
         <Button variant='outlineBrand1' onClick={() => handleClick()}>
           Criar anuncio
         </Button>
