@@ -12,58 +12,49 @@ import {
 } from "@chakra-ui/react"
 import { useState } from "react"
 
-interface IAdProps {
-  image: string
-  title: string
-  description: string
-  userName: string
-  mileage: number
-  year: number
-  price: number
-}
+import { IAd } from "../../interfaces/ads"
+import { formatCurrency } from "../../utils/formatCurrency"
 
 interface ICustomCardProps {
-  ad: IAdProps
-  isActive?: boolean
-  isMine?: boolean
+  ad: IAd
 }
 
-export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
-  const { image, description, mileage, price, title, userName, year } = ad
+export const CustomCard = ({ ad }: ICustomCardProps) => {
+  const { description, mileage, price, title, user, year, is_active, images } =
+    ad
+
+  // const { userId } = useContext()
+  // const isMine = () => {userId == user.id ? true : false}
+
   const [isOnHover, setIsOnHover] = useState(false)
 
-  const formattedPrice = () => {
-    return Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(price)
-  }
+  const formattedPrice = formatCurrency(price)
 
-  function handleEdit() {}
-  function handleSeeMore() {}
+  const handleEdit = () => {}
+  const handleSeeMore = () => {}
 
   return (
     <Card
       w='312px'
-      h={isMine ? "380px" : "350px"}
+      // h={isMine ? "380px" : "350px"}
       variant='unstyled'
       _hover={{ cursor: "pointer" }}
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
     >
-      {isActive !== undefined && (
+      {/*  {!isMine && (
         <Box
           p='2'
           m='2'
           borderRadius='2px'
           color='white'
           fontSize='0.875rem'
-          bg={isActive ? "brand.1" : "grey.4"}
+          bg={is_active ? "brand.1" : "grey.4"}
           position='absolute'
         >
-          {isActive ? "Active" : "Inactive"}
+          {is_active ? "Active" : "Inactive"}
         </Box>
-      )}
+      )} */}
       <Box
         w='100%'
         h='150px'
@@ -73,7 +64,7 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
         overflow='hidden'
       >
         <Image
-          src={image}
+          src={images[0].url}
           w='100%'
           h='100%'
           transform={isOnHover ? "scale(1.2)" : "scale(1)"}
@@ -109,7 +100,7 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
           >
             {description}
           </Text>
-          <Text> {userName} </Text>
+          <Text> {user.name} </Text>
         </Stack>
         <Box
           p='0'
@@ -146,10 +137,10 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
             </Box>
           </HStack>
           <Text as='span' color='grey.1' fontWeight='500' fontFamily='heading'>
-            {formattedPrice()}
+            {formattedPrice}
           </Text>
         </Box>
-        {isMine && (
+        {/* {isMine && (
           <CardFooter p='0' paddingTop='4' gap='2'>
             <Button
               fontSize='0.875rem'
@@ -168,7 +159,7 @@ export const CustomCard = ({ ad, isActive, isMine }: ICustomCardProps) => {
               Ver como
             </Button>
           </CardFooter>
-        )}
+        )} */}
       </CardBody>
     </Card>
   )
