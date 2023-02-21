@@ -7,10 +7,7 @@ export const FooterDesktop = () => {
     <Box
       bg='black'
       color='grey.10'
-      position='absolute'
-      right={0}
-      left={0}
-      bottom={0}
+      w='100%'
     >
       <Container
         as={Stack}
