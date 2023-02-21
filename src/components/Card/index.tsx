@@ -35,14 +35,14 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
 
   return (
     <Card
-      w='312px'
+    w='300px'
       // h={isMine ? "380px" : "350px"}
       variant='unstyled'
       _hover={{ cursor: "pointer" }}
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
     >
-      {/*  {!isMine && (
+      {/* {!isMine && (
         <Box
           p='2'
           m='2'
@@ -54,7 +54,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
         >
           {is_active ? "Active" : "Inactive"}
         </Box>
-      )} */}
+      )}  */}
       <Box
         w='100%'
         h='150px'
@@ -159,8 +159,10 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
               Ver como
             </Button>
           </CardFooter>
-        )} */}
+        )}  */}
       </CardBody>
     </Card>
   )
-}
+} 
+
+

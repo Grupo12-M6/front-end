@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { Flex } from "@chakra-ui/react"
+import { Flex, VStack } from "@chakra-ui/react"
 
 import { api } from "../../services/api"
 import { UseGetScreenWidth } from "../../hooks"
@@ -16,48 +16,58 @@ import { FooterDesktop } from "../../components/Footer"
 import { Background } from "../../components/Background"
 import { HeaderMobile } from "../../components/Header/HeaderMobile"
 
-
 const Profile = () => {
-  let { id } = useParams()
+  // let { id } = useParams()
 
-  const [userAds, setUserAds] = useState<IAd[]>([])
+  const [userAds, setUserAds] = useState<IAd[]>([] as IAd[])
   const [userInfo, setUserInfo] = useState<IUser>({} as IUser)
 
   const [, width] = UseGetScreenWidth()
 
-  useEffect(() => {
+  /* useEffect(() => {
     api
       .get(
-        `/users/${id}/ads` /* {
+        `/users/${id}/ads`  {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          } */
+          } 
       )
       .then((res) => {
         setUserAds(res.data)
-        setUserInfo(res.data.user)
+        setUserInfo(res.data[0].user)
       })
       .catch((err) => console.log(err))
   }, [])
-
+ */
   return (
-    <Flex>
+    <Flex
+      w='100vw'
+      h='100vh'
+      flexDirection='column'
+      alignItems='center'
+      overflowY='scroll'
+      overflowX='hidden'
+    >
       {width >= 768 ? <Header /> : <HeaderMobile />}
       <Background />
-      <CardUserInfo userInfo={userInfo} />
 
-      <List
-        title='Carros'
-        list={userAds.filter((ad) => ad.motor_type == "carro")}
-      />
-      <List
-        title='Motos'
-        list={userAds.filter((ad) => ad.motor_type == "moto")}
-      />
+      <VStack w='100%' p='60px 0' gap='12'>
+        <CardUserInfo userInfo={userInfo} />
+
+        <List
+          title='Carros'
+          list={userAds.filter((ad) => ad.motor_type == "carro")}
+        />
+        <List
+          title='Motos'
+          list={userAds.filter((ad) => ad.motor_type == "moto")}
+        />
+      </VStack>
       <FooterDesktop />
     </Flex>
   )
 }
 
 export default Profile
+

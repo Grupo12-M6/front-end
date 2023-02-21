@@ -56,8 +56,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_15656_1626"
@@ -67,8 +67,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_15656_1626"
@@ -78,8 +78,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint3_linear_15656_1626"
@@ -89,8 +89,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint4_linear_15656_1626"
@@ -100,8 +100,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint5_linear_15656_1626"
@@ -111,8 +111,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint6_linear_15656_1626"
@@ -122,8 +122,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint7_linear_15656_1626"
@@ -133,8 +133,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint8_linear_15656_1626"
@@ -144,8 +144,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
         <linearGradient
           id="paint9_linear_15656_1626"
@@ -155,8 +155,8 @@ export const DefaultLogo = (props: any) => {
           y2="32.168"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#0B0D0D" />
-          <stop offset="1" stop-color="#4529E6" />
+          <stop stopColor="#0B0D0D" />
+          <stop offset="1" stopColor="#4529E6" />
         </linearGradient>
       </defs>
     </svg>
