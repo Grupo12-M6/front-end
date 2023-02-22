@@ -20,11 +20,22 @@ interface ICustomCardProps {
 }
 
 export const CustomCard = ({ ad }: ICustomCardProps) => {
-  const { description, mileage, price, title, user, year, is_active, images } =
-    ad
+  const {
+    description,
+    mileage,
+    price,
+    title,
+    user,
+    year,
+    isActive, //images
+  } = ad
 
-  // const { userId } = useContext()
-  // const isMine = () => {userId == user.id ? true : false}
+  const userId = "c93f86fd-6cc1-4136-8d80-6f58a853502a"
+  let isMine = false
+
+  if (userId == user.id) {
+    isMine = true
+  }
 
   const [isOnHover, setIsOnHover] = useState(false)
 
@@ -35,26 +46,27 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
 
   return (
     <Card
-    w='300px'
-      // h={isMine ? "380px" : "350px"}
+      w='300px'
+      h={isMine ? "380px" : "350px"}
       variant='unstyled'
       _hover={{ cursor: "pointer" }}
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
+      bgColor='grey.8'
     >
-      {/* {!isMine && (
+      {!isMine && (
         <Box
           p='2'
           m='2'
           borderRadius='2px'
           color='white'
           fontSize='0.875rem'
-          bg={is_active ? "brand.1" : "grey.4"}
+          bg={isActive ? "brand.1" : "grey.4"}
           position='absolute'
         >
-          {is_active ? "Active" : "Inactive"}
+          {isActive ? "Active" : "Inactive"}
         </Box>
-      )}  */}
+      )}
       <Box
         w='100%'
         h='150px'
@@ -64,7 +76,8 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
         overflow='hidden'
       >
         <Image
-          src={images[0].url}
+          // src={images[0].url}
+          src='https://garagem360.com.br/wp-content/uploads/2021/08/ALTA20-1.jpeg'
           w='100%'
           h='100%'
           transform={isOnHover ? "scale(1.2)" : "scale(1)"}
@@ -140,7 +153,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
             {formattedPrice}
           </Text>
         </Box>
-        {/* {isMine && (
+        {isMine && (
           <CardFooter p='0' paddingTop='4' gap='2'>
             <Button
               fontSize='0.875rem'
@@ -159,10 +172,8 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
               Ver como
             </Button>
           </CardFooter>
-        )}  */}
+        )}
       </CardBody>
     </Card>
   )
-} 
-
-
+}

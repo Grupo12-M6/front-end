@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react"
+import { Heading, HStack, Text, VStack } from "@chakra-ui/react"
 import { IAd } from "../../interfaces/ads"
 
 import { CustomCard } from "../Card"
@@ -29,7 +29,7 @@ export const List = ({ title, list }: IListProps) => {
         },
       }}
     >
-      <Heading fontFamily='Lexend' fontWeight='600' fontSize='md' color='black'>
+      <Heading fontFamily='Lexend' fontWeight='600' fontSize='md' color='black' marginBottom='12'>
         {title}
       </Heading>
 

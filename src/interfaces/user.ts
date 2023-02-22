@@ -5,9 +5,9 @@ export interface IUser {
   name: string
   email: string
   cpf: string
-  phone_number: string
+  phoneNumber: string
   birthday: Date
   description: string
-  is_seller: boolean
+  isSeller: boolean
   address: IAddress
 }

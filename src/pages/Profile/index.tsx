@@ -17,29 +17,30 @@ import { Background } from "../../components/Background"
 import { HeaderMobile } from "../../components/Header/HeaderMobile"
 
 const Profile = () => {
-  // let { id } = useParams()
+  let { id } = useParams()
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlU2VsbGVyQG1haWwuY29tIiwiaWF0IjoxNjc3MDgzOTIzLCJleHAiOjE2NzcxMTk5MjMsInN1YiI6ImM5M2Y4NmZkLTZjYzEtNDEzNi04ZDgwLTZmNThhODUzNTAyYSJ9.bAoZJX8QLvZeMZyVas657unnz7l0ffsQRDrwp_i20pE"
 
   const [userAds, setUserAds] = useState<IAd[]>([] as IAd[])
   const [userInfo, setUserInfo] = useState<IUser>({} as IUser)
 
   const [, width] = UseGetScreenWidth()
 
-  /* useEffect(() => {
+  useEffect(() => {
     api
-      .get(
-        `/users/${id}/ads`  {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          } 
-      )
+      .get(`/users/${id}/ads`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         setUserAds(res.data)
         setUserInfo(res.data[0].user)
       })
       .catch((err) => console.log(err))
   }, [])
- */
+
+
   return (
     <Flex
       w='100vw'
@@ -49,19 +50,19 @@ const Profile = () => {
       overflowY='scroll'
       overflowX='hidden'
     >
-      {width >= 768 ? <Header /> : <HeaderMobile />}
       <Background />
+      {width >= 768 ? <Header /> : <HeaderMobile />}
 
       <VStack w='100%' p='60px 0' gap='12'>
         <CardUserInfo userInfo={userInfo} />
 
         <List
           title='Carros'
-          list={userAds.filter((ad) => ad.motor_type == "carro")}
+          list={userAds.filter((ad) => ad.motorType == "carro")}
         />
         <List
           title='Motos'
-          list={userAds.filter((ad) => ad.motor_type == "moto")}
+          list={userAds.filter((ad) => ad.motorType == "moto")}
         />
       </VStack>
       <FooterDesktop />
@@ -70,4 +71,3 @@ const Profile = () => {
 }
 
 export default Profile
-

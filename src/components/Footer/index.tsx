@@ -8,6 +8,8 @@ export const FooterDesktop = () => {
       bg='black'
       color='grey.10'
       w='100%'
+      position='relative'
+      bottom='0'
     >
       <Container
         as={Stack}
