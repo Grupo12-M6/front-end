@@ -1,4 +1,5 @@
 import { Avatar, Button, HStack, Tag, Text, VStack } from "@chakra-ui/react"
+import { useAuth } from "../../contexts/AuthContext"
 import { IUser } from "../../interfaces/user"
 
 interface ICardUserProps {
@@ -6,7 +7,7 @@ interface ICardUserProps {
 }
 
 export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
-  const userId = "c93f86fd-6cc1-4136-8d80-6f58a853502a"
+  const { user } = useAuth()
   const handleClick = () => {}
 
   return (
@@ -42,7 +43,7 @@ export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
       <Text fontSize='xs' fontWeight='400' lineHeight='28px'>
         {userInfo.description}
       </Text>
-      {userInfo.id === userId && (
+      {userInfo.id === user.id && (
         <Button
           variant='outlineBrand1'
           fontSize='xs'

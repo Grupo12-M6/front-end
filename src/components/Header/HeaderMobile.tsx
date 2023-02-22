@@ -1,3 +1,4 @@
+import React from "react"
 import {
   Accordion,
   AccordionButton,
@@ -5,19 +6,33 @@ import {
   AccordionPanel,
   Button,
   Flex,
+  Heading,
   Text,
+  useDisclosure,
   VStack,
 } from "@chakra-ui/react"
 
 import { HiMenu } from "react-icons/hi"
 import { CgClose } from "react-icons/cg"
+
 import { CustomLink } from "./CustomLink"
-import { DefaultLogo } from "../../utils/defaultLogo"
 import { UserMenu } from "../Menu/UserMenu"
+import { LoginForm } from "../Form/LoginForm"
+import { ModalBasic } from "../Modals/baseModal"
+import { useAuth } from "../../contexts/AuthContext"
+import { DefaultLogo } from "../../utils/defaultLogo"
 
 export const HeaderMobile = () => {
-  function handleClickLogin() {}
-  function handleClickRegister() {}
+  const { token, user } = useAuth()
+
+  const {
+    isOpen: isMLoginOpen,
+    onOpen: onMLoginOpen,
+    onClose: onMLoginClose,
+  } = useDisclosure()
+
+  const initialRefLogin = React.useRef(null)
+  const finalRefLogin = React.useRef(null)
 
   return (
     <Accordion w='100vw' allowToggle>
@@ -57,43 +72,74 @@ export const HeaderMobile = () => {
                 <CustomLink href='#auction' content='Leilão' />
               </Flex>
 
-              <VStack
-                h='180px'
-                p='32px 16px'
-                justifyContent='space-between'
-                alignItems='flex-start'
-              >
-                <Text
-                  as='button'
-                  color='grey.2'
-                  fontSize='xs'
-                  fontWeight='600'
-                  fontFamily='body'
-                  _hover={{ color: "brand.1" }}
-                  _focus={{ color: "brand.1" }}
-                  onClick={() => handleClickLogin()}
+              {token ? (
+                <UserMenu name={user.name} />
+              ) : (
+                <VStack
+                  h='180px'
+                  p='32px 16px'
+                  justifyContent='space-between'
+                  alignItems='flex-start'
                 >
-                  Fazer Login
-                </Text>
-                <Button
-                  w='100%'
-                  h='48px'
-                  p='0'
-                  margin='0'
-                  fontSize='xs'
-                  variant='outline1'
-                  onClick={() => handleClickRegister()}
-                >
-                  Cadastrar
-                </Button>
-              </VStack>
-
-              {/* if token -> <UserMenu/> instead of last VStack */}
-              {/* <UserMenu name={}/> */}
+                  <Text
+                    as='button'
+                    color='grey.2'
+                    fontSize='xs'
+                    fontWeight='600'
+                    fontFamily='body'
+                    _hover={{ color: "brand.1" }}
+                    _focus={{ color: "brand.1" }}
+                    onClick={() => onMLoginOpen()}
+                  >
+                    Fazer Login
+                  </Text>
+                  <Button
+                    w='100%'
+                    h='48px'
+                    p='0'
+                    margin='0'
+                    fontSize='xs'
+                    variant='outline1'
+                  >
+                    Cadastrar
+                  </Button>
+                </VStack>
+              )}
             </AccordionPanel>
           </>
         )}
       </AccordionItem>
+
+      <ModalBasic
+        initialRef={initialRefLogin}
+        finalRef={finalRefLogin}
+        isOpen={isMLoginOpen}
+        onClose={onMLoginClose}
+      >
+        <VStack
+          p='20px 5px'
+          alignItems='flex-start'
+          h='542px'
+          justifyContent='space-between'
+        >
+          <Heading fontFamily='Lexend' fontSize='md' color='black'>
+            Login
+          </Heading>
+          <LoginForm initialRef={initialRefLogin} />
+          <VStack gap='4' alignItems='center' w='100%'>
+            <Text fontSize='0.875rem'>Ainda não possui conta?</Text>
+            <Button
+              onClick={() => {
+                onMLoginClose
+              }}
+              w='100%'
+              variant='outline2'
+            >
+              Cadastrar
+            </Button>
+          </VStack>
+        </VStack>
+      </ModalBasic>
     </Accordion>
   )
 }

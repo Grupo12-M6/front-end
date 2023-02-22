@@ -1,12 +1,33 @@
-import { Button, Flex, HStack, Text } from "@chakra-ui/react"
+import React from "react"
+import {
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react"
 
 import { CustomLink } from "./CustomLink"
-import { DefaultLogo } from "../../utils/defaultLogo"
 import { UserMenu } from "../Menu/UserMenu"
+import { LoginForm } from "../Form/LoginForm"
+import { ModalBasic } from "../Modals/baseModal"
+import { useAuth } from "../../contexts/AuthContext"
+import { DefaultLogo } from "../../utils/defaultLogo"
 
 export const Header = () => {
-  function handleClickLogin() {}
-  function handleClickRegister() {}
+  const { token, user } = useAuth()
+
+  const {
+    isOpen: isMLoginOpen,
+    onOpen: onMLoginOpen,
+    onClose: onMLoginClose,
+  } = useDisclosure()
+
+  const initialRefLogin = React.useRef(null)
+  const finalRefLogin = React.useRef(null)
+  
 
   return (
     <Flex
@@ -45,39 +66,65 @@ export const Header = () => {
           <CustomLink href='#auction' content='Leilão' />
         </HStack>
 
-        <HStack w='45%' gap='4' justifyContent='space-between' pl='30px'>
-          <Text
-            as='button'
-            w='max-content'
-            color='grey.2'
-            fontSize='xs'
-            textAlign='left'
-            fontWeight='600'
-            fontFamily='body'
-            _hover={{ color: "brand.1" }}
-            _focus={{ color: "brand.1" }}
-            onClick={() => handleClickLogin()}
-          >
-            Fazer Login
-          </Text>
+        {token ? (
+          <UserMenu name={user.name}/>
+        ) : (
+          <HStack w='45%' gap='4' justifyContent='space-between' pl='30px'>
+            <Text
+              as='button'
+              w='max-content'
+              color='grey.2'
+              fontSize='xs'
+              textAlign='left'
+              fontWeight='600'
+              fontFamily='body'
+              _hover={{ color: "brand.1" }}
+              _focus={{ color: "brand.1" }}
+              ref={finalRefLogin}
+              onClick={() => onMLoginOpen()}
+            >
+              Fazer Login
+            </Text>
+            <Button
+              m='0'
+              h='48px'
+              w='130px'
+              minW='100px'
+              margin='0'
+              fontSize='xs'
+              fontWeight='600'
+              fontFamily='body'
+              variant='outline1'
+            >
+              Cadastrar
+            </Button>
+          </HStack>
+        )}
+      </Flex>
+
+      <ModalBasic
+        initialRef={initialRefLogin}
+        finalRef={finalRefLogin}
+        isOpen={isMLoginOpen}
+        onClose={onMLoginClose}
+      >
+        <VStack p='30px 15px' alignItems='flex-start' h='542px' justifyContent='space-between'>
+        <Heading fontFamily='Lexend' fontSize='md' color='black'> Login </Heading>
+        <LoginForm initialRef={initialRefLogin}/>
+        <VStack gap='4' alignItems='center' w='100%'>
+          <Text fontSize='0.875rem'>Ainda não possui conta?</Text>
           <Button
-            m='0'
-            h='48px'
-            w='130px'
-            minW='100px'
-            margin='0'
-            fontSize='xs'
-            fontWeight='600'
-            fontFamily='body'
-            variant='outline1'
-            onClick={() => handleClickRegister()}
+            onClick={() => {
+              onMLoginClose
+            }}
+            w='100%'
+            variant='outline2'
           >
             Cadastrar
           </Button>
-        </HStack>
-        {/* if token -> <UserMenu/> instead of last VStack */}
-        {/* <UserMenu name={}/> */}
-      </Flex>
+        </VStack>
+        </VStack>
+      </ModalBasic>
     </Flex>
   )
 }
