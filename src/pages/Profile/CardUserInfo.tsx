@@ -6,7 +6,7 @@ interface ICardUserProps {
 }
 
 export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
-  // const { userId } = useContext()
+  const userId = "c93f86fd-6cc1-4136-8d80-6f58a853502a"
   const handleClick = () => {}
 
   return (
@@ -27,7 +27,7 @@ export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
         <Text fontFamily='Lexend' fontWeight='600' fontSize='sm' color='grey.1'>
           {userInfo.name}
         </Text>
-        {!!userInfo.is_seller && (
+        {userInfo.isSeller && (
           <Tag
             p='8px 12px'
             fontSize='0.875rem'
@@ -42,8 +42,7 @@ export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
       <Text fontSize='xs' fontWeight='400' lineHeight='28px'>
         {userInfo.description}
       </Text>
-
-     {/*  {userInfo.id === userid && (
+      {userInfo.id === userId && (
         <Button
           variant='outlineBrand1'
           fontSize='xs'
@@ -52,7 +51,7 @@ export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
         >
           Criar anuncio
         </Button>
-      )} */}
+      )}
     </VStack>
   )
 }
