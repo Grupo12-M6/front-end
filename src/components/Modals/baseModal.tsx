@@ -7,8 +7,8 @@ import { forwardRef, ReactNode } from "react"
 // const initialRef = React.useRef(null)
 // const finalRef = React.useRef(null)
     // <ModalBasic
-    // initialFocusRef={initialRef}
-    // finalFocusRef={finalRef}
+    // initialRef={initialRef}
+    // finalRef={finalRef}
     // isOpen={isOpen}
     // onClose={onClose}
     // >
