@@ -69,31 +69,41 @@ export const theme = extendTheme({
   },
   components: {
     Button: {
-      baseStyle: {
-        fontSize: "0.875rem",
-        fontWeight: "600",
-        borderRadius: "4px",
-      },
       variants: {
         disable: {
           bg: "grey.5",
           color: "white",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
         },
         brandDisable: {
           bg: "brand.3",
           color: "brand.4",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
         },
         brandOpacity: {
           bg: "brand.4",
           color: "brand.1",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
         },
         light: {
           bg: "grey.10",
           color: "grey.1",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
         },
         grey: {
           bg: "grey.0",
           color: "white",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "grey.1",
           },
@@ -101,6 +111,9 @@ export const theme = extendTheme({
         negative: {
           bg: "grey.6",
           color: "grey.2",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "grey.5",
           },
@@ -108,6 +121,9 @@ export const theme = extendTheme({
         brand1: {
           bg: "brand.1",
           color: "white",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "brand.2",
           },
@@ -116,6 +132,9 @@ export const theme = extendTheme({
           color: "grey.10",
           border: "2px",
           borderColor: "grey.10",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "grey.10",
             color: "grey.1",
@@ -125,6 +144,9 @@ export const theme = extendTheme({
           color: "grey.0",
           border: "2px",
           borderColor: "grey.0",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "grey.1",
             color: "grey.10",
@@ -135,6 +157,9 @@ export const theme = extendTheme({
           color: "grey.0",
           border: "2px",
           borderColor: "grey.4",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "grey.10",
             color: "grey.1",
@@ -145,13 +170,19 @@ export const theme = extendTheme({
           color: "brand.1",
           border: "2px",
           borderColor: "brand.1",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "brand.4",
           },
         },
-        link: {
+        linkCustom: {
           bg: "transparent",
           color: "grey.0",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "grey.8",
           },
@@ -159,13 +190,21 @@ export const theme = extendTheme({
         alert: {
           bg: "alert.3",
           color: "alert.1",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "alert.2",
+            border: "unset",
+            outline: "unset",
           },
         },
         success: {
           bg: "success.3",
           color: "success.1",
+          fontSize: "1rem",
+          fontWeight: "600",
+          borderRadius: "4px",
           _hover: {
             bg: "success.2",
           },

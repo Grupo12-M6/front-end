@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react"
 import { useState } from "react"
+import { useAuth } from "../../contexts/AuthContext"
 
 import { IAd } from "../../interfaces/ads"
 import { formatCurrency } from "../../utils/formatCurrency"
@@ -25,15 +26,15 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
     mileage,
     price,
     title,
-    user,
+    user: cardUser,
     year,
     isActive, //images
   } = ad
 
-  const userId = "c93f86fd-6cc1-4136-8d80-6f58a853502a"
+  const { user } = useAuth()
   let isMine = false
 
-  if (userId == user.id) {
+  if (user.id == cardUser.id) {
     isMine = true
   }
 

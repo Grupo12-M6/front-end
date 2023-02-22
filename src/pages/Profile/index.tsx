@@ -15,11 +15,11 @@ import { Header } from "../../components/Header"
 import { FooterDesktop } from "../../components/Footer"
 import { Background } from "../../components/Background"
 import { HeaderMobile } from "../../components/Header/HeaderMobile"
+import { useAuth } from "../../contexts/AuthContext"
 
 const Profile = () => {
   let { id } = useParams()
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlU2VsbGVyQG1haWwuY29tIiwiaWF0IjoxNjc3MDgzOTIzLCJleHAiOjE2NzcxMTk5MjMsInN1YiI6ImM5M2Y4NmZkLTZjYzEtNDEzNi04ZDgwLTZmNThhODUzNTAyYSJ9.bAoZJX8QLvZeMZyVas657unnz7l0ffsQRDrwp_i20pE"
+  const { token } = useAuth()
 
   const [userAds, setUserAds] = useState<IAd[]>([] as IAd[])
   const [userInfo, setUserInfo] = useState<IUser>({} as IUser)
