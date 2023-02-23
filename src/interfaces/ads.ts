@@ -1,3 +1,4 @@
+import { ReactNode } from "react"
 import { IImage } from "./images"
 import { IUser } from "./user"
 
@@ -13,4 +14,13 @@ export interface IAd {
   isActive: boolean
   user: IUser
   images: IImage[]
+}
+
+export interface IProviderProps {
+  children: ReactNode
+}
+
+export interface IAdContextData {
+  ads: any[] //IAd[]
+  listContacts: () => Promise<void>
 }
