@@ -1,4 +1,3 @@
-import React from "react"
 import {
   Accordion,
   AccordionButton,
@@ -6,7 +5,6 @@ import {
   AccordionPanel,
   Button,
   Flex,
-  Heading,
   Text,
   useDisclosure,
   VStack,
@@ -17,10 +15,9 @@ import { CgClose } from "react-icons/cg"
 
 import { CustomLink } from "./CustomLink"
 import { UserMenu } from "../Menu/UserMenu"
-import { LoginForm } from "../Form/LoginForm"
-import { ModalBasic } from "../Modals/baseModal"
 import { useAuth } from "../../contexts/AuthContext"
 import { DefaultLogo } from "../../utils/defaultLogo"
+import { LoginModal } from "../Modals/LoginModal"
 
 export const HeaderMobile = () => {
   const { token, user } = useAuth()
@@ -30,9 +27,6 @@ export const HeaderMobile = () => {
     onOpen: onMLoginOpen,
     onClose: onMLoginClose,
   } = useDisclosure()
-
-  const initialRefLogin = React.useRef(null)
-  const finalRefLogin = React.useRef(null)
 
   return (
     <Accordion w='100vw' allowToggle>
@@ -110,36 +104,7 @@ export const HeaderMobile = () => {
         )}
       </AccordionItem>
 
-      <ModalBasic
-        initialRef={initialRefLogin}
-        finalRef={finalRefLogin}
-        isOpen={isMLoginOpen}
-        onClose={onMLoginClose}
-      >
-        <VStack
-          p='20px 5px'
-          alignItems='flex-start'
-          h='542px'
-          justifyContent='space-between'
-        >
-          <Heading fontFamily='Lexend' fontSize='md' color='black'>
-            Login
-          </Heading>
-          <LoginForm initialRef={initialRefLogin} />
-          <VStack gap='4' alignItems='center' w='100%'>
-            <Text fontSize='0.875rem'>Ainda não possui conta?</Text>
-            <Button
-              onClick={() => {
-                onMLoginClose
-              }}
-              w='100%'
-              variant='outline2'
-            >
-              Cadastrar
-            </Button>
-          </VStack>
-        </VStack>
-      </ModalBasic>
+      <LoginModal isOpen={isMLoginOpen} onClose={onMLoginClose} />
     </Accordion>
   )
 }

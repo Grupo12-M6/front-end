@@ -1,20 +1,16 @@
-import React from "react"
 import {
   Button,
   Flex,
-  Heading,
   HStack,
   Text,
   useDisclosure,
-  VStack,
 } from "@chakra-ui/react"
 
 import { CustomLink } from "./CustomLink"
 import { UserMenu } from "../Menu/UserMenu"
-import { LoginForm } from "../Form/LoginForm"
-import { ModalBasic } from "../Modals/baseModal"
 import { useAuth } from "../../contexts/AuthContext"
 import { DefaultLogo } from "../../utils/defaultLogo"
+import { LoginModal } from "../Modals/LoginModal"
 
 export const Header = () => {
   const { token, user } = useAuth()
@@ -24,10 +20,6 @@ export const Header = () => {
     onOpen: onMLoginOpen,
     onClose: onMLoginClose,
   } = useDisclosure()
-
-  const initialRefLogin = React.useRef(null)
-  const finalRefLogin = React.useRef(null)
-  
 
   return (
     <Flex
@@ -67,7 +59,7 @@ export const Header = () => {
         </HStack>
 
         {token ? (
-          <UserMenu name={user.name}/>
+          <UserMenu name={user.name} />
         ) : (
           <HStack w='45%' gap='4' justifyContent='space-between' pl='30px'>
             <Text
@@ -80,7 +72,6 @@ export const Header = () => {
               fontFamily='body'
               _hover={{ color: "brand.1" }}
               _focus={{ color: "brand.1" }}
-              ref={finalRefLogin}
               onClick={() => onMLoginOpen()}
             >
               Fazer Login
@@ -102,27 +93,7 @@ export const Header = () => {
         )}
       </Flex>
 
-      <ModalBasic
-        isOpen={isMLoginOpen}
-        onClose={onMLoginClose}
-      >
-        <VStack p='30px 15px' alignItems='flex-start' h='542px' justifyContent='space-between'>
-        <Heading fontFamily='Lexend' fontSize='md' color='black'> Login </Heading>
-        <LoginForm />
-        <VStack gap='4' alignItems='center' w='100%'>
-          <Text fontSize='0.875rem'>Ainda não possui conta?</Text>
-          <Button
-            onClick={() => {
-              onMLoginClose
-            }}
-            w='100%'
-            variant='outline2'
-          >
-            Cadastrar
-          </Button>
-        </VStack>
-        </VStack>
-      </ModalBasic>
+      <LoginModal isOpen={isMLoginOpen} onClose={onMLoginClose} />
     </Flex>
   )
 }
