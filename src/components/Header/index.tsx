@@ -59,7 +59,7 @@ export const Header = () => {
         </HStack>
 
         {token ? (
-          <UserMenu name={user.name} />
+          <UserMenu name={user.name} isSeller={user.isSeller}/>
         ) : (
           <HStack w='45%' gap='4' justifyContent='space-between' pl='30px'>
             <Text

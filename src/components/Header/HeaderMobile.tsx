@@ -67,7 +67,7 @@ export const HeaderMobile = () => {
               </Flex>
 
               {token ? (
-                <UserMenu name={user.name} />
+                <UserMenu name={user.name} isSeller={user.isSeller} />
               ) : (
                 <VStack
                   h='180px'

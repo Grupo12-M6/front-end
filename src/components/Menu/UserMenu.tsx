@@ -1,30 +1,38 @@
 import { Component } from "react"
-import {
-  Avatar,
-  Box,
-  Menu,
-  MenuButton,
-  MenuList,
-  Text,
-} from "@chakra-ui/react"
+import { Avatar, Box, Menu, MenuButton, MenuList, Text } from "@chakra-ui/react"
 
 import { CustomMenuItem } from "./CustomMenuItem"
+import { useAuth } from "../../contexts/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 interface IUserMenuProps {
   name: string
+  isSeller: boolean
 }
 
-export const UserMenu = ({ name }: IUserMenuProps) => {
-  function handleEditProfile() {}
-  function handleEditAddress() {}
-  function handleSeeAds() {}
-  function handleLogOut() {}
+export const UserMenu = ({ name, isSeller }: IUserMenuProps) => {
+  const { signOut } = useAuth()
+  const navigate = useNavigate()
+
+  const handleEditProfile = () => {}
+  const handleEditAddress = () => {}
+  const handleSeeAds = () => {}
+  const handleLogOut = () => {
+    signOut()
+    navigate("/")
+  }
 
   return (
     <Menu>
-      <MenuButton p={['32px 16px', '32px 16px', '0', '0']}>
-        <Box display='flex' gap='6' alignItems='center' w='max-content'>
-          <Avatar name={name} size='sm'/>
+      <MenuButton p={["32px 16px", "32px 16px", "0", "0"]}>
+        <Box
+          display='flex'
+          gap='6'
+          alignItems='center'
+          w='max-content'
+          pl='30px'
+        >
+          <Avatar name={name} size='sm' />
           <Text
             color='grey.2'
             fontSize='xs'
@@ -45,10 +53,12 @@ export const UserMenu = ({ name }: IUserMenuProps) => {
           functionOnClick={handleEditAddress}
           content='Editar Endereço'
         />
-        <CustomMenuItem
-          functionOnClick={handleSeeAds}
-          content='Meus Anúncios'
-        />{/* Only if the user is a seller */}
+        {isSeller && (
+          <CustomMenuItem
+            functionOnClick={handleSeeAds}
+            content='Meus Anúncios'
+          />
+        )}
         <CustomMenuItem functionOnClick={handleLogOut} content='Sair' />
       </MenuList>
     </Menu>
