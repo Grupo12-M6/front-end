@@ -10,11 +10,9 @@ import { signInSchema } from "../../validators"
 import { Input } from "./input"
 import { ISignInData } from "../../interfaces/user"
 
-interface ILoginProps {
-  initialRef: React.MutableRefObject<null>
-}
 
-export const LoginForm = ({ initialRef }: ILoginProps) => {
+
+export const LoginForm = () => {
   const navigate = useNavigate()
 
   const { signIn } = useAuth()
@@ -28,31 +26,27 @@ export const LoginForm = ({ initialRef }: ILoginProps) => {
   })
 
   const handleSignIn = (data: ISignInData) => {
-    signIn(data)
-      .then(() => {
-        console.log
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    console.log(data)
+    // signIn(data)
+    //   .then(() => {
+    //     console.log
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
   }
 
   const handleForgetPassword = () => {}
 
   return (
-    <FormControl
+    <form
       onSubmit={handleSubmit(handleSignIn as SubmitHandler<FieldValues>)}
-      h='60%'
-      display='flex'
-      flexDir='column'
-      justifyContent='space-between'
     >
       <Input
         placeholder='Digitar email'
         label='Email'
         error={errors.email}
         {...register("email")}
-        ref={initialRef}
       />
       <VStack alignItems='flex-end'>
         <Input
@@ -74,6 +68,6 @@ export const LoginForm = ({ initialRef }: ILoginProps) => {
       <Button type='submit' variant='brand1'>
         Entrar
       </Button>
-    </FormControl>
+    </form>
   )
 }

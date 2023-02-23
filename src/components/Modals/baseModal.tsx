@@ -10,11 +10,7 @@ import { forwardRef, ReactNode } from "react"
 
 // -----EXEMPLO DE USO-----
 // const { isOpen, onOpen, onClose } = useDisclosure()
-// const initialRef = React.useRef(null)
-// const finalRef = React.useRef(null)
 // <ModalBasic
-// initialRef={initialRef}
-// finalRef={finalRef}
 // isOpen={isOpen}
 // onClose={onClose}
 // >
@@ -33,17 +29,13 @@ interface IPropsModal {
   children: ReactNode | any
   isOpen: boolean
   onClose: () => void
-  initialRef: any
-  finalRef: any
 }
 
-const BasicModal = ({
+export const ModalBasic = ({
   title,
   children,
   onClose,
   isOpen,
-  initialRef,
-  finalRef,
 }: IPropsModal) => {
   return (
     <>
@@ -51,8 +43,6 @@ const BasicModal = ({
         blockScrollOnMount={false}
         isOpen={isOpen}
         onClose={onClose}
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
       >
         <ModalOverlay />
         <ModalContent marginLeft='2' marginRight='2'>
@@ -73,5 +63,3 @@ const BasicModal = ({
     </>
   )
 }
-
-export const ModalBasic = forwardRef(BasicModal)
