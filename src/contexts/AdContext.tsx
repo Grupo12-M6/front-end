@@ -22,7 +22,9 @@ const AdProvider = ({ children }: IProviderProps) => {
   const listContacts = async () => {
     await api
       .get("/ads")
-      .then((res) => setAds(res.data))
+      .then((res) => {
+        setAds(res.data.data)
+      })
       .catch((err) => console.log(err))
   }
 
