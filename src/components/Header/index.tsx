@@ -103,14 +103,12 @@ export const Header = () => {
       </Flex>
 
       <ModalBasic
-        initialRef={initialRefLogin}
-        finalRef={finalRefLogin}
         isOpen={isMLoginOpen}
         onClose={onMLoginClose}
       >
         <VStack p='30px 15px' alignItems='flex-start' h='542px' justifyContent='space-between'>
         <Heading fontFamily='Lexend' fontSize='md' color='black'> Login </Heading>
-        <LoginForm initialRef={initialRefLogin}/>
+        <LoginForm />
         <VStack gap='4' alignItems='center' w='100%'>
           <Text fontSize='0.875rem'>Ainda não possui conta?</Text>
           <Button
