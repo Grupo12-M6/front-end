@@ -27,12 +27,12 @@ const Home = () => {
         <List
           id='cars'
           title='Carros'
-          list={ads.filter((ad) => ad.motorType == "carro")}
+          list={ads.filter((ad) => ad.motorType.toLowerCase() == "carro")}
         />
         <List
           id='motorcycles'
           title='Motos'
-          list={ads.filter((ad) => ad.motorType == "moto")}
+          list={ads.filter((ad) => ad.motorType.toLowerCase() == "moto")}
         />
       </Flex>
       <FooterDesktop />

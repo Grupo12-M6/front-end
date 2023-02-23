@@ -1,4 +1,3 @@
-import { Component } from "react"
 import { Avatar, Box, Menu, MenuButton, MenuList, Text } from "@chakra-ui/react"
 
 import { CustomMenuItem } from "./CustomMenuItem"
@@ -30,7 +29,7 @@ export const UserMenu = ({ name, isSeller }: IUserMenuProps) => {
           gap='6'
           alignItems='center'
           w='max-content'
-          pl='30px'
+          pl={['0', '0', '30px', '30px']}
         >
           <Avatar name={name} size='sm' />
           <Text
