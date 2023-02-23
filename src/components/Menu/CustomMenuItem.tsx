@@ -17,7 +17,7 @@ export const CustomMenuItem = ({
       textAlign='left'
       fontWeight='400'
       fontFamily='body'
-      onClick={() => functionOnClick}
+      onClick={() => functionOnClick()}
     >
       {content}
     </MenuItem>
