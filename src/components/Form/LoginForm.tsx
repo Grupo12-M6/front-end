@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom"
-import { Button, FormControl, VStack } from "@chakra-ui/react"
+import { Button, Flex, VStack } from "@chakra-ui/react"
 
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { FieldValues, SubmitHandler } from "react-hook-form/dist/types"
 
+import { Input } from "./input"
 import { useAuth } from "../../contexts/AuthContext"
 import { signInSchema } from "../../validators"
-import { Input } from "./input"
 import { ISignInData } from "../../interfaces/user"
-
-
 
 export const LoginForm = () => {
   const navigate = useNavigate()
@@ -26,20 +24,25 @@ export const LoginForm = () => {
   })
 
   const handleSignIn = (data: ISignInData) => {
-    console.log(data)
-    // signIn(data)
-    //   .then(() => {
-    //     console.log
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
+    signIn(data)
+      .then((res) => {
+        console.log(res)
+        navigate(0)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   const handleForgetPassword = () => {}
 
   return (
-    <form
+    <Flex
+      as='form'
+      w='100%'
+      h='60%'
+      flexDirection='column'
+      justifyContent='space-between'
       onSubmit={handleSubmit(handleSignIn as SubmitHandler<FieldValues>)}
     >
       <Input
@@ -58,9 +61,11 @@ export const LoginForm = () => {
         />
         <Button
           onClick={() => handleForgetPassword}
-          variant='linkCustom'
+          p='0'
+          bgColor='transparent'
           fontSize='0.875rem'
           color='grey.2'
+          _hover={{ bgColor: "transparent", color: "brand.1" }}
         >
           Esqueci minha senha
         </Button>
@@ -68,6 +73,6 @@ export const LoginForm = () => {
       <Button type='submit' variant='brand1'>
         Entrar
       </Button>
-    </form>
+    </Flex>
   )
 }

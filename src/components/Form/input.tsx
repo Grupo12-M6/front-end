@@ -50,7 +50,7 @@ const inputVariation: InputVariationOptions = {
     error: "alert.1",
     default: "grey.3",
     focus: "grey.1",
-    filled: "grey.8",
+    filled: "grey.4",
 }
 
 const inputBgVariation: InputVariationOptions = {
