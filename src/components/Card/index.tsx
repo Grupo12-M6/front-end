@@ -29,7 +29,8 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
     title,
     user: cardUser,
     year,
-    isActive, //images
+    isActive,
+    images
   } = ad
 
   const { user } = useAuth()
@@ -52,8 +53,10 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
       h={isMine ? "380px" : "350px"}
       variant='unstyled'
       _hover={{ cursor: "pointer" }}
+      className="keen-slider__slide"
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
+      bgColor='grey.8'
     >
       {!isMine && (
         <Box
@@ -77,8 +80,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
         overflow='hidden'
       >
         <Image
-          // src={images[0].url}
-          src='https://garagem360.com.br/wp-content/uploads/2021/08/ALTA20-1.jpeg'
+          src={images[0].url}
           w='100%'
           h='100%'
           transform={isOnHover ? "scale(1.2)" : "scale(1)"}

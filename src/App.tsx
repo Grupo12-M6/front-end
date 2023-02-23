@@ -1,3 +1,4 @@
+import "keen-slider/keen-slider.min.css"
 import { ChakraBaseProvider } from "@chakra-ui/react"
 
 import { Router } from "./routes"
