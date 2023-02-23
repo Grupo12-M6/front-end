@@ -30,7 +30,7 @@ export const FooterDesktop = () => {
           aria-label='Search database'
           fontSize={20}
           icon={<IoIosArrowUp />}
-          onClick={() => "window.scrollTo(0, 0)"}
+          onClick={() => window.location.href='#top'}
         />
       </Container>
     </Box>

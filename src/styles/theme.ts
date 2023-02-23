@@ -106,6 +106,7 @@ export const theme = extendTheme({
           borderRadius: "4px",
           _hover: {
             bg: "grey.1",
+            cursor: 'pointer'
           },
         },
         negative: {
@@ -116,6 +117,7 @@ export const theme = extendTheme({
           borderRadius: "4px",
           _hover: {
             bg: "grey.5",
+            cursor: 'pointer'
           },
         },
         brand1: {
@@ -126,6 +128,7 @@ export const theme = extendTheme({
           borderRadius: "4px",
           _hover: {
             bg: "brand.2",
+            cursor: 'pointer'
           },
         },
         outlineLight: {
@@ -138,6 +141,7 @@ export const theme = extendTheme({
           _hover: {
             bg: "grey.10",
             color: "grey.1",
+            cursor: 'pointer'
           },
         },
         outline1: {
@@ -151,6 +155,7 @@ export const theme = extendTheme({
             bg: "grey.1",
             color: "grey.10",
             borderColor: "grey.1",
+            cursor: 'pointer'
           },
         },
         outline2: {
@@ -164,6 +169,7 @@ export const theme = extendTheme({
             bg: "grey.10",
             color: "grey.1",
             borderColor: "grey.1",
+            cursor: 'pointer'
           },
         },
         outlineBrand1: {
@@ -175,6 +181,7 @@ export const theme = extendTheme({
           borderRadius: "4px",
           _hover: {
             bg: "brand.4",
+            cursor: 'pointer'
           },
         },
         linkCustom: {
@@ -185,6 +192,7 @@ export const theme = extendTheme({
           borderRadius: "4px",
           _hover: {
             bg: "grey.8",
+            cursor: 'pointer'
           },
         },
         alert: {
@@ -197,6 +205,7 @@ export const theme = extendTheme({
             bg: "alert.2",
             border: "unset",
             outline: "unset",
+            cursor: 'pointer'
           },
         },
         success: {
@@ -207,6 +216,7 @@ export const theme = extendTheme({
           borderRadius: "4px",
           _hover: {
             bg: "success.2",
+            cursor: 'pointer'
           },
         },
       },

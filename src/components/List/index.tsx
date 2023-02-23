@@ -4,13 +4,15 @@ import { IAd } from "../../interfaces/ads"
 import { CustomCard } from "../Card"
 
 interface IListProps {
+  id: string
   title: string
   list: IAd[]
 }
 
-export const List = ({ title, list }: IListProps) => {
+export const List = ({ id, title, list }: IListProps) => {
   return (
     <VStack
+      id={id}
       w='100%'
       h='max-content'
       p='6'

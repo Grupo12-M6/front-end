@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Card,
@@ -34,7 +35,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
   const { user } = useAuth()
   let isMine = false
 
-  if (user.id == cardUser.id) {
+  if (user?.id == cardUser.id) {
     isMine = true
   }
 
@@ -53,7 +54,6 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
       _hover={{ cursor: "pointer" }}
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
-      bgColor='grey.8'
     >
       {!isMine && (
         <Box
@@ -114,7 +114,10 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
           >
             {description}
           </Text>
-          <Text> {user.name} </Text>
+          <HStack paddingTop='4'>
+            <Avatar name={cardUser.name} size='sm'/>
+            <Text> {cardUser.name} </Text>
+          </HStack>
         </Stack>
         <Box
           p='0'
