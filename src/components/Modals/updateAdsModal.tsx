@@ -18,8 +18,10 @@ import { RadioCard } from "../Form/radio"
 import { useState } from "react"
 import { IPropsModal, IListImage, IUpdate } from "../../interfaces/ads"
 import { Dialog } from "../Dialog"
+import { useAd } from "../../contexts/AdContext"
 
-export const ModalUpdateAds = ({ onClose, isOpen }: IPropsModal) => {
+export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModal) => {
+  const { deleteAd } = useAd()
   const {
     isOpen: isExcludeMOpen,
     onOpen,
@@ -41,7 +43,6 @@ export const ModalUpdateAds = ({ onClose, isOpen }: IPropsModal) => {
     formState: { errors, isSubmitting },
   } = useForm()
 
-  const handleDelete = () => {}
 
   const handleRegister = (data: IUpdate) => {
     if (data.adType == null) {
@@ -98,7 +99,7 @@ export const ModalUpdateAds = ({ onClose, isOpen }: IPropsModal) => {
 
           <HStack gap='2' alignSelf={['center', 'center', 'flex-end', 'flex-end']}>
             <Button onClick={() => onExcludeMClose()} variant='negative'> Cancelar </Button>
-            <Button onClick={() => handleDelete()} variant='alert'>
+            <Button onClick={() => deleteAd(id)} variant='alert'>
               Sim, excluir anúncio
             </Button>
           </HStack>

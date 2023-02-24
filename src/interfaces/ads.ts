@@ -23,6 +23,7 @@ export interface IProviderProps {
 export interface IAdContextData {
   ads: IAd[]
   listContacts: () => Promise<void>
+  deleteAd: (adId: string) => Promise<void>
 }
 
 export interface IRegister {
@@ -38,6 +39,7 @@ export interface IRegister {
 }
 
 export interface IPropsModal {
+  id: string
   onClose: any;
   isOpen: any;
 }

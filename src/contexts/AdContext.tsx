@@ -28,8 +28,23 @@ const AdProvider = ({ children }: IProviderProps) => {
       .catch((err) => console.log(err))
   }
 
+  const deleteAd = async (adId: string) => {
+    await api
+      .delete(`/ads/${adId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        listContacts()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
-    <AdContext.Provider value={{ ads, listContacts }}>
+    <AdContext.Provider value={{ ads, listContacts, deleteAd }}>
       {children}
     </AdContext.Provider>
   )
