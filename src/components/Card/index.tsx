@@ -190,7 +190,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
           </CardFooter>
         )}
       </CardBody>
-      <ModalUpdateAds onClose={onClose} isOpen={isOpen} />
+      <ModalUpdateAds id={ad.id} onClose={onClose} isOpen={isOpen} />
     </Card>
   )
 }
