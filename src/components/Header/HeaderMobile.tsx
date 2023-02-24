@@ -29,7 +29,7 @@ export const HeaderMobile = () => {
   } = useDisclosure()
 
   return (
-    <Accordion w='100vw' allowToggle>
+    <Accordion id='top' w='100vw' allowToggle>
       <AccordionItem w='100%' bg='grey.10' boxShadow='md'>
         {({ isExpanded }) => (
           <>
@@ -67,7 +67,7 @@ export const HeaderMobile = () => {
               </Flex>
 
               {token ? (
-                <UserMenu name={user.name} />
+                <UserMenu name={user.name} isSeller={user.isSeller} />
               ) : (
                 <VStack
                   h='180px'

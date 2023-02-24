@@ -44,7 +44,8 @@ const AuthProvider = ({ children }: IProviderProps) => {
         Authorization: `Bearer ${token}`,
       },
     })
-    const user = userResponse.data
+    console.log(userResponse.data)
+    const user = userResponse.data.data
 
 
     localStorage.setItem("@token", token)

@@ -1,19 +1,46 @@
+import { useEffect } from "react";
 import { Flex } from "@chakra-ui/react";
 
+import { Intro } from "./Intro";
 import { UseGetScreenWidth } from "../../hooks";
+
+import { List } from "../../components/List";
+import { useAd } from "../../contexts/AdContext";
 import { Header } from "../../components/Header";
-import { HeaderMobile } from "../../components/Header/HeaderMobile";
 import { FooterDesktop } from "../../components/Footer";
-import { Background } from "../../components/Background";
-import { CardEditProduct } from "../Product/CardEditProduct";
-import { useDisclosure } from "@chakra-ui/react";
+import { HeaderMobile } from "../../components/Header/HeaderMobile";
+
 const Home = () => {
   const [, width] = UseGetScreenWidth();
+  const { ads, listContacts } = useAd();
+
+  useEffect(() => {
+    listContacts();
+  }, []);
 
   return (
-    <Flex w="100vw" h="100vh" flexDirection="column">
+    <Flex
+      w="100vw"
+      h="100vh"
+      flexDirection="column"
+      overflowX="hidden"
+      scrollBehavior="smooth"
+    >
       {width >= 768 ? <Header /> : <HeaderMobile />}
-      <Background />
+      <Flex flexDir="column">
+        <Intro />
+        <List id="auction" title="Leilão" list={[]} />
+        <List
+          id="cars"
+          title="Carros"
+          list={ads.filter((ad) => ad.motorType.toLowerCase() == "carro")}
+        />
+        <List
+          id="motorcycles"
+          title="Motos"
+          list={ads.filter((ad) => ad.motorType.toLowerCase() == "moto")}
+        />
+      </Flex>
       <FooterDesktop />
     </Flex>
   );

@@ -58,10 +58,12 @@ const Profile = () => {
 
         <List
           title='Carros'
-          list={userAds.filter((ad) => ad.motorType == "carro")}
+          id='cars'
+          list={userAds.filter((ad) => ad.motorType == "carro") }
         />
         <List
           title='Motos'
+          id='motorcycles'
           list={userAds.filter((ad) => ad.motorType == "moto")}
         />
       </VStack>

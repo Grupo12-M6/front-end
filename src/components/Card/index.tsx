@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Button,
   Card,
@@ -9,18 +10,27 @@ import {
   Image,
   Stack,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react"
 import { useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 
 import { IAd } from "../../interfaces/ads"
 import { formatCurrency } from "../../utils/formatCurrency"
+import { ModalUpdateAds } from "../Modals/updateAdsModal"
 
 interface ICustomCardProps {
   ad: IAd
 }
 
 export const CustomCard = ({ ad }: ICustomCardProps) => {
+  
+  const {
+    isOpen,
+    onOpen,
+    onClose,
+  } = useDisclosure()
+  
   const {
     description,
     mileage,
@@ -28,13 +38,14 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
     title,
     user: cardUser,
     year,
-    isActive, //images
+    isActive,
+    images
   } = ad
 
   const { user } = useAuth()
   let isMine = false
 
-  if (user.id == cardUser.id) {
+  if (user?.id == cardUser.id) {
     isMine = true
   }
 
@@ -51,6 +62,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
       h={isMine ? "380px" : "350px"}
       variant='unstyled'
       _hover={{ cursor: "pointer" }}
+      className="keen-slider__slide"
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
       bgColor='grey.8'
@@ -78,7 +90,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
       >
         <Image
           // src={images[0].url}
-          src='https://garagem360.com.br/wp-content/uploads/2021/08/ALTA20-1.jpeg'
+          src="https://quatrorodas.abril.com.br/wp-content/uploads/2020/12/C0494CFB-8C4D-4C63-9C5F-6E9B0A0D790E.jpeg?quality=70&strip=info&w=611&h=407&crop=1"
           w='100%'
           h='100%'
           transform={isOnHover ? "scale(1.2)" : "scale(1)"}
@@ -114,7 +126,10 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
           >
             {description}
           </Text>
-          <Text> {user.name} </Text>
+          <HStack paddingTop='4'>
+            <Avatar name={cardUser.name} size='sm'/>
+            <Text> {cardUser.name} </Text>
+          </HStack>
         </Stack>
         <Box
           p='0'
@@ -160,7 +175,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
               fontSize='0.875rem'
               fontWeight='600'
               variant='outline1'
-              onClick={() => handleEdit()}
+              onClick={() => onOpen()}
             >
               Editar
             </Button>
@@ -174,7 +189,9 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
             </Button>
           </CardFooter>
         )}
+        
       </CardBody>
+      <ModalUpdateAds onClose={onClose} isOpen={isOpen} />
     </Card>
   )
 }
