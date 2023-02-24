@@ -24,3 +24,36 @@ export interface IAdContextData {
   ads: any[] //IAd[]
   listContacts: () => Promise<void>
 }
+
+export interface IRegister {
+  title: string;
+  adType: string;
+  year: number;
+  description: string;
+  mileage: number;
+  motorType: string;
+  price: number;
+  isActive: boolean;
+  images: IListImage[];
+}
+
+export interface IPropsModal {
+  onClose: any;
+  isOpen: any;
+}
+
+export interface IListImage {
+  url: string;
+}
+
+export interface IUpdate {
+  title?: string;
+  adType?: string;
+  year?: number;
+  description?: string;
+  mileage?: number;
+  motorType?: string;
+  price?: number;
+  isActive?: boolean;
+  image?: IListImage[];
+}

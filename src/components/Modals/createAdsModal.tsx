@@ -13,44 +13,20 @@ import { Input } from "../Form/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { ModalBasic } from "./baseModal";
 import { RadioCard } from "../Form/radio";
-import { useCallback, useState } from "react";
-
-interface IPropsModal {
-    onClose: any;
-    isOpen: any;
-}
-
-interface IListImage {
-    url: string;
-}
-
-interface IRegister {
-    title: string;
-    adType: string;
-    year: number;
-    description: string;
-    mileage: number;
-    motorType: string;
-    price: number;
-    isActive: boolean;
-    image: IListImage[];
-}
+import { useState } from "react";
+import { IPropsModal, IListImage, IRegister } from "../../interfaces/ads";
 
 
 export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
     const options_1 = ['Venda', "Leilão",]
     const options_2 = ['Carro', 'Moto']
 
-    const [click, setClick] = useState(0)
-    const [infoImage, setInfoImage] = useState<any>([])
+    const [infoImage, setInfoImage] = useState<IListImage[]>([
+            {
+                url: ""
+            }
+        ])
 
-    const handleClick = useCallback(() => {
-        if (click > 0) {
-            setClick(click + 1)
-            return < ImageAdsDinamics />
-        }
-      }, [click])
-    
     const {
         handleSubmit,
         register,
@@ -67,18 +43,12 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
         console.log(data)
     }
 
-    const ImageAdsDinamics = () => {
-        register("image", {value: infoImage})
-        return (
-            <Input
-            name="url"
-            placeholder='Inserir URL da imagem'
-            label={`${click}° Imagem da galeria`}
-            marginBottom="28px"
-            error={errors.url}
-            onChange={e => setInfoImage({url: e.target.value})}
-            />
-        )
+    const ImageAdd = () => {
+         setInfoImage((prevState) => [
+           ...prevState, {
+            url: "",
+            }
+        ])
     }
     
     const { getRootProps, getRadioProps } = useRadioGroup({
@@ -239,21 +209,25 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
                     {...register("url")}
                 />
 
-
-                {/* <Input
-                    placeholder='Inserir URL da imagem'
-                    label='1° Imagem da galeria'
-                    marginBottom="28px"
-                    error={errors.url}
-                    {...register("url")}
-                /> */}
+                {
+                    infoImage.map((proc, index) => (
+                        <Input
+                            key={index}
+                            placeholder='Inserir URL da imagem'
+                            label={`${index + 1}° Imagem da galeria`}
+                            marginBottom="28px"
+                            error={errors.url}
+                            {...register("url")}
+                        />
+                    ))
+                }
 
                 <Button
                 bg='#EDEAFD'
                 fontSize="14px"
                 color="#4529E6"
                 width="85%"
-                onClick={() => handleClick()}
+                onClick={() => ImageAdd()}
                 >Adicionar campo para imagem da galeria</Button>
                 <Flex
                     w='100%'
