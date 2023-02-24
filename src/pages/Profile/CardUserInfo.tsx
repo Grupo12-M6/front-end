@@ -1,4 +1,5 @@
-import { Avatar, Button, HStack, Tag, Text, VStack } from "@chakra-ui/react"
+import { Avatar, Button, HStack, Tag, Text, useDisclosure, VStack } from "@chakra-ui/react"
+import { ModalCreateAds } from "../../components/Modals/createAdsModal"
 import { useAuth } from "../../contexts/AuthContext"
 import { IUser } from "../../interfaces/user"
 
@@ -8,7 +9,12 @@ interface ICardUserProps {
 
 export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
   const { user } = useAuth()
-  const handleClick = () => {}
+
+  const {
+    isOpen,
+    onOpen,
+    onClose,
+  } = useDisclosure()
 
   return (
     <VStack
@@ -48,11 +54,12 @@ export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
           variant='outlineBrand1'
           fontSize='xs'
           padding='22px 18px'
-          onClick={() => handleClick()}
+          onClick={() => onOpen()}
         >
           Criar anuncio
         </Button>
       )}
+      <ModalCreateAds onClose={onClose} isOpen={isOpen} />
     </VStack>
   )
 }

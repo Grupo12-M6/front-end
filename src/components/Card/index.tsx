@@ -80,7 +80,8 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
         overflow='hidden'
       >
         <Image
-          src={images[0].url}
+          // src={images[0].url}
+          src="https://quatrorodas.abril.com.br/wp-content/uploads/2020/12/C0494CFB-8C4D-4C63-9C5F-6E9B0A0D790E.jpeg?quality=70&strip=info&w=611&h=407&crop=1"
           w='100%'
           h='100%'
           transform={isOnHover ? "scale(1.2)" : "scale(1)"}
