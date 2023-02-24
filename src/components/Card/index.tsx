@@ -10,18 +10,27 @@ import {
   Image,
   Stack,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react"
 import { useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
 
 import { IAd } from "../../interfaces/ads"
 import { formatCurrency } from "../../utils/formatCurrency"
+import { ModalUpdateAds } from "../Modals/updateAdsModal"
 
 interface ICustomCardProps {
   ad: IAd
 }
 
 export const CustomCard = ({ ad }: ICustomCardProps) => {
+  
+  const {
+    isOpen,
+    onOpen,
+    onClose,
+  } = useDisclosure()
+  
   const {
     description,
     mileage,
@@ -166,7 +175,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
               fontSize='0.875rem'
               fontWeight='600'
               variant='outline1'
-              onClick={() => handleEdit()}
+              onClick={() => onOpen()}
             >
               Editar
             </Button>
@@ -180,7 +189,9 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
             </Button>
           </CardFooter>
         )}
+        
       </CardBody>
+      <ModalUpdateAds onClose={onClose} isOpen={isOpen} />
     </Card>
   )
 }

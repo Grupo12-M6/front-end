@@ -13,6 +13,7 @@ import { Input } from "../Form/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { ModalBasic } from "./baseModal";
 import { RadioCard } from "../Form/radio";
+import { useCallback, useState } from "react";
 
 interface IPropsModal {
     onClose: any;
@@ -35,9 +36,20 @@ interface IRegister {
     image: IListImage[];
 }
 
+
 export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
     const options_1 = ['Venda', "Leilão",]
     const options_2 = ['Carro', 'Moto']
+
+    const [click, setClick] = useState(0)
+    const [infoImage, setInfoImage] = useState<any>([])
+
+    const handleClick = useCallback(() => {
+        if (click > 0) {
+            setClick(click + 1)
+            return < ImageAdsDinamics />
+        }
+      }, [click])
     
     const {
         handleSubmit,
@@ -53,6 +65,20 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
             data.motorType = "Moto"
         }
         console.log(data)
+    }
+
+    const ImageAdsDinamics = () => {
+        register("image", {value: infoImage})
+        return (
+            <Input
+            name="url"
+            placeholder='Inserir URL da imagem'
+            label={`${click}° Imagem da galeria`}
+            marginBottom="28px"
+            error={errors.url}
+            onChange={e => setInfoImage({url: e.target.value})}
+            />
+        )
     }
     
     const { getRootProps, getRadioProps } = useRadioGroup({
@@ -75,7 +101,7 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
         onClose={onClose}
         >
             <VStack p='30px 15px' alignItems='flex-start' h='100%' justifyContent='space-between'>
-            <Heading fontFamily='Lexend' fontSize='md' color='black'> Criar anuncio </Heading>
+            <Heading fontFamily='Lexend' fontSize='md' color='black'> Criar anúncio </Heading>
             <Flex 
             as="form"
             w='100%'
@@ -89,7 +115,7 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
                     fontFamily="inter"
                     marginTop="18px"
                     color="#000000"
-                >Tipo de anuncio</Text>
+                >Tipo de anúncio</Text>
                 <Flex
                 w='100%'
                 gap="2%"
@@ -213,19 +239,21 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
                     {...register("url")}
                 />
 
-                <Input
+
+                {/* <Input
                     placeholder='Inserir URL da imagem'
                     label='1° Imagem da galeria'
                     marginBottom="28px"
                     error={errors.url}
                     {...register("url")}
-                />
+                /> */}
 
                 <Button
                 bg='#EDEAFD'
                 fontSize="14px"
                 color="#4529E6"
                 width="85%"
+                onClick={() => handleClick()}
                 >Adicionar campo para imagem da galeria</Button>
                 <Flex
                     w='100%'
@@ -252,7 +280,7 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
                         _focus={{ bgColor: "brand.3" , color: "#EDEAFD", border: "none"}}
                         width="50%"
                         marginTop="28px"
-                    >Criar anuncio</Button>
+                    >Criar anúncio</Button>
                 </Flex>
             </Flex>
             </VStack>
