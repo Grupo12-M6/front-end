@@ -66,7 +66,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
       className='keen-slider__slide'
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
-      bgColor='grey.8'
+      bgColor='transparent'
     >
       {onProfile && !isMine && (
         <Box

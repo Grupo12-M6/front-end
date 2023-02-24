@@ -19,7 +19,14 @@ const Home = () => {
   }, [])
 
   return (
-    <Flex w='100vw' h='100vh' flexDirection='column' overflowX='hidden' scrollBehavior='smooth'>
+    <Flex
+      w='100vw'
+      h='100vh'
+      flexDirection='column'
+      overflowX='hidden'
+      scrollBehavior='smooth'
+      bgColor='grey.8'
+    >
       {width >= 768 ? <Header /> : <HeaderMobile />}
       <Flex flexDir='column'>
         <Intro />
