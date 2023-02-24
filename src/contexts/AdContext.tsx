@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react"
 
 import { api } from "../services/api"
 import { useAuth } from "./AuthContext"
-import { IAdContextData, IProviderProps } from "../interfaces/ads"
+import { IAd, IAdContextData, IProviderProps } from "../interfaces/ads"
 
 const AdContext = createContext<IAdContextData>({} as IAdContextData)
 
@@ -17,7 +17,7 @@ const useAd = () => {
 
 const AdProvider = ({ children }: IProviderProps) => {
   const { token } = useAuth()
-  const [ads, setAds] = useState([]) //useState<IAd[]>([])
+  const [ads, setAds] = useState<IAd[]>([])
 
   const listContacts = async () => {
     await api

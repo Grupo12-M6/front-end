@@ -10,15 +10,17 @@ interface IUserMenuProps {
 }
 
 export const UserMenu = ({ name, isSeller }: IUserMenuProps) => {
-  const { signOut } = useAuth()
+  const { signOut, user } = useAuth()
   const navigate = useNavigate()
 
   const handleEditProfile = () => {}
   const handleEditAddress = () => {}
-  const handleSeeAds = () => {}
+  const handleSeeAds = () => {
+    navigate(`/users/${user.id}`)
+  }
   const handleLogOut = () => {
     signOut()
-    navigate("/")
+    navigate('/')
   }
 
   return (

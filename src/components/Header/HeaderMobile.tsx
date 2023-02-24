@@ -39,7 +39,7 @@ export const HeaderMobile = () => {
               justifyContent='space-between'
               alignItems='center'
             >
-              <DefaultLogo />
+              <DefaultLogo/>
 
               <AccordionButton w='18px' h='18px' p='0'>
                 {isExpanded ? (
