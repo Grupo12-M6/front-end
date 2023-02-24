@@ -21,7 +21,7 @@ export interface IProviderProps {
 }
 
 export interface IAdContextData {
-  ads: any[] //IAd[]
+  ads: IAd[]
   listContacts: () => Promise<void>
 }
 

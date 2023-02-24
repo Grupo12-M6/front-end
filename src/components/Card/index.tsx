@@ -13,6 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import { useState } from "react"
+import { useParams } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 
 import { IAd } from "../../interfaces/ads"
@@ -24,13 +25,10 @@ interface ICustomCardProps {
 }
 
 export const CustomCard = ({ ad }: ICustomCardProps) => {
-  
-  const {
-    isOpen,
-    onOpen,
-    onClose,
-  } = useDisclosure()
-  
+  const { id: urlId } = useParams()
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   const {
     description,
     mileage,
@@ -39,21 +37,24 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
     user: cardUser,
     year,
     isActive,
-    images
+    images,
   } = ad
 
   const { user } = useAuth()
   let isMine = false
+  let onProfile = false
 
-  if (user?.id == cardUser.id) {
-    isMine = true
+  if (urlId) {
+    onProfile = true
+    if (user?.id == cardUser.id) {
+      isMine = true
+    }
   }
 
   const [isOnHover, setIsOnHover] = useState(false)
 
   const formattedPrice = formatCurrency(price)
 
-  const handleEdit = () => {}
   const handleSeeMore = () => {}
 
   return (
@@ -62,12 +63,12 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
       h={isMine ? "380px" : "350px"}
       variant='unstyled'
       _hover={{ cursor: "pointer" }}
-      className="keen-slider__slide"
+      className='keen-slider__slide'
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
       bgColor='grey.8'
     >
-      {!isMine && (
+      {onProfile && !isMine && (
         <Box
           p='2'
           m='2'
@@ -89,8 +90,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
         overflow='hidden'
       >
         <Image
-          // src={images[0].url}
-          src="https://quatrorodas.abril.com.br/wp-content/uploads/2020/12/C0494CFB-8C4D-4C63-9C5F-6E9B0A0D790E.jpeg?quality=70&strip=info&w=611&h=407&crop=1"
+          src={images[0]?.url}
           w='100%'
           h='100%'
           transform={isOnHover ? "scale(1.2)" : "scale(1)"}
@@ -127,7 +127,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
             {description}
           </Text>
           <HStack paddingTop='4'>
-            <Avatar name={cardUser.name} size='sm'/>
+            <Avatar name={cardUser.name} size='sm' />
             <Text> {cardUser.name} </Text>
           </HStack>
         </Stack>
@@ -169,7 +169,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
             {formattedPrice}
           </Text>
         </Box>
-        {isMine && (
+        {onProfile && isMine && (
           <CardFooter p='0' paddingTop='4' gap='2'>
             <Button
               fontSize='0.875rem'
@@ -189,7 +189,6 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
             </Button>
           </CardFooter>
         )}
-        
       </CardBody>
       <ModalUpdateAds onClose={onClose} isOpen={isOpen} />
     </Card>

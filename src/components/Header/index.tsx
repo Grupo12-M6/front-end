@@ -37,7 +37,7 @@ export const Header = () => {
       -moz-box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);
       box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);'
     >
-      <DefaultLogo />
+      <DefaultLogo/>
       <Flex
         h='100%'
         w='45%'
