@@ -12,15 +12,19 @@ import {
 
 import { Input } from "../Form/input"
 
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
+import {
+  FieldValues,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form"
 import { ModalBasic } from "./baseModal"
 import { RadioCard } from "../Form/radio"
-import { useState } from "react"
-import { IPropsModal, IListImage, IUpdate } from "../../interfaces/ads"
+import { IPropsModal, IUpdate } from "../../interfaces/ads"
 import { Dialog } from "../Dialog"
 import { useAd } from "../../contexts/AdContext"
 
-export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModal) => {
+export const ModalUpdateAds = ({ onClose, isOpen }: IPropsModal) => {
   const { deleteAd } = useAd()
   const {
     isOpen: isExcludeMOpen,
@@ -28,39 +32,36 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModal) => {
     onClose: onExcludeMClose,
   } = useDisclosure()
 
-  const options_1 = ["Venda", "Leilão"]
-  const options_2 = ["Carro", "Moto"]
-
-  const [infoImage, setInfoImage] = useState<IListImage[]>([
-    {
-      url: "",
-    },
-  ])
-
   const {
+    control,
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm()
 
+  const { fields, append } = useFieldArray({
+    control,
+    name: "images",
+  })
 
-  const handleRegister = (data: IUpdate) => {
+  const ImageAdd = () => {
+    append({
+      url: "",
+    })
+  }
+
+  const handleUpdate = (data: IUpdate) => {
     if (data.adType == null) {
       data.adType = "Leilão"
     }
     if (data.motorType == null) {
       data.motorType = "Moto"
     }
+    console.log(data)
   }
 
-  const ImageAdd = () => {
-    setInfoImage((prevState) => [
-      ...prevState,
-      {
-        url: "",
-      },
-    ])
-  }
+  const options_1 = ["Venda", "Leilão"]
+  const options_2 = ["Carro", "Moto"]
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "adType",
@@ -83,7 +84,10 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModal) => {
         isOpen={isExcludeMOpen}
         onClose={onExcludeMClose}
       >
-        <VStack gap='4' alignItems={['center', 'center', 'flex-start', 'flex-start']}>
+        <VStack
+          gap='4'
+          alignItems={["center", "center", "flex-start", "flex-start"]}
+        >
           <Text
             fontFamily='Lexend'
             fontSize='xs'
@@ -92,14 +96,20 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModal) => {
           >
             Tem certeza que deseja remover este anúncio?
           </Text>
-          <Text fontSize='xs' fontWeight='400' color='grey.2' lineHeight='28px' >
+          <Text fontSize='xs' fontWeight='400' color='grey.2' lineHeight='28px'>
             Essa ação não pode ser desfeita. Isso excluirá permanentemente sua
             conta e removerá seus dados de nossos servidores.
           </Text>
 
-          <HStack gap='2' alignSelf={['center', 'center', 'flex-end', 'flex-end']}>
-            <Button onClick={() => onExcludeMClose()} variant='negative'> Cancelar </Button>
-            <Button onClick={() => deleteAd(id)} variant='alert'>
+          <HStack
+            gap='2'
+            alignSelf={["center", "center", "flex-end", "flex-end"]}
+          >
+            <Button onClick={() => onExcludeMClose()} variant='negative'>
+              {" "}
+              Cancelar{" "}
+            </Button>
+            <Button onClick={() => deleteAd} variant='alert'>
               Sim, excluir anúncio
             </Button>
           </HStack>
@@ -121,9 +131,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModal) => {
             w='100%'
             flexDirection='column'
             justifyContent='space-between'
-            onSubmit={handleSubmit(
-              handleRegister as SubmitHandler<FieldValues>
-            )}
+            onSubmit={handleSubmit(handleUpdate as SubmitHandler<FieldValues>)}
           >
             <Text
               fontSize='14px'
@@ -260,19 +268,23 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModal) => {
               label='Imagem da capa'
               marginBottom='28px'
               error={errors.url}
-              {...register("url")}
+              {...register(`images.${0}.url`)}
             />
 
-            {infoImage.map((proc, index) => (
-              <Input
-                key={index}
-                placeholder='Inserir URL da imagem'
-                label={`${index + 1}° Imagem da galeria`}
-                marginBottom='28px'
-                error={errors.url}
-                {...register("url")}
-              />
-            ))}
+            {fields.map((proc, index) => {
+              if (index >= 1) {
+                return (
+                  <Input
+                    key={index}
+                    placeholder='Inserir URL da imagem'
+                    label={`${index}° Imagem da galeria`}
+                    marginBottom='28px'
+                    error={errors.url}
+                    {...register(`images.${index}.url`)}
+                  />
+                )
+              }
+            })}
 
             <Button
               bg='#EDEAFD'
