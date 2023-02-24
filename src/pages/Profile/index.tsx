@@ -13,7 +13,6 @@ import { CardUserInfo } from "./CardUserInfo"
 import { List } from "../../components/List"
 import { Header } from "../../components/Header"
 import { FooterDesktop } from "../../components/Footer"
-import { Background } from "../../components/Background"
 import { HeaderMobile } from "../../components/Header/HeaderMobile"
 import { useAuth } from "../../contexts/AuthContext"
 
@@ -40,7 +39,6 @@ const Profile = () => {
       .catch((err) => console.log(err))
   }, [])
 
-
   return (
     <Flex
       w='100vw'
@@ -49,17 +47,22 @@ const Profile = () => {
       alignItems='center'
       overflowY='scroll'
       overflowX='hidden'
+      scrollBehavior='smooth'
     >
-      <Background />
       {width >= 768 ? <Header /> : <HeaderMobile />}
 
-      <VStack w='100%' p='60px 0' gap='12'>
+      <VStack
+        w='100%'
+        p='60px 0'
+        gap='12'
+        bgGradient='linear(to-b, brand.2 0%, brand.2 16%, grey.8 16%, grey.8 100%)'
+      >
         <CardUserInfo userInfo={userInfo} />
 
         <List
           title='Carros'
           id='cars'
-          list={userAds.filter((ad) => ad.motorType == "carro") }
+          list={userAds.filter((ad) => ad.motorType == "carro")}
         />
         <List
           title='Motos'

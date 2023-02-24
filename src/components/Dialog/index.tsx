@@ -19,7 +19,7 @@ export const Dialog = ({ title, isOpen, onClose, children }: IDialogProps) => {
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent height='max-content' marginLeft='2' marginRight='2'>
           <ModalHeader
             fontFamily='Lexend'
             fontSize='xs'
@@ -30,7 +30,7 @@ export const Dialog = ({ title, isOpen, onClose, children }: IDialogProps) => {
             {title}
             <ModalCloseButton size='xs' position='static' />
           </ModalHeader>
-          <ModalBody>{children}</ModalBody>
+          <ModalBody paddingBottom='4'>{children}</ModalBody>
         </ModalContent>
       </Modal>
     </>
