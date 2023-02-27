@@ -12,6 +12,7 @@ export interface IAd {
   price: number
   motorType: string
   isActive: boolean
+  isDelete: boolean
   user: IUser
   images: IImage[]
 }
@@ -22,7 +23,10 @@ export interface IProviderProps {
 
 export interface IAdContextData {
   ads: IAd[]
-  listContacts: () => Promise<void>
+  adsByUser: IAd[]
+  userInfo: IUser
+  listAds: () => Promise<void>
+  listAdsByUser: (userId: string) => Promise<void>
   deleteAd: (adId: string) => Promise<void>
 }
 
@@ -39,6 +43,11 @@ export interface IRegister {
 }
 
 export interface IPropsModal {
+  onClose: any;
+  isOpen: any;
+}
+
+export interface IPropsModalUpdate {
   id: string
   onClose: any;
   isOpen: any;

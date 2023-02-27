@@ -12,10 +12,10 @@ import { HeaderMobile } from "../../components/Header/HeaderMobile"
 
 const Home = () => {
   const [, width] = UseGetScreenWidth()
-  const { ads, listContacts } = useAd()
+  const { ads, listAds } = useAd()
 
   useEffect(() => {
-    listContacts()
+    listAds()
   }, [])
 
   return (

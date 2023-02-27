@@ -20,11 +20,11 @@ import {
 } from "react-hook-form"
 import { ModalBasic } from "./baseModal"
 import { RadioCard } from "../Form/radio"
-import { IPropsModal, IUpdate } from "../../interfaces/ads"
+import { IPropsModalUpdate, IUpdate } from "../../interfaces/ads"
 import { Dialog } from "../Dialog"
 import { useAd } from "../../contexts/AdContext"
 
-export const ModalUpdateAds = ({ onClose, isOpen }: IPropsModal) => {
+export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
   const { deleteAd } = useAd()
   const {
     isOpen: isExcludeMOpen,
@@ -97,8 +97,7 @@ export const ModalUpdateAds = ({ onClose, isOpen }: IPropsModal) => {
             Tem certeza que deseja remover este anúncio?
           </Text>
           <Text fontSize='xs' fontWeight='400' color='grey.2' lineHeight='28px'>
-            Essa ação não pode ser desfeita. Isso excluirá permanentemente sua
-            conta e removerá seus dados de nossos servidores.
+            Essa ação não pode ser desfeita. Isso excluirá permanentemente esse anúncio e removerá seus dados de nossos servidores.
           </Text>
 
           <HStack
@@ -106,10 +105,9 @@ export const ModalUpdateAds = ({ onClose, isOpen }: IPropsModal) => {
             alignSelf={["center", "center", "flex-end", "flex-end"]}
           >
             <Button onClick={() => onExcludeMClose()} variant='negative'>
-              {" "}
-              Cancelar{" "}
+              Cancelar
             </Button>
-            <Button onClick={() => deleteAd} variant='alert'>
+            <Button onClick={() => deleteAd(id)} variant='alert'>
               Sim, excluir anúncio
             </Button>
           </HStack>
