@@ -2,11 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { Flex, VStack } from "@chakra-ui/react"
 
-import { api } from "../../services/api"
 import { UseGetScreenWidth } from "../../hooks"
-
-import { IAd } from "../../interfaces/ads"
-import { IUser } from "../../interfaces/user"
 
 import { CardUserInfo } from "./CardUserInfo"
 
@@ -14,29 +10,17 @@ import { List } from "../../components/List"
 import { Header } from "../../components/Header"
 import { FooterDesktop } from "../../components/Footer"
 import { HeaderMobile } from "../../components/Header/HeaderMobile"
-import { useAuth } from "../../contexts/AuthContext"
+import { useAd } from "../../contexts/AdContext"
 
 const Profile = () => {
   let { id } = useParams()
-  const { token } = useAuth()
 
-  const [userAds, setUserAds] = useState<IAd[]>([] as IAd[])
-  const [userInfo, setUserInfo] = useState<IUser>({} as IUser)
+  const { listAdsByUser, adsByUser, userInfo } = useAd()
 
   const [, width] = UseGetScreenWidth()
 
   useEffect(() => {
-    api
-      .get(`/users/${id}/ads`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUserAds(res.data)
-        setUserInfo(res.data[0].user)
-      })
-      .catch((err) => console.log(err))
+    listAdsByUser(id!)
   }, [])
 
   return (
@@ -62,12 +46,12 @@ const Profile = () => {
         <List
           title='Carros'
           id='cars'
-          list={userAds.filter((ad) => ad.motorType == "carro")}
+          list={adsByUser.filter((ad) => ad.motorType == "carro")}
         />
         <List
           title='Motos'
           id='motorcycles'
-          list={userAds.filter((ad) => ad.motorType == "moto")}
+          list={adsByUser.filter((ad) => ad.motorType == "moto")}
         />
       </VStack>
       <FooterDesktop />

@@ -26,7 +26,6 @@ interface ICustomCardProps {
 
 export const CustomCard = ({ ad }: ICustomCardProps) => {
   const { id: urlId } = useParams()
-
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const {
@@ -70,15 +69,16 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
     >
       {onProfile && !isMine && (
         <Box
-          p='2'
+          p='2px 8px'
           m='2'
           borderRadius='2px'
           color='white'
           fontSize='0.875rem'
           bg={isActive ? "brand.1" : "grey.4"}
           position='absolute'
+          zIndex={2}
         >
-          {isActive ? "Active" : "Inactive"}
+          {isActive ? "Ativo" : "Inativo"}
         </Box>
       )}
       <Box
