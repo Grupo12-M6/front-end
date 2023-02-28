@@ -117,7 +117,7 @@ export const HeaderMobile = () => {
         onClose={onMLoginClose}
         onOpenRegister={onMRegisterOpen}
       />
-      <RegisterModal isOpen={isMRegisterOpen} onClose={onMRegisterClose} />
+      <RegisterModal isOpen={isMRegisterOpen} onClose={onMRegisterClose} onOpenLogin={onMLoginOpen}/>
     </Accordion>
   )
 }

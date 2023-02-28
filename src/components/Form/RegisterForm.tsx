@@ -18,7 +18,15 @@ import { IRegisterForm } from "../../interfaces/user"
 import { registerSchema } from "../../validators"
 import { useUser } from "../../contexts/UserContext"
 
-export const RegisterForm = () => {
+interface IRegisterFormProps {
+  onOpenDialog: () => void
+  onCloseForm: () => void
+}
+
+export const RegisterForm = ({
+  onOpenDialog,
+  onCloseForm,
+}: IRegisterFormProps) => {
   const navigate = useNavigate()
   const { register: registerUser } = useUser()
 
@@ -38,7 +46,7 @@ export const RegisterForm = () => {
     resolver: yupResolver(registerSchema),
   })
 
-  const handleRegister = (data: IRegisterForm) => {
+  const handleRegister = async (data: IRegisterForm) => {
     const info = {
       name: data.name,
       email: data.email,
@@ -56,6 +64,9 @@ export const RegisterForm = () => {
       complement: data.complement || undefined,
     }
     registerUser(info)
+
+    onCloseForm()
+    onOpenDialog()
   }
 
   return (
@@ -166,48 +177,60 @@ export const RegisterForm = () => {
             {...register("complement")}
           />
         </HStack>
-      <Text alignSelf='flex-start' fontSize='0.875rem' fontWeight='500' color='black'> Tipo de conta </Text>
+        <Text
+          alignSelf='flex-start'
+          fontSize='0.875rem'
+          fontWeight='500'
+          color='black'
+        >
+          {" "}
+          Tipo de conta{" "}
+        </Text>
 
-      <Flex
-        w='100%'
-        gap={['2', '0', '0', '0']}
-        marginTop='8px'
-        flexDirection={['column', 'row', 'row', 'row']}
-        justifyContent='space-between'
-        {...group}
-        {...register("isSeller")}
-      >
-        {radioOptions.map((value) => {
-          const radio = getRadioProps({ value })
-          return (
-            <RadioCard px={['50px', '50px', '45px', '45px']} py='10.5px' key={value} {...radio}>
-              {value}
-            </RadioCard>
-          )
-        })}
-      </Flex>
+        <Flex
+          w='100%'
+          gap={["2", "0", "0", "0"]}
+          marginTop='8px'
+          flexDirection={["column", "row", "row", "row"]}
+          justifyContent='space-between'
+          {...group}
+          {...register("isSeller")}
+        >
+          {radioOptions.map((value) => {
+            const radio = getRadioProps({ value })
+            return (
+              <RadioCard
+                px={["50px", "50px", "45px", "45px"]}
+                py='10.5px'
+                key={value}
+                {...radio}
+              >
+                {value}
+              </RadioCard>
+            )
+          })}
+        </Flex>
 
-      <Input
-        placeholder='Digitar senha'
-        label='Senha'
-        type='password'
-        error={errors.password}
-        {...register("password")}
-      />
+        <Input
+          placeholder='Digitar senha'
+          label='Senha'
+          type='password'
+          error={errors.password}
+          {...register("password")}
+        />
 
-      <Input
-        placeholder='Digitar senha'
-        label='Confirmar senha'
-        type='password'
-        error={errors.passwordConfirmation}
-        {...register("passwordConfirmation")}
-      />
+        <Input
+          placeholder='Digitar senha'
+          label='Confirmar senha'
+          type='password'
+          error={errors.passwordConfirmation}
+          {...register("passwordConfirmation")}
+        />
 
-      <Button w='100%' h='48px' type='submit' variant='brand1'>
-        Finalizar cadastro
-      </Button>
+        <Button w='100%' h='48px' type='submit' variant='brand1'>
+          Finalizar cadastro
+        </Button>
       </VStack>
-      
     </Flex>
   )
 }
