@@ -11,6 +11,7 @@ import { UserMenu } from "../Menu/UserMenu"
 import { useAuth } from "../../contexts/AuthContext"
 import { DefaultLogo } from "../../utils/defaultLogo"
 import { LoginModal } from "../Modals/LoginModal"
+import { RegisterModal } from "../Modals/RegisterModal"
 
 export const Header = () => {
   const { token, user } = useAuth()
@@ -19,6 +20,12 @@ export const Header = () => {
     isOpen: isMLoginOpen,
     onOpen: onMLoginOpen,
     onClose: onMLoginClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isMRegisterOpen,
+    onOpen: onMRegisterOpen,
+    onClose: onMRegisterClose,
   } = useDisclosure()
 
   return (
@@ -87,6 +94,7 @@ export const Header = () => {
               fontWeight='600'
               fontFamily='body'
               variant='outline1'
+              onClick={() => onMRegisterOpen()}
             >
               Cadastrar
             </Button>
@@ -94,7 +102,8 @@ export const Header = () => {
         )}
       </Flex>
 
-      <LoginModal isOpen={isMLoginOpen} onClose={onMLoginClose} />
+      <LoginModal isOpen={isMLoginOpen} onClose={onMLoginClose} onOpenRegister={onMRegisterOpen}/>
+      <RegisterModal isOpen={isMRegisterOpen} onClose={onMRegisterClose}/>
     </Flex>
   )
 }

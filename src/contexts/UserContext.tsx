@@ -22,27 +22,9 @@ const useUser = () => {
 const UserProvider = ({ children }: IProviderProps) => {
   const { token } = useAuth()
 
-  const register = async ({
-    name,
-    email,
-    password,
-    cpf,
-    phoneNumber,
-    birthday,
-    description,
-    isSeller,
-  }: IRegisterData) => {
+  const register = async (data: IRegisterData) => {
     await api
-      .post("/users", {
-        name,
-        email,
-        password,
-        cpf,
-        phoneNumber,
-        birthday,
-        description,
-        isSeller,
-      })
+      .post("/users", data)
       .then((res) => {
         console.log(res)
       })
@@ -51,7 +33,9 @@ const UserProvider = ({ children }: IProviderProps) => {
       })
   }
 
-  return <UserContext.Provider value={{register}}>{children}</UserContext.Provider>
+  return (
+    <UserContext.Provider value={{ register }}>{children}</UserContext.Provider>
+  )
 }
 
 export { UserProvider, useUser }

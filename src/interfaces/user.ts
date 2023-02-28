@@ -36,6 +36,24 @@ export interface IAuthContextData {
   signOut: () => void
 }
 
+export interface IRegisterForm {
+  name: string
+  email: string
+  password: string
+  cpf: string
+  phoneNumber: string
+  birthday: string
+  description: string
+  isSeller: string
+  cep: string
+  state: string
+  city: string
+  street: string
+  number: string
+  complement?: number
+  passwordConfirmation: string
+}
+
 export interface IRegisterData {
   name: string
   email: string
@@ -45,17 +63,15 @@ export interface IRegisterData {
   birthday: string
   description: string
   isSeller: boolean
+  cep: string
+  state: string
+  city: string
+  street: string
+  number: string
+  complement?: number
 }
 
+
 export interface IUserContextData {
-  register: ({
-    name,
-    email,
-    password,
-    cpf,
-    phoneNumber,
-    birthday,
-    description,
-    isSeller,
-  }: IRegisterData) => Promise<void>
+  register: (data: IRegisterData) => Promise<void>
 }
