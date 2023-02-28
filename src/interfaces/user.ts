@@ -35,3 +35,27 @@ export interface IAuthContextData {
   signIn: (credentials: ISignInData) => Promise<void>
   signOut: () => void
 }
+
+export interface IRegisterData {
+  name: string
+  email: string
+  password: string
+  cpf: string
+  phoneNumber: string
+  birthday: string
+  description: string
+  isSeller: boolean
+}
+
+export interface IUserContextData {
+  register: ({
+    name,
+    email,
+    password,
+    cpf,
+    phoneNumber,
+    birthday,
+    description,
+    isSeller,
+  }: IRegisterData) => Promise<void>
+}
