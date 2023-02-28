@@ -8,6 +8,7 @@ import {
   useRadioGroup,
   useDisclosure,
   HStack,
+  InputProps,
 } from "@chakra-ui/react"
 
 import { Input } from "../Form/input"
@@ -25,7 +26,7 @@ import { Dialog } from "../Dialog"
 import { useAd } from "../../contexts/AdContext"
 
 export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
-  const { deleteAd } = useAd()
+  const { deleteAd, listOneAds, adsInfo, imgs } = useAd()
   const {
     isOpen: isExcludeMOpen,
     onOpen,
@@ -45,9 +46,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
   })
 
   const ImageAdd = () => {
-    append({
-      url: "",
-    })
+    append({ url: ""})
   }
 
   const handleUpdate = (data: IUpdate) => {
@@ -55,7 +54,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
       data.adType = "Leilão"
     }
     if (data.motorType == null) {
-      data.motorType = "Moto"
+      data.motorType = "Carro"
     }
     console.log(data)
   }
@@ -65,13 +64,13 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "adType",
-    defaultValue: "venda",
+    defaultValue: adsInfo.adType,
   })
 
   const { getRootProps: getRootProps_2, getRadioProps: getRadioProps_2 } =
     useRadioGroup({
       name: "motorType",
-      defaultValue: "carro",
+      defaultValue: adsInfo.motorType,
     })
 
   const group = getRootProps()
@@ -172,6 +171,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
             <Input
               placeholder='Digitar titulo'
               label='Titulo'
+              defaultValue={adsInfo.title}
               error={errors.title}
               {...register("title")}
             />
@@ -187,6 +187,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
                 type='number'
                 placeholder='Digitar ano'
                 label='Ano'
+                defaultValue={adsInfo.year}
                 error={errors.year}
                 {...register("year")}
               />
@@ -195,6 +196,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
                 type='number'
                 placeholder='0'
                 label='Quilometragem'
+                defaultValue={adsInfo.mileage}
                 error={errors.mileage}
                 {...register("mileage")}
               />
@@ -203,6 +205,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
                 type='number'
                 placeholder='Digitar preço'
                 label='Preço'
+                defaultValue={adsInfo.price}
                 error={errors.price}
                 {...register("price")}
               />
@@ -227,6 +230,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
                 fontSize='16px'
                 placeholder='Digitar Descrição'
                 // error={errors.email}
+                defaultValue={adsInfo.description}
                 {...register("description")}
               />
             </Flex>
@@ -265,6 +269,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
               placeholder='Inserir URL da imagem'
               label='Imagem da capa'
               marginBottom='28px'
+              // defaultValue={fields[0] as any}
               error={errors.url}
               {...register(`images.${0}.url`)}
             />
