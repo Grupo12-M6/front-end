@@ -18,11 +18,12 @@ export const RadioCard = (props: any) => {
           fontFamily="inter"
           fontSize="16px"
           fontWeight="600"
+          textAlign='center'
           border="2px"
           borderColor="grey.4"
           borderRadius="4px"
-          px={66}
-          py={3}
+          px={props.px || 66}
+          py={props.py || 3}
         >
           {props.children}
         </Box>

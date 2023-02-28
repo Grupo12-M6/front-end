@@ -18,6 +18,7 @@ import { UserMenu } from "../Menu/UserMenu"
 import { useAuth } from "../../contexts/AuthContext"
 import { DefaultLogo } from "../../utils/defaultLogo"
 import { LoginModal } from "../Modals/LoginModal"
+import { RegisterModal } from "../Modals/RegisterModal"
 
 export const HeaderMobile = () => {
   const { token, user } = useAuth()
@@ -26,6 +27,12 @@ export const HeaderMobile = () => {
     isOpen: isMLoginOpen,
     onOpen: onMLoginOpen,
     onClose: onMLoginClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isMRegisterOpen,
+    onOpen: onMRegisterOpen,
+    onClose: onMRegisterClose,
   } = useDisclosure()
 
   return (
@@ -39,7 +46,7 @@ export const HeaderMobile = () => {
               justifyContent='space-between'
               alignItems='center'
             >
-              <DefaultLogo/>
+              <DefaultLogo />
 
               <AccordionButton w='18px' h='18px' p='0'>
                 {isExpanded ? (
@@ -94,6 +101,7 @@ export const HeaderMobile = () => {
                     margin='0'
                     fontSize='xs'
                     variant='outline1'
+                    onClick={() => onMRegisterOpen()}
                   >
                     Cadastrar
                   </Button>
@@ -104,7 +112,12 @@ export const HeaderMobile = () => {
         )}
       </AccordionItem>
 
-      <LoginModal isOpen={isMLoginOpen} onClose={onMLoginClose} />
+      <LoginModal
+        isOpen={isMLoginOpen}
+        onClose={onMLoginClose}
+        onOpenRegister={onMRegisterOpen}
+      />
+      <RegisterModal isOpen={isMRegisterOpen} onClose={onMRegisterClose} />
     </Accordion>
   )
 }
