@@ -23,11 +23,15 @@ export interface IProviderProps {
 
 export interface IAdContextData {
   ads: IAd[]
+  imgs: IListImage[]
   adsByUser: IAd[]
   userInfo: IUser
+  adsInfo: IAd
   listAds: () => Promise<void>
   listAdsByUser: (userId: string) => Promise<void>
   deleteAd: (adId: string) => Promise<void>
+  registerAds: ({...data}: IRegister) => Promise<void>
+  listOneAds: (adId: string) => Promise<void>
 }
 
 export interface IRegister {

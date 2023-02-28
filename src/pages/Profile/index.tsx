@@ -46,12 +46,12 @@ const Profile = () => {
         <List
           title='Carros'
           id='cars'
-          list={adsByUser.filter((ad) => ad.motorType == "carro")}
+          list={adsByUser.filter((ad) => ad.motorType == "Carro")}
         />
         <List
           title='Motos'
           id='motorcycles'
-          list={adsByUser.filter((ad) => ad.motorType == "moto")}
+          list={adsByUser.filter((ad) => ad.motorType == "Moto")}
         />
       </VStack>
       <FooterDesktop />

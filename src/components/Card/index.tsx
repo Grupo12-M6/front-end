@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
+import { useAd } from "../../contexts/AdContext"
 import { useAuth } from "../../contexts/AuthContext"
 
 import { IAd } from "../../interfaces/ads"
@@ -27,6 +28,7 @@ interface ICustomCardProps {
 export const CustomCard = ({ ad }: ICustomCardProps) => {
   const { id: urlId } = useParams()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { listOneAds } = useAd()
 
   const {
     description,
@@ -55,6 +57,12 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
   const formattedPrice = formatCurrency(price)
 
   const handleSeeMore = () => {}
+
+  const handleEditAd = (adId: string) => {
+    listOneAds(adId)
+
+    onOpen()
+  }
 
   return (
     <Card
@@ -175,7 +183,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
               fontSize='0.875rem'
               fontWeight='600'
               variant='outline1'
-              onClick={() => onOpen()}
+              onClick={() => handleEditAd(ad.id)}
             >
               Editar
             </Button>
