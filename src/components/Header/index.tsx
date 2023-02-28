@@ -103,7 +103,7 @@ export const Header = () => {
       </Flex>
 
       <LoginModal isOpen={isMLoginOpen} onClose={onMLoginClose} onOpenRegister={onMRegisterOpen}/>
-      <RegisterModal isOpen={isMRegisterOpen} onClose={onMRegisterClose}/>
+      <RegisterModal isOpen={isMRegisterOpen} onClose={onMRegisterClose} onOpenLogin={onMLoginOpen}/>
     </Flex>
   )
 }

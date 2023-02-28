@@ -16,7 +16,7 @@ export const registerSchema = yup.object().shape({
   state: yup.string().required("Estado necessário").max(2, 'Apenas abreviação'),
   city: yup.string().required("Cidade necessária"),
   street: yup.string().required("Rua necessária"),
-  number: yup.number().required("Número necessário"),
+  number: yup.number().required("Número necessário").typeError('Número inválido'),
   complement: yup.string(),
   isSeller: yup.string().required("Tipo de conta necessário"),
   password: yup.string().required("Senha necessária"),
