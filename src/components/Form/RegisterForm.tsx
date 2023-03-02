@@ -49,6 +49,12 @@ export const RegisterForm = ({
   })
 
   const handleRegister = (data: IRegisterForm) => {
+    if(data.isSeller == null) {
+      data.isSeller = "Anunciante"
+    }
+    
+    console.log(data.isSeller)
+
     const info = {
       name: data.name,
       email: data.email,
