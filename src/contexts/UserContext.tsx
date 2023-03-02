@@ -1,10 +1,11 @@
-import { createContext, useCallback, useContext, useState } from "react"
+import { createContext, useContext } from "react"
 
 import { api } from "../services/api"
 import { useAuth } from "./AuthContext"
 import {
   IProviderProps,
   IRegisterData,
+  IUpdateUserData,
   IUserContextData,
 } from "../interfaces/user"
 
@@ -33,8 +34,24 @@ const UserProvider = ({ children }: IProviderProps) => {
       })
   }
 
+  const updateUser = async (id: string, data: IUpdateUserData) => {
+    await api
+      .patch(`/users/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        localStorage.setItem("@user", JSON.stringify(res.data))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
-    <UserContext.Provider value={{ register }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ register, updateUser }}>{children}</UserContext.Provider>
   )
 }
 

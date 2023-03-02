@@ -1,8 +1,17 @@
-import { Avatar, Box, Menu, MenuButton, MenuList, Text } from "@chakra-ui/react"
+import {
+  Avatar,
+  Box,
+  Menu,
+  MenuButton,
+  MenuList,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react"
 
 import { CustomMenuItem } from "./CustomMenuItem"
 import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { UpdateUserModal } from "../Modals/UpdateUserModal"
 
 interface IUserMenuProps {
   name: string
@@ -10,28 +19,38 @@ interface IUserMenuProps {
 }
 
 export const UserMenu = ({ name, isSeller }: IUserMenuProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   const { signOut, user } = useAuth()
   const navigate = useNavigate()
 
-  const handleEditProfile = () => {}
+  const handleEditProfile = () => {
+    onOpen()
+
+  }
+
   const handleEditAddress = () => {}
+
   const handleSeeAds = () => {
     navigate(`/users/${user.id}`)
   }
+
   const handleLogOut = () => {
     signOut()
-    navigate('/')
+    navigate("/")
   }
+
 
   return (
     <Menu>
+      <UpdateUserModal isOpen={isOpen} onClose={onClose}/>
       <MenuButton p={["32px 16px", "32px 16px", "0", "0"]}>
         <Box
           display='flex'
           gap='6'
           alignItems='center'
           w='max-content'
-          pl={['0', '0', '30px', '30px']}
+          pl={["0", "0", "30px", "30px"]}
         >
           <Avatar name={name} size='sm' />
           <Text
