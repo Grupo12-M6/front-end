@@ -28,6 +28,7 @@ export const RegisterForm = ({
   onCloseForm,
 }: IRegisterFormProps) => {
   const navigate = useNavigate()
+
   const { register: registerUser } = useUser()
 
   const radioOptions = ["Comprador", "Anunciante"]
@@ -46,7 +47,7 @@ export const RegisterForm = ({
     resolver: yupResolver(registerSchema),
   })
 
-  const handleRegister = async (data: IRegisterForm) => {
+  const handleRegister = (data: IRegisterForm) => {
     const info = {
       name: data.name,
       email: data.email,
@@ -56,17 +57,24 @@ export const RegisterForm = ({
       birthday: data.birthday,
       description: data.description,
       isSeller: data.isSeller == "Anunciante" ? true : false,
-      cep: data.cep,
-      state: data.state,
-      city: data.city,
-      street: data.street,
-      number: data.number,
-      complement: data.complement || undefined,
+      address: {
+        cep: data.cep,
+        state: data.state,
+        city: data.city,
+        street: data.street,
+        number: data.number,
+        complement: data.complement || undefined,
+      },
     }
-    registerUser(info)
 
-    onCloseForm()
-    onOpenDialog()
+    registerUser(info)
+      .then((res) => {
+        onCloseForm()
+        onOpenDialog()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (
@@ -183,8 +191,7 @@ export const RegisterForm = ({
           fontWeight='500'
           color='black'
         >
-          {" "}
-          Tipo de conta{" "}
+          Tipo de conta
         </Text>
 
         <Flex
