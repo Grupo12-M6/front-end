@@ -32,6 +32,7 @@ export interface IAdContextData {
   deleteAd: (adId: string) => Promise<void>
   registerAds: ({...data}: IRegister) => Promise<void>
   listOneAds: (adId: string) => Promise<void>
+  updateAds: (adsId: string, {...data}: IUpdate) => Promise<void>
 }
 
 export interface IRegister {
@@ -70,5 +71,5 @@ export interface IUpdate {
   motorType?: string;
   price?: number;
   isActive?: boolean;
-  image?: IListImage[];
+  images?: IListImage[];
 }

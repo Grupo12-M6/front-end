@@ -18,7 +18,7 @@ export const registerSchema = yup.object().shape({
   street: yup.string().required("Rua necessária"),
   number: yup.number().required("Número necessário").typeError('Número inválido'),
   complement: yup.string(),
-  isSeller: yup.string().required("Tipo de conta necessário"),
+  // isSeller: yup.string().required("Tipo de conta necessário"),
   password: yup.string().required("Senha necessária"),
   passwordConfirmation: yup.string().oneOf([yup.ref('password')], 'Senhas precisam ser iguais')
 })
@@ -41,6 +41,21 @@ export const registerAdsSchema = yup.object().shape({
   mileage: yup.number().required("Quilometragem é obrigatório"),
   price: yup.number().required("Preço é obrigatório"),
   description: yup.string().required("É necessário inserir uma descrição"),
+  // motorType: yup.string().required("É obrigatório selecionar o tipo de veiculo"),
+  images: yup.array().of(
+    yup.object().shape({
+      url: yup.string(),
+    })
+  ),
+})
+
+export const updateAdsSchema = yup.object().shape({
+  title: yup.string(),
+  // adType: yup.string().required("É obrigatório selecionar o tipo de anúncio"),
+  year: yup.number(),
+  mileage: yup.number(),
+  price: yup.number(),
+  description: yup.string(),
   // motorType: yup.string().required("É obrigatório selecionar o tipo de veiculo"),
   images: yup.array().of(
     yup.object().shape({

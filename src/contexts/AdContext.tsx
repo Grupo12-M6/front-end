@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useState } from "react"
 import { api } from "../services/api"
 import { useAuth } from "./AuthContext"
 import { IUser } from "../interfaces/user"
-import { IAd, IAdContextData, IListImage, IProviderProps, IRegister } from "../interfaces/ads"
+import { IAd, IAdContextData, IListImage, IProviderProps, IRegister, IUpdate } from "../interfaces/ads"
 
 import jwt_decode from "jwt-decode"
 
@@ -57,6 +57,18 @@ const AdProvider = ({ children }: IProviderProps) => {
     
   }, [])
 
+  const updateAds = useCallback(async (adsId: string, {...data}: IUpdate) => {
+      await api.patch(`/ads/${adsId}`, {...data}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+      .then((data) => {
+        console.log(data.data)
+      })
+      .catch(err => console.log(err))
+    }, [])
+
   const listOneAds = async (adsId: string) => {
     await api
       .get(`/ads/${adsId}`)
@@ -86,6 +98,7 @@ const AdProvider = ({ children }: IProviderProps) => {
       })
       .then((res) => {
         setAdsByUser(res.data.filter((ad: IAd) => ad.isDelete === false))
+        console.log(res)
         setUserInfo(res.data[0].user)
       })
       .catch((err) => console.log(err))
@@ -119,6 +132,7 @@ const AdProvider = ({ children }: IProviderProps) => {
         listAdsByUser, 
         registerAds, 
         listOneAds,
+        updateAds
       }}
     >
       {children}
