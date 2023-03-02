@@ -54,6 +54,17 @@ export interface IRegisterForm {
   passwordConfirmation: string
 }
 
+export interface IUpdateUserForm {
+  name?: string
+  email?: string
+  password?: string
+  cpf?: string
+  phoneNumber?: string
+  birthday?: string
+  description?: string
+  isSeller?: string
+}
+
 export interface IRegisterData {
   name: string
   email: string
@@ -66,7 +77,19 @@ export interface IRegisterData {
   address: IAddressCreate
 }
 
+export interface IUpdateUserData {
+  name?: string
+  email?: string
+  password?: string
+  cpf?: string
+  phoneNumber?: string
+  birthday?: string | Date
+  description?: string
+  isSeller?: boolean
+}
+
 
 export interface IUserContextData {
   register: (data: IRegisterData) => Promise<void>
+  updateUser: (id: string, data: IUpdateUserData) => Promise<void>
 }

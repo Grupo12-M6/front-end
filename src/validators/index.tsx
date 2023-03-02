@@ -21,7 +21,17 @@ export const registerSchema = yup.object().shape({
   isSeller: yup.string().required("Tipo de conta necessário"),
   password: yup.string().required("Senha necessária"),
   passwordConfirmation: yup.string().oneOf([yup.ref('password')], 'Senhas precisam ser iguais')
+})
 
+export const updateUserSchema = yup.object().shape({
+  name: yup.string(),
+  email: yup.string().email("Email inválido"),
+  cpf: yup.string(),
+  phoneNumber: yup.string(),
+  birthday: yup.string(),
+  description: yup.string().max(400, 'Tamanho máximo de caracteres atingido'),
+  isSeller: yup.string(),
+  password: yup.string(),
 })
 
 export const registerAdsSchema = yup.object().shape({

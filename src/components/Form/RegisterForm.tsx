@@ -4,6 +4,7 @@ import {
   Flex,
   HStack,
   Text,
+  Textarea,
   useRadioGroup,
   VStack,
 } from "@chakra-ui/react"
@@ -55,7 +56,7 @@ export const RegisterForm = ({
       cpf: data.cpf,
       phoneNumber: data.phoneNumber,
       birthday: data.birthday,
-      description: data.description,
+      description: data.description || "Sem descrição",
       isSeller: data.isSeller == "Anunciante" ? true : false,
       address: {
         cep: data.cep,
@@ -129,12 +130,36 @@ export const RegisterForm = ({
           {...register("birthday")}
         />
 
-        <Input
-          placeholder='Digitar descrição'
-          label='Descrição'
-          error={errors.description}
-          {...register("description")}
-        />
+        <VStack w='100%'>
+          <Text
+            w='100%'
+            color='grey.1'
+            fontSize='14px'
+            fontWeight={500}
+            fontFamily='inter'
+            mb='0'
+            textAlign='left'
+          >
+            Descrição
+          </Text>
+
+          <Textarea
+            id='description'
+            variant='outline'
+            placeholder='Digitar descrição'
+            _hover={{ bgColor: "grey.8" }}
+            _placeholder={{ color: "grey.3" }}
+            _focus={{ bg: "grey.9" }}
+            borderRadius='4px'
+            fontSize='16px'
+            size='lg'
+            h='48px'
+            w='100%'
+            color='black'
+            borderColor='black'
+            {...register("description")}
+          />
+        </VStack>
       </VStack>
 
       <Text py='6' fontSize='0.875rem' fontWeight='500' color='black'>
