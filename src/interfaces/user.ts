@@ -1,4 +1,4 @@
-import { IAddress } from "./address"
+import { IAddress, IAddressCreate } from "./address"
 import { ReactNode } from "react"
 
 export interface IUser {
@@ -49,8 +49,8 @@ export interface IRegisterForm {
   state: string
   city: string
   street: string
-  number: string
-  complement?: number
+  number: number
+  complement?: string
   passwordConfirmation: string
 }
 
@@ -63,12 +63,7 @@ export interface IRegisterData {
   birthday: string
   description: string
   isSeller: boolean
-  cep: string
-  state: string
-  city: string
-  street: string
-  number: string
-  complement?: number
+  address: IAddressCreate
 }
 
 

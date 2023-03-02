@@ -7,3 +7,5 @@ export interface IAddress {
   number: number
   complement?: string
 }
+
+export type IAddressCreate = Omit<IAddress, 'id'>
