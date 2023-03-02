@@ -1,4 +1,4 @@
-import { Button, Flex, Text, Textarea, VStack } from "@chakra-ui/react"
+import { Button, Flex, HStack, Text, Textarea, VStack } from "@chakra-ui/react"
 
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -149,11 +149,18 @@ export const UpdateUserForm = ({ onCloseForm }: IUpdateUserFormProps) => {
         </VStack>
       </VStack>
 
-      <VStack gap='4' paddingY='6'>
-        <Button w='100%' h='48px' type='submit' variant='brand1'>
+      <HStack
+        gap='2'
+        paddingTop='6'
+        alignSelf={["center", "flex-end", "flex-end", "flex-end"]}
+      >
+        <Button onClick={() => onCloseForm()} h='48px' variant='negative'>
+          Cancelar
+        </Button>
+        <Button h='48px' type='submit' variant='brand1'>
           Editar perfil
         </Button>
-      </VStack>
+      </HStack>
     </Flex>
   )
 }
