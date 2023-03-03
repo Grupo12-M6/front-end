@@ -17,6 +17,7 @@ const Profile = () => {
   let { id } = useParams()
 
   const { listAdsByUser, adsByUser } = useAd()
+  const { listOneUser, currentUser } = useUser()
   
   const [, width] = UseGetScreenWidth()
   
@@ -24,7 +25,7 @@ const Profile = () => {
     listAdsByUser(id!)
     listOneUser(id!)
   }, [])
-  const { listOneUser, currentUser } = useUser()
+  
   return (
     <Flex
       w='100vw'

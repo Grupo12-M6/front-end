@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useAd } from "../../contexts/AdContext"
 import { useAuth } from "../../contexts/AuthContext"
 
@@ -29,6 +29,8 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
   const { id: urlId } = useParams()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { listOneAds } = useAd()
+
+  const navigate = useNavigate()
 
   const {
     description,
@@ -56,7 +58,9 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
 
   const formattedPrice = formatCurrency(price)
 
-  const handleSeeMore = () => {}
+  const handleSeeMore = () => {
+    navigate(`/ad/${ad.id}`)
+  }
 
   const handleEditAd = (adId: string) => {
     listOneAds(adId)
@@ -74,6 +78,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
       bgColor='transparent'
+      onClick={() => handleSeeMore()}
     >
       {onProfile && !isMine && (
         <Box
@@ -191,7 +196,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
               fontSize='0.875rem'
               fontWeight='600'
               variant='outline1'
-              onClick={() => handleSeeMore()}
+              onClick={() => onProfile && isMine && handleSeeMore()}
             >
               Ver como
             </Button>
