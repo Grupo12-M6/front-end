@@ -46,7 +46,6 @@ const AuthProvider = ({ children }: IProviderProps) => {
     })
     const user = userResponse.data.data
 
-
     localStorage.setItem("@token", token)
     localStorage.setItem("@user", JSON.stringify(user))
 
