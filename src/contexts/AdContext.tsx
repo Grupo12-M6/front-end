@@ -2,7 +2,6 @@ import { createContext, useCallback, useContext, useState } from "react"
 
 import { api } from "../services/api"
 import { useAuth } from "./AuthContext"
-import { IUser } from "../interfaces/user"
 import { IAd, IAdContextData, IListImage, IProviderProps, IRegister, IUpdate } from "../interfaces/ads"
 
 import jwt_decode from "jwt-decode"
@@ -24,7 +23,6 @@ const AdProvider = ({ children }: IProviderProps) => {
 
   const [ads, setAds] = useState<IAd[]>([])
   const [adsByUser, setAdsByUser] = useState<IAd[]>([])
-  const [userInfo, setUserInfo] = useState<IUser>({} as IUser)
   const [adsInfo, setAdsInfo] = useState<IAd>({} as IAd)
   const [imgs, setImgs] = useState<IListImage[]>([])
 
@@ -51,7 +49,6 @@ const AdProvider = ({ children }: IProviderProps) => {
       })
       .then((res) => {
         setAdsByUser(res.data.filter((ad: IAd) => ad.isDelete === false))
-        setUserInfo(res.data[0].user)
       })
       .catch((err) => console.log(err))
     
@@ -73,7 +70,6 @@ const AdProvider = ({ children }: IProviderProps) => {
     await api
       .get(`/ads/${adsId}`)
       .then((data) => {
-        console.log(data.data)
         setAdsInfo(data.data)
         setImgs(data.data.images)
       })
@@ -98,8 +94,6 @@ const AdProvider = ({ children }: IProviderProps) => {
       })
       .then((res) => {
         setAdsByUser(res.data.filter((ad: IAd) => ad.isDelete === false))
-        console.log(res)
-        setUserInfo(res.data[0].user)
       })
       .catch((err) => console.log(err))
   }
@@ -124,7 +118,6 @@ const AdProvider = ({ children }: IProviderProps) => {
       value={{ 
         ads, 
         adsByUser, 
-        userInfo, 
         adsInfo,
         imgs,
         listAds, 

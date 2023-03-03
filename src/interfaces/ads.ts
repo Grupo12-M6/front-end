@@ -25,7 +25,6 @@ export interface IAdContextData {
   ads: IAd[]
   imgs: IListImage[]
   adsByUser: IAd[]
-  userInfo: IUser
   adsInfo: IAd
   listAds: () => Promise<void>
   listAdsByUser: (userId: string) => Promise<void>

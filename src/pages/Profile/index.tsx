@@ -24,7 +24,6 @@ const Profile = () => {
     listAdsByUser(id!)
     listOneUser(id!)
   }, [])
-  
   const { listOneUser, currentUser } = useUser()
   return (
     <Flex
@@ -49,12 +48,12 @@ const Profile = () => {
         <List
           title='Carros'
           id='cars'
-          list={adsByUser.filter((ad) => ad.motorType == "Carro")}
+          list={adsByUser.filter((ad) => ad.motorType.toLowerCase() == "carro")}
         />
         <List
           title='Motos'
           id='motorcycles'
-          list={adsByUser.filter((ad) => ad.motorType == "Moto")}
+          list={adsByUser.filter((ad) => ad.motorType.toLowerCase() == "moto")}
         />
       </VStack>
       <FooterDesktop />
