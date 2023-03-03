@@ -88,7 +88,6 @@ export interface IUpdateUserData {
   isSeller?: boolean
 }
 
-
 export interface IUserContextData {
   currentUser: IUser
   register: (data: IRegisterData) => Promise<void>

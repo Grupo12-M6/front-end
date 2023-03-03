@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export interface IAddress {
   id: string
   cep: string
@@ -9,3 +11,20 @@ export interface IAddress {
 }
 
 export type IAddressCreate = Omit<IAddress, 'id'>
+
+export interface IProviderProps {
+  children: ReactNode
+}
+
+export interface IUpdateAddressData {
+  cep?: string
+  estado?: string
+  cidade?: string
+  rua?: string
+  numero?: number
+  complement?: string 
+}
+
+export interface IAddressContextData {
+  updateAddress: (id: string, data: IUpdateAddressData) => Promise<void>
+}
