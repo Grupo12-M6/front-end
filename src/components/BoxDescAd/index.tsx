@@ -7,10 +7,6 @@ interface IBoxDescAd {
 const BoxDescAd = ({ description }: IBoxDescAd) => {
   return (
     <Box
-      minW="351px"
-      minH="325px"
-      maxW="751px"
-      maxH="213px"
       backgroundColor="grey.10"
       borderRadius="4px"
       display="flex"
@@ -18,8 +14,8 @@ const BoxDescAd = ({ description }: IBoxDescAd) => {
       gap="32px"
     >
       <Text
-        marginLeft="44px"
-        marginRight="44px"
+        marginLeft="22px"
+        marginRight="22px"
         marginTop="36px"
         fontStyle="fonts.heading"
         color="grey.1"
@@ -30,8 +26,9 @@ const BoxDescAd = ({ description }: IBoxDescAd) => {
       <Text
         fontWeight="400"
         fontStyle="fonts.body"
-        marginLeft="44px"
-        marginRight="44px"
+        marginLeft="22px"
+        marginRight="22px"
+        marginBottom="36px"
       >
         {description}
       </Text>

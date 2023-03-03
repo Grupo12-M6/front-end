@@ -2,24 +2,17 @@ import { Box, Text, Badge, HStack, Button } from "@chakra-ui/react";
 
 interface IBoxInfoAd {
   title: string;
-  year: string;
-  milles: string;
-  price: string;
+  year: string | number;
+  milles: string | number;
+  price: string | number;
 }
 
 const BoxInfoAd = ({ title, year, milles, price }: IBoxInfoAd) => {
   return (
-    <Box
-      minW="351px"
-      minH="326.96px"
-      maxW="751px"
-      maxH="239.39px"
-      backgroundColor="grey.10"
-      borderRadius="4px"
-    >
+    <Box backgroundColor="grey.10" borderRadius="4px">
       <Text
-        marginLeft="44px"
-        marginRight="44px"
+        marginLeft="22px"
+        marginRight="22px"
         marginTop="44px"
         marginBottom="44px"
         fontSize="fontSizes.ls"
@@ -31,8 +24,8 @@ const BoxInfoAd = ({ title, year, milles, price }: IBoxInfoAd) => {
       <HStack
         spacing="2"
         justifyContent="space-between"
-        marginLeft="44px"
-        marginRight="44px"
+        marginLeft="22px"
+        marginRight="22px"
       >
         <Box display="flex" flexDirection="row" gap="10px" flexWrap="wrap">
           <Badge
@@ -69,8 +62,8 @@ const BoxInfoAd = ({ title, year, milles, price }: IBoxInfoAd) => {
         fontWeight="600"
         fontSize="14px"
         fontStyle="fonts.body"
-        marginLeft="44px"
-        marginRight="44px"
+        marginLeft="22px"
+        marginRight="22px"
         marginTop="28px"
         marginBottom="28px"
       >

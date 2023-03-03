@@ -1,25 +1,23 @@
-import { Box, Text, Avatar, Button } from "@chakra-ui/react";
+import { Box, Text, Avatar, Button, Link } from "@chakra-ui/react";
 
 interface IBoxInfoSallerProps {
   name: string;
   description: string;
+  id: string;
 }
 
-const BoxInfoSaller = ({ name, description }: IBoxInfoSallerProps) => {
+const BoxInfoSaller = ({ name, description, id }: IBoxInfoSallerProps) => {
   return (
     <Box
-      minW="351px"
-      minH="398px"
-      maxW="440px"
-      maxH="426px"
       backgroundColor="grey.10"
       display="flex"
+      width="100%"
       flexDirection="column"
       alignItems="center"
     >
       <Avatar
         marginTop="37px"
-        marginBottom="28px"
+        marginBottom="20px"
         size="lg"
         name={name}
         src=""
@@ -33,14 +31,24 @@ const BoxInfoSaller = ({ name, description }: IBoxInfoSallerProps) => {
         fontWeight="400"
         fontSize="16px"
         textAlign="center"
-        marginLeft="44px"
-        marginRight="44px"
       >
         {description}
       </Text>
-      <Button fontWeight="600" color="#FFFFFF" backgroundColor="grey.0">
-        Ver Todos anuncios
-      </Button>
+      <Link
+        href={"/users/" + id}
+        display="flex"
+        width="100%"
+        justifyContent="center"
+      >
+        <Button
+          fontWeight="500"
+          color="#FFFFFF"
+          backgroundColor="grey.0"
+          padding="12px 28px"
+        >
+          Ver Todos anuncios
+        </Button>
+      </Link>
     </Box>
   );
 };

@@ -1,15 +1,13 @@
-import { Box, Text, Avatar, HStack } from "@chakra-ui/react";
+import { Box, Text, Avatar, HStack, Icon } from "@chakra-ui/react";
+import { IComment } from "../../interfaces/comments";
 
 interface IBoxCommentsProduct {
-  users: string[];
-  comments: string[];
+  comments: IComment[];
 }
 
-const BoxCommentsAd = ({ users, comments }: IBoxCommentsProduct) => {
+const BoxCommentsAd = ({ comments }: IBoxCommentsProduct) => {
   return (
     <Box
-      minW="351px"
-      width="751px"
       backgroundColor="grey.10"
       marginBottom="36px"
       display="flex"
@@ -17,32 +15,42 @@ const BoxCommentsAd = ({ users, comments }: IBoxCommentsProduct) => {
       gap="28px"
     >
       <Text
-        marginTop="36px"
-        marginLeft="44px"
-        marginRight="44px"
+        marginTop="30px"
+        marginLeft="22px"
+        marginRight="22px"
         fontStyle="fonts.heading"
         color="grey.1"
         fontWeight="600"
       >
         Comentários
       </Text>
-      {comments.map((items, indice) => {
+      {comments.map((item, indice) => {
+        // console.log(item.createdAt);
+        let test = item.createdAt.toString();
+        let text = test.slice(0, 10);
+
         return (
           <Box
-            marginLeft="44px"
-            marginRight="44px"
+            marginLeft="22px"
+            marginRight="22px"
             display="flex"
             flexDirection="column"
             gap="16px"
+            key={indice}
           >
             <HStack spacing={2}>
-              <Avatar size="sm" name={users[indice]} src="" />
-              <Text fontStyle="fonts.body" color="grey.1" fontWeight="500">
-                {users[indice]}
-              </Text>
+              <Avatar size="sm" name={item.user.name} src="" />
+              {/* <Avatar size="sm" name={item.user.name} src="" /> */}
+              <HStack spacing={2}>
+                <Text fontStyle="fonts.body" color="grey.1" fontWeight="500">
+                  {item.user.name}
+                </Text>
+                {/* "•" */}
+                <Text>• {text}</Text>
+              </HStack>
             </HStack>
             <Text fontStyle="fonts.body" color="grey.2" fontWeight="400">
-              {items}
+              {item.content}
             </Text>
           </Box>
         );

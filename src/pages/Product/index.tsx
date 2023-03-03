@@ -1,53 +1,95 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 import { UseGetScreenWidth } from "../../hooks";
 import { Header } from "../../components/Header";
 import { HeaderMobile } from "../../components/Header/HeaderMobile";
+import { useAd } from "../../contexts/AdContext";
 import { FooterDesktop } from "../../components/Footer";
-import { Background } from "../../components/Background";
 import BoxGalleryImages from "../../components/BoxGalleryImages";
 import BoxInfoAd from "../../components/BoxInfoAd/Index";
 import BoxInfoSaller from "../../components/BoxInfoSaller";
 import BoxCommentsAd from "../../components/BoxCommentsAd";
 import BoxBannerAd from "../../components/BoxBannerAd";
 import BoxDescAd from "../../components/BoxDescAd";
+import BoxInputAd from "../../components/BoxInputAd";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Product = () => {
   const [, width] = UseGetScreenWidth();
+  const { ads, listOneAd, listCommentsForOneAd, comments, update } = useAd();
+  const { id } = useParams();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    listOneAd(id);
+    listCommentsForOneAd(id);
+  }, [update]);
 
   return (
     <Flex w="100vw" h="100vh" flexDirection="column">
       {width >= 768 ? <Header /> : <HeaderMobile />}
-      {/* <Background /> */}
-      {/* <BoxBannerAd imageLink="" /> */}
-      {/* <BoxBannerAd imageLink="https://images.hellokids.com/_uploads/_tiny_galerie/200811/800x600-madagascar-2-wallpaper-gloria-source_vzc.jpg" /> */}
-      {/* <BoxGalleryImages
-        images={[
-          "https://pbs.twimg.com/media/ErH22boXIAA0OKu?format=jpg&name=4096x4096",
-          "https://pbs.twimg.com/media/ErH22boXIAA0OKu?format=jpg&name=4096x4096",
-          "https://pbs.twimg.com/media/ErH22boXIAA0OKu?format=jpg&name=4096x4096",
-          "https://pbs.twimg.com/media/ErH22boXIAA0OKu?format=jpg&name=4096x4096",
-          "https://pbs.twimg.com/media/ErH22boXIAA0OKu?format=jpg&name=4096x4096",
-          "https://pbs.twimg.com/media/ErH22boXIAA0OKu?format=jpg&name=4096x4096",
-        ]}
-      /> */}
-      {/* <BoxInfoAd
-        title="Mercedes Benz A 200 CGI ADVANCE SEDAN Mercedes Benz A 200"
-        year="2013"
-        milles="0KM"
-        price="00.000,00"
-      /> */}
-      {/* <BoxDescAd description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." /> */}
-      {/* <BoxInfoSaller
-        name="Samuel Leão"
-        description="Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's"
-      /> */}
-      {/* <BoxCommentsAd
-        users={["Eliseu Brito", "Joãozinho", "Camila"]}
-        comments={["3214", "13124", "teste"]}
-      /> */}
-      {/* <FooterDesktop /> */}
+      {ads[0] ? (
+        <Box
+          display="flex"
+          flexDirection="row"
+          flexWrap="wrap"
+          marginLeft="95px"
+          marginRight="95px"
+          marginTop="25px"
+          marginBottom="35px"
+          justifyContent="space-between"
+          alignContent="center"
+        >
+          <Box
+            width="500px"
+            display="flex"
+            flexDirection="column"
+            rowGap="15px"
+          >
+            <BoxBannerAd imageLink={ads[0].images} />
+
+            <BoxInfoAd
+              title={ads[0].title}
+              year={ads[0].year}
+              milles={ads[0].mileage}
+              price={ads[0].price}
+            />
+            <BoxDescAd description={ads[0].description} />
+          </Box>
+          <Box
+            width="300px"
+            display="flex"
+            flexDirection="column"
+            rowGap="15px"
+          >
+            <BoxGalleryImages images={ads[0].images} />
+            <BoxInfoSaller
+              name={ads[0].user.name}
+              description={ads[0].user.description}
+              id={ads[0].user.id}
+            />
+          </Box>
+          <Box
+            width="500px"
+            display="flex"
+            marginTop="15px"
+            flexDirection="column"
+          >
+            <BoxCommentsAd comments={comments} />
+            {user ? (
+              <BoxInputAd active={false} name={user.name}></BoxInputAd>
+            ) : (
+              <BoxInputAd active={true} name="Visitante"></BoxInputAd>
+            )}
+            {/* <BoxInputAd name="Visitante"></BoxInputAd> */}
+          </Box>
+        </Box>
+      ) : (
+        <Text>Anuncio Não Encontrado</Text>
+      )}
+      <FooterDesktop />
     </Flex>
   );
 };
