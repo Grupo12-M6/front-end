@@ -90,6 +90,8 @@ export interface IUpdateUserData {
 
 
 export interface IUserContextData {
+  currentUser: IUser
   register: (data: IRegisterData) => Promise<void>
+  listOneUser: (id: string) => Promise<void>
   updateUser: (id: string, data: IUpdateUserData) => Promise<void>
 }
