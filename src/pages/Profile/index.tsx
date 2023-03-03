@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { Flex, VStack } from "@chakra-ui/react"
 
@@ -11,18 +11,20 @@ import { Header } from "../../components/Header"
 import { FooterDesktop } from "../../components/Footer"
 import { HeaderMobile } from "../../components/Header/HeaderMobile"
 import { useAd } from "../../contexts/AdContext"
+import { useUser } from "../../contexts/UserContext"
 
 const Profile = () => {
   let { id } = useParams()
 
-  const { listAdsByUser, adsByUser, userInfo } = useAd()
-
+  const { listAdsByUser, adsByUser } = useAd()
+  
   const [, width] = UseGetScreenWidth()
-
+  
   useEffect(() => {
     listAdsByUser(id!)
+    listOneUser(id!)
   }, [])
-
+  const { listOneUser, currentUser } = useUser()
   return (
     <Flex
       w='100vw'
@@ -41,17 +43,17 @@ const Profile = () => {
         gap='12'
         bgGradient='linear(to-b, brand.2 0%, brand.2 16%, grey.8 16%, grey.8 100%)'
       >
-        <CardUserInfo userInfo={userInfo} />
+        <CardUserInfo userInfo={currentUser} />
 
         <List
           title='Carros'
           id='cars'
-          list={adsByUser.filter((ad) => ad.motorType == "carro")}
+          list={adsByUser.filter((ad) => ad.motorType.toLowerCase() == "carro")}
         />
         <List
           title='Motos'
           id='motorcycles'
-          list={adsByUser.filter((ad) => ad.motorType == "moto")}
+          list={adsByUser.filter((ad) => ad.motorType.toLowerCase() == "moto")}
         />
       </VStack>
       <FooterDesktop />

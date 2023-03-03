@@ -1,10 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 import { api } from "../services/api";
 import { useAuth } from "./AuthContext";
-import { IUser } from "../interfaces/user";
-import { IAd, IAdContextData, IProviderProps } from "../interfaces/ads";
+import {
+  IAd,
+  IAdContextData,
+  IListImage,
+  IProviderProps,
+  IRegister,
+  IUpdate,
+} from "../interfaces/ads";
 import { IComment } from "../interfaces/comments";
+import { IUser } from "../interfaces/user";
+import jwt_decode from "jwt-decode";
 
 const AdContext = createContext<IAdContextData>({} as IAdContextData);
 
@@ -18,12 +26,94 @@ const useAd = () => {
 };
 
 const AdProvider = ({ children }: IProviderProps) => {
+  const [userInfo, setUserInfo] = useState<IUser>({} as IUser);
   const { token } = useAuth();
+
   const [update, setUpdate] = useState(0);
   const [ads, setAds] = useState<IAd[]>([]);
   const [comments, setComments] = useState<IComment[]>([]);
   const [adsByUser, setAdsByUser] = useState<IAd[]>([]);
-  const [userInfo, setUserInfo] = useState<IUser>({} as IUser);
+  const [adsInfo, setAdsInfo] = useState<IAd>({} as IAd);
+  const [imgs, setImgs] = useState<IListImage[]>([]);
+
+  const registerAds = useCallback(
+    async ({
+      title,
+      adType,
+      description,
+      images,
+      mileage,
+      motorType,
+      price,
+      year,
+    }: IRegister) => {
+      const decoded: any = jwt_decode(token);
+      const userId = decoded.sub;
+
+      await api
+        .post(
+          "/ads",
+          {
+            title,
+            adType,
+            description,
+            images,
+            mileage,
+            motorType,
+            price,
+            year,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((resp) => {
+          console.log(resp.data);
+        })
+        .catch((err) => console.log(err));
+
+      await api
+        .get(`/users/${userId}/ads`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          setAdsByUser(res.data.filter((ad: IAd) => ad.isDelete === false));
+        })
+        .catch((err) => console.log(err));
+    },
+    []
+  );
+
+  const updateAds = useCallback(async (adsId: string, { ...data }: IUpdate) => {
+    await api
+      .patch(
+        `/ads/${adsId}`,
+        { ...data },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((data) => {
+        console.log(data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const listOneAds = async (adsId: string) => {
+    await api
+      .get(`/ads/${adsId}`)
+      .then((data) => {
+        setAdsInfo(data.data);
+        setImgs(data.data.images);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const listAds = async () => {
     await api
@@ -43,7 +133,6 @@ const AdProvider = ({ children }: IProviderProps) => {
       })
       .then((res) => {
         setAdsByUser(res.data.filter((ad: IAd) => ad.isDelete === false));
-        setUserInfo(res.data[0].user);
       })
       .catch((err) => console.log(err));
   };
@@ -116,16 +205,20 @@ const AdProvider = ({ children }: IProviderProps) => {
       value={{
         ads,
         adsByUser,
-        comments,
-        userInfo,
+        adsInfo,
+        imgs,
         listAds,
         deleteAd,
         listAdsByUser,
-        listOneAd,
+        registerAds,
+        listOneAds,
+        updateAds,
         listCommentsForOneAd,
         createCommentForOneAd,
         update,
+        listOneAd,
         setUpdate,
+        comments,
       }}
     >
       {children}

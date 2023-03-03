@@ -8,6 +8,7 @@ import {
   useRadioGroup,
   useDisclosure,
   HStack,
+  InputProps,
 } from "@chakra-ui/react"
 
 import { Input } from "../Form/input"
@@ -23,13 +24,25 @@ import { RadioCard } from "../Form/radio"
 import { IPropsModalUpdate, IUpdate } from "../../interfaces/ads"
 import { Dialog } from "../Dialog"
 import { useAd } from "../../contexts/AdContext"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../contexts/AuthContext"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { updateAdsSchema } from "../../validators"
 
 export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
-  const { deleteAd } = useAd()
+  const { deleteAd, listOneAds, adsInfo, imgs, updateAds } = useAd()
+  const { user } = useAuth()
+
   const {
     isOpen: isExcludeMOpen,
     onOpen,
     onClose: onExcludeMClose,
+  } = useDisclosure()
+
+  const navigate = useNavigate()
+
+  const {
+    onClose: onEditClose,
   } = useDisclosure()
 
   const {
@@ -45,9 +58,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
   })
 
   const ImageAdd = () => {
-    append({
-      url: "",
-    })
+    append(adsInfo.images)
   }
 
   const handleUpdate = (data: IUpdate) => {
@@ -55,9 +66,35 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
       data.adType = "Leilão"
     }
     if (data.motorType == null) {
-      data.motorType = "Moto"
+      data.motorType = "Carro"
     }
+
+    const updateAd = {
+      title: data.title || adsInfo.title,
+      adType: data.adType || adsInfo.adType,
+      year: data.year || adsInfo.year,
+      mileage: data.mileage || adsInfo.mileage,
+      price: data.price || adsInfo.price,
+      description: data.description || adsInfo.description,
+      motorType: data.motorType || adsInfo.motorType,
+      images: data.images || adsInfo.images
+    }
+
     console.log(data)
+
+    updateAds(id, {...updateAd})
+
+    navigate(`/users/${user.id}`)
+    
+    onEditClose()
+  }
+
+  let urlCap = ""
+  let idCap = ""
+
+  if (adsInfo.images?.length > 0) {
+    urlCap = adsInfo.images[0].url
+    idCap = adsInfo.images[0].id
   }
 
   const options_1 = ["Venda", "Leilão"]
@@ -65,13 +102,13 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "adType",
-    defaultValue: "venda",
+    defaultValue: adsInfo.adType,
   })
 
   const { getRootProps: getRootProps_2, getRadioProps: getRadioProps_2 } =
     useRadioGroup({
       name: "motorType",
-      defaultValue: "carro",
+      defaultValue: adsInfo.motorType,
     })
 
   const group = getRootProps()
@@ -172,7 +209,8 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
             <Input
               placeholder='Digitar titulo'
               label='Titulo'
-              error={errors.title}
+              defaultValue={adsInfo.title}
+              // error={errors.title}
               {...register("title")}
             />
             <Flex
@@ -187,7 +225,8 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
                 type='number'
                 placeholder='Digitar ano'
                 label='Ano'
-                error={errors.year}
+                defaultValue={adsInfo.year}
+                // error={errors.year}
                 {...register("year")}
               />
 
@@ -195,7 +234,8 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
                 type='number'
                 placeholder='0'
                 label='Quilometragem'
-                error={errors.mileage}
+                defaultValue={adsInfo.mileage}
+                // error={errors.mileage}
                 {...register("mileage")}
               />
 
@@ -203,7 +243,8 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
                 type='number'
                 placeholder='Digitar preço'
                 label='Preço'
-                error={errors.price}
+                defaultValue={adsInfo.price}
+                // error={errors.price}
                 {...register("price")}
               />
             </Flex>
@@ -227,6 +268,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
                 fontSize='16px'
                 placeholder='Digitar Descrição'
                 // error={errors.email}
+                defaultValue={adsInfo.description}
                 {...register("description")}
               />
             </Flex>
@@ -262,22 +304,22 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
             </Flex>
 
             <Input
+              key={idCap}
               placeholder='Inserir URL da imagem'
               label='Imagem da capa'
               marginBottom='28px'
-              error={errors.url}
+              defaultValue={urlCap && urlCap}
               {...register(`images.${0}.url`)}
             />
 
             {fields.map((proc, index) => {
-              if (index >= 1) {
+              if (index >= 2) {
                 return (
                   <Input
-                    key={index}
+                    key={proc.id}
                     placeholder='Inserir URL da imagem'
-                    label={`${index}° Imagem da galeria`}
+                    label={`${index - 1}° Imagem da galeria`}
                     marginBottom='28px'
-                    error={errors.url}
                     {...register(`images.${index}.url`)}
                   />
                 )

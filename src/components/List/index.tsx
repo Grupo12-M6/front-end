@@ -49,7 +49,7 @@ export const List = ({ id, title, list }: IListProps) => {
           ))}
         </HStack>
       ) : (
-        <Text> Ainda não há nenhum anúncio para esse tipo</Text>
+        <Text paddingBottom='8'> Ainda não há nenhum anúncio para esse tipo</Text>
       )}
     </VStack>
   )

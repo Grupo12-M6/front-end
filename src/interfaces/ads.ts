@@ -24,12 +24,16 @@ export interface IProviderProps {
 
 export interface IAdContextData {
   ads: IAd[];
-  comments: IComment[];
+  imgs: IListImage[];
   adsByUser: IAd[];
-  userInfo: IUser;
+  adsInfo: IAd;
+  comments: IComment[];
   listAds: () => Promise<void>;
   listAdsByUser: (userId: string) => Promise<void>;
   deleteAd: (adId: string) => Promise<void>;
+  registerAds: ({ ...data }: IRegister) => Promise<void>;
+  listOneAds: (adId: string) => Promise<void>;
+  updateAds: (adsId: string, { ...data }: IUpdate) => Promise<void>;
   listOneAd: (adId: string | undefined) => Promise<void>;
   listCommentsForOneAd: (adId: string | undefined) => Promise<void>;
   createCommentForOneAd: (
@@ -76,5 +80,5 @@ export interface IUpdate {
   motorType?: string;
   price?: number;
   isActive?: boolean;
-  image?: IListImage[];
+  images?: IListImage[];
 }

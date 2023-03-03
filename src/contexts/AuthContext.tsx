@@ -44,7 +44,6 @@ const AuthProvider = ({ children }: IProviderProps) => {
         Authorization: `Bearer ${token}`,
       },
     })
-    console.log(userResponse.data)
     const user = userResponse.data.data
 
 

@@ -14,16 +14,28 @@ import { FieldValues, SubmitHandler, useFieldArray, useForm } from "react-hook-f
 import { ModalBasic } from "./baseModal";
 import { RadioCard } from "../Form/radio";
 import { IPropsModal, IRegister } from "../../interfaces/ads";
+import { useAd } from "../../contexts/AdContext";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerAdsSchema } from "../../validators";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 
 export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
+    
+    const navigate = useNavigate()
+
+    const { registerAds } = useAd();
+    const { user } = useAuth()
 
     const {
         control,
         handleSubmit,
         register,
         formState: { errors, isSubmitting },
-    } = useForm();
+    } = useForm({
+        resolver: yupResolver(registerAdsSchema),
+    });
 
     // SETTINGS ADD INPUTS IMAGES 
     const {fields, append} = useFieldArray({
@@ -45,20 +57,26 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
             data.motorType = "Moto"
         }
         console.log(data)
+        
+        registerAds({...data})
+
+        navigate(`/users/${user.id}`)
+        
+        onClose()
     }
 
     // SETTINGS INPUTS RADIOS
-    const options_1 = ['Venda', "Leilão",]
+    const options_1 = ['Venda', "Leilão"]
     const options_2 = ['Carro', 'Moto']
 
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: 'adType',
-        defaultValue: 'venda',
+        defaultValue: 'Venda',
     })
 
     const { getRootProps: getRootProps_2, getRadioProps: getRadioProps_2 } = useRadioGroup ({
         name: 'motorType',
-        defaultValue: 'carro',
+        defaultValue: 'Carro',
     })
 
     const group = getRootProps()
@@ -191,10 +209,10 @@ export const ModalCreateAds = ({onClose, isOpen}: IPropsModal) => {
                 {...group_2}
                 {...register("motorType")}
                 >
-                    {options_2.map((value) => {
+                    {options_2.map((value, length) => {
                         const radio = getRadioProps_2({ value })
                         return (
-                        <RadioCard key={value} {...radio}>
+                        <RadioCard key={length} {...radio}>
                             {value}
                         </RadioCard>
                         )

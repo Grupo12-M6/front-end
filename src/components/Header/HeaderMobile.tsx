@@ -18,6 +18,8 @@ import { UserMenu } from "../Menu/UserMenu"
 import { useAuth } from "../../contexts/AuthContext"
 import { DefaultLogo } from "../../utils/defaultLogo"
 import { LoginModal } from "../Modals/LoginModal"
+import { RegisterModal } from "../Modals/RegisterModal"
+import { Dialog } from "../Dialog"
 
 export const HeaderMobile = () => {
   const { token, user } = useAuth()
@@ -26,6 +28,18 @@ export const HeaderMobile = () => {
     isOpen: isMLoginOpen,
     onOpen: onMLoginOpen,
     onClose: onMLoginClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isMRegisterOpen,
+    onOpen: onMRegisterOpen,
+    onClose: onMRegisterClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isDialogOpen,
+    onOpen: onDialogOpen,
+    onClose: onDialogClose,
   } = useDisclosure()
 
   return (
@@ -39,7 +53,7 @@ export const HeaderMobile = () => {
               justifyContent='space-between'
               alignItems='center'
             >
-              <DefaultLogo/>
+              <DefaultLogo />
 
               <AccordionButton w='18px' h='18px' p='0'>
                 {isExpanded ? (
@@ -94,6 +108,7 @@ export const HeaderMobile = () => {
                     margin='0'
                     fontSize='xs'
                     variant='outline1'
+                    onClick={() => onMRegisterOpen()}
                   >
                     Cadastrar
                   </Button>
@@ -104,7 +119,43 @@ export const HeaderMobile = () => {
         )}
       </AccordionItem>
 
-      <LoginModal isOpen={isMLoginOpen} onClose={onMLoginClose} />
+      <LoginModal
+        isOpen={isMLoginOpen}
+        onClose={onMLoginClose}
+        onOpenRegister={onMRegisterOpen}
+      />
+      <RegisterModal
+        isOpen={isMRegisterOpen}
+        onClose={onMRegisterClose}
+        onOpenDialog={onDialogOpen}
+      />
+      <Dialog title='Sucesso!' isOpen={isDialogOpen} onClose={onDialogClose}>
+        <VStack
+          gap='4'
+          alignItems={["center", "center", "flex-start", "flex-start"]}
+        >
+          <Text
+            fontFamily='Lexend'
+            fontSize='xs'
+            fontWeight='500'
+            color='black'
+          >
+            Sua conta foi criada com sucesso!
+          </Text>
+          <Text fontSize='xs' fontWeight='400' color='grey.2' lineHeight='28px'>
+            Agora você poderá ver seus negócios crescendo em grande escala
+          </Text>
+          <Button
+            variant='brand1'
+            onClick={() => {
+              onDialogClose()
+              onMLoginOpen()
+            }}
+          >
+            Ir para o login
+          </Button>
+        </VStack>
+      </Dialog>
     </Accordion>
   )
 }

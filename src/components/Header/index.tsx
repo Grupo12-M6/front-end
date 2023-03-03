@@ -4,6 +4,7 @@ import {
   HStack,
   Text,
   useDisclosure,
+  VStack,
 } from "@chakra-ui/react"
 
 import { CustomLink } from "./CustomLink"
@@ -11,6 +12,8 @@ import { UserMenu } from "../Menu/UserMenu"
 import { useAuth } from "../../contexts/AuthContext"
 import { DefaultLogo } from "../../utils/defaultLogo"
 import { LoginModal } from "../Modals/LoginModal"
+import { RegisterModal } from "../Modals/RegisterModal"
+import { Dialog } from "../Dialog"
 
 export const Header = () => {
   const { token, user } = useAuth()
@@ -19,6 +22,18 @@ export const Header = () => {
     isOpen: isMLoginOpen,
     onOpen: onMLoginOpen,
     onClose: onMLoginClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isMRegisterOpen,
+    onOpen: onMRegisterOpen,
+    onClose: onMRegisterClose,
+  } = useDisclosure()
+
+  const {
+    isOpen: isDialogOpen,
+    onOpen: onDialogOpen,
+    onClose: onDialogClose,
   } = useDisclosure()
 
   return (
@@ -37,7 +52,7 @@ export const Header = () => {
       -moz-box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);
       box-shadow: 0px 7px 67px -28px rgba(0,0,0,0.41);'
     >
-      <DefaultLogo/>
+      <DefaultLogo />
       <Flex
         h='100%'
         w='45%'
@@ -60,7 +75,7 @@ export const Header = () => {
         </HStack>
 
         {token ? (
-          <UserMenu name={user.name} isSeller={user.isSeller}/>
+          <UserMenu name={user.name} isSeller={user.isSeller} />
         ) : (
           <HStack w='45%' gap='4' justifyContent='space-between' pl='30px'>
             <Text
@@ -87,6 +102,7 @@ export const Header = () => {
               fontWeight='600'
               fontFamily='body'
               variant='outline1'
+              onClick={() => onMRegisterOpen()}
             >
               Cadastrar
             </Button>
@@ -94,7 +110,43 @@ export const Header = () => {
         )}
       </Flex>
 
-      <LoginModal isOpen={isMLoginOpen} onClose={onMLoginClose} />
+      <LoginModal
+        isOpen={isMLoginOpen}
+        onClose={onMLoginClose}
+        onOpenRegister={onMRegisterOpen}
+      />
+      <RegisterModal
+        isOpen={isMRegisterOpen}
+        onClose={onMRegisterClose}
+        onOpenDialog={onDialogOpen}
+      />
+      <Dialog title='Sucesso!' isOpen={isDialogOpen} onClose={onDialogClose}>
+        <VStack
+          gap='4'
+          alignItems={["center", "center", "flex-start", "flex-start"]}
+        >
+          <Text
+            fontFamily='Lexend'
+            fontSize='xs'
+            fontWeight='500'
+            color='black'
+          >
+            Sua conta foi criada com sucesso!
+          </Text>
+          <Text fontSize='xs' fontWeight='400' color='grey.2' lineHeight='28px'>
+            Agora você poderá ver seus negócios crescendo em grande escala
+          </Text>
+          <Button
+            variant='brand1'
+            onClick={() => {
+              onDialogClose()
+              onMLoginOpen()
+            }}
+          >
+            Ir para o login
+          </Button>
+        </VStack>
+      </Dialog>
     </Flex>
   )
 }

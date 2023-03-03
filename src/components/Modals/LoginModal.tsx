@@ -5,9 +5,10 @@ import { ModalBasic } from "./baseModal"
 interface IModalProps {
   isOpen: boolean
   onClose: () => void
+  onOpenRegister: () => void
 }
 
-export const LoginModal = ({ isOpen, onClose }: IModalProps) => {
+export const LoginModal = ({ isOpen, onClose, onOpenRegister }: IModalProps) => {
   return (
     <ModalBasic isOpen={isOpen} onClose={onClose}>
       <VStack
@@ -24,7 +25,8 @@ export const LoginModal = ({ isOpen, onClose }: IModalProps) => {
           <Text fontSize='0.875rem'>Ainda não possui conta?</Text>
           <Button
             onClick={() => {
-              onClose
+              onClose()
+              onOpenRegister()
             }}
             w='100%'
             variant='outline2'
