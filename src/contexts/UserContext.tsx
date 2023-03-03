@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react"
+import { createContext, useContext, useState } from "react"
 
 import { api } from "../services/api"
 import { useAuth } from "./AuthContext"
@@ -6,6 +6,7 @@ import {
   IProviderProps,
   IRegisterData,
   IUpdateUserData,
+  IUser,
   IUserContextData,
 } from "../interfaces/user"
 
@@ -22,6 +23,7 @@ const useUser = () => {
 
 const UserProvider = ({ children }: IProviderProps) => {
   const { token } = useAuth()
+  const [currentUser, setCurrentUser] = useState<IUser>({} as IUser)
 
   const register = async (data: IRegisterData) => {
     await api
@@ -29,6 +31,15 @@ const UserProvider = ({ children }: IProviderProps) => {
       .then((res) => {
         console.log(res)
       })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const listOneUser = async (id: string) => {
+    await api
+      .get(`/users/${id}`)
+      .then((res) => setCurrentUser(res.data.data))
       .catch((err) => {
         console.log(err)
       })
@@ -51,7 +62,9 @@ const UserProvider = ({ children }: IProviderProps) => {
   }
 
   return (
-    <UserContext.Provider value={{ register, updateUser }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ register, listOneUser, updateUser, currentUser}}>
+      {children}
+    </UserContext.Provider>
   )
 }
 

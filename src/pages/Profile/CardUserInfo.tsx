@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/AuthContext"
 import { IUser } from "../../interfaces/user"
 
 interface ICardUserProps {
-  userInfo: IUser
+  userInfo: IUser 
 }
 
 export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
