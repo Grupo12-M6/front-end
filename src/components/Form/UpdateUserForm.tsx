@@ -158,7 +158,7 @@ export const UpdateUserForm = ({ onCloseForm }: IUpdateUserFormProps) => {
           Cancelar
         </Button>
         <Button h='48px' type='submit' variant='brand1'>
-          Editar perfil
+          Salvar alterações
         </Button>
       </HStack>
     </Flex>

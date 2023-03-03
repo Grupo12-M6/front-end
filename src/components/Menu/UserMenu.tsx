@@ -12,6 +12,7 @@ import { CustomMenuItem } from "./CustomMenuItem"
 import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { UpdateUserModal } from "../Modals/UpdateUserModal"
+import { UpdateAddressModal } from "../Modals/UpdateAddressModal"
 
 interface IUserMenuProps {
   name: string
@@ -20,16 +21,22 @@ interface IUserMenuProps {
 
 export const UserMenu = ({ name, isSeller }: IUserMenuProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isOpenEditAddress,
+    onOpen: onOpenEditAddress,
+    onClose: onCloseEditAddress,
+  } = useDisclosure()
 
   const { signOut, user } = useAuth()
   const navigate = useNavigate()
 
   const handleEditProfile = () => {
     onOpen()
-
   }
 
-  const handleEditAddress = () => {}
+  const handleEditAddress = () => {
+    onOpenEditAddress()
+  }
 
   const handleSeeAds = () => {
     navigate(`/users/${user.id}`)
@@ -40,10 +47,13 @@ export const UserMenu = ({ name, isSeller }: IUserMenuProps) => {
     navigate("/")
   }
 
-
   return (
     <Menu>
-      <UpdateUserModal isOpen={isOpen} onClose={onClose}/>
+      <UpdateUserModal isOpen={isOpen} onClose={onClose} />
+      <UpdateAddressModal
+        isOpen={isOpenEditAddress}
+        onClose={onCloseEditAddress}
+      />
       <MenuButton p={["32px 16px", "32px 16px", "0", "0"]}>
         <Box
           display='flex'

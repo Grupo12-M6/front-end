@@ -62,7 +62,9 @@ const UserProvider = ({ children }: IProviderProps) => {
   }
 
   return (
-    <UserContext.Provider value={{ register, listOneUser, updateUser, currentUser}}>
+    <UserContext.Provider
+      value={{ register, listOneUser, updateUser, currentUser }}
+    >
       {children}
     </UserContext.Provider>
   )

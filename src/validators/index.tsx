@@ -63,3 +63,12 @@ export const updateAdsSchema = yup.object().shape({
     })
   ),
 })
+
+export const updateAddressSchema = yup.object().shape({
+  cep: yup.string(),
+  state: yup.string().max(2, 'Apenas abreviação'),
+  city: yup.string(),
+  street: yup.string(),
+  number: yup.number().typeError('Número inválido'),
+  complement: yup.string(),
+})

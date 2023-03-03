@@ -1,6 +1,6 @@
 import { Heading, VStack } from "@chakra-ui/react"
 
-import { UpdateUserForm } from "../Form/UpdateUserForm"
+import { UpdateAddressForm } from "../Form/UpdateAddressForm"
 import { ModalBasic } from "./baseModal"
 
 interface IModalProps {
@@ -8,12 +8,7 @@ interface IModalProps {
   onClose: () => void
 }
 
-export const UpdateAddressModal = ({
-  isOpen,
-  onClose,
-}: IModalProps) => {
-  
-
+export const UpdateAddressModal = ({ isOpen, onClose }: IModalProps) => {
   return (
     <ModalBasic isOpen={isOpen} onClose={onClose}>
       <VStack
@@ -24,9 +19,8 @@ export const UpdateAddressModal = ({
         <Heading fontFamily='Lexend' fontSize='sm' color='black'>
           Editar perfil
         </Heading>
-        <UpdateUserForm onCloseForm={onClose}/>
+        <UpdateAddressForm onCloseForm={onClose} />
       </VStack>
-
     </ModalBasic>
   )
 }

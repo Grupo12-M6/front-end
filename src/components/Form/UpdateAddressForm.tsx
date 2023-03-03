@@ -1,55 +1,46 @@
-import { Button, Flex, HStack, Text, Textarea, VStack } from "@chakra-ui/react"
-
+import { Button, Flex, HStack, Text, VStack } from "@chakra-ui/react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { FieldValues, SubmitHandler } from "react-hook-form/dist/types"
-
-import { Input } from "./input"
-import { IUpdateUserForm } from "../../interfaces/user"
-import { updateUserSchema } from "../../validators"
-import { useUser } from "../../contexts/UserContext"
-import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 
-interface IUpdateUserFormProps {
+import { Input } from "./input"
+import { updateAddressSchema } from "../../validators"
+import { IUpdateAddressData } from "../../interfaces/address"
+import { useAuth } from "../../contexts/AuthContext"
+import { useAddress } from "../../contexts/AddressContext"
+
+interface IUpdateAddressFormProps {
   onCloseForm: () => void
 }
 
-export const UpdateUserForm = ({ onCloseForm }: IUpdateUserFormProps) => {
+export const UpdateAddressForm = ({ onCloseForm }: IUpdateAddressFormProps) => {
   const { user, signOut } = useAuth()
-  const { updateUser } = useUser()
+  const { updateAddress } = useAddress()
 
   const navigate = useNavigate()
+
+  const { cep, city, id, number, state, street, complement } = user.address
 
   const {
     formState: { errors },
     register,
     handleSubmit,
   } = useForm({
-    resolver: yupResolver(updateUserSchema),
+    resolver: yupResolver(updateAddressSchema),
   })
 
-  const handleUpdate = (data: IUpdateUserForm) => {
-    const isSeller = () => {
-      if (data.isSeller) {
-        if (data.isSeller == "Anunciante") {
-          return true
-        }
-        return false
-      }
-    }
-
+  const handleUpdate = (data: IUpdateAddressData) => {
     const info = {
-      name: data.name || user.name,
-      email: data.email || user.email,
-      cpf: data.cpf || user.cpf,
-      phoneNumber: data.phoneNumber || user.phoneNumber,
-      birthday: data.birthday || user.birthday,
-      description: data.description || user.description,
-      isSeller: isSeller() || user.isSeller,
+      cep: data.cep || cep,
+      state: data.state || state,
+      city: data.city || city,
+      street: data.street || street,
+      number: data.number || number,
+      complement: data.complement || complement,
     }
 
-    updateUser(user.id, info)
+    updateAddress(id, info)
       .then((res) => {
         onCloseForm()
         signOut()
@@ -70,83 +61,55 @@ export const UpdateUserForm = ({ onCloseForm }: IUpdateUserFormProps) => {
       onSubmit={handleSubmit(handleUpdate as SubmitHandler<FieldValues>)}
     >
       <Text py='6' fontSize='0.875rem' fontWeight='500' color='black'>
-        Informações pessoais
+        Informações de endereço
       </Text>
 
       <VStack gap='4'>
         <Input
-          placeholder='Ex: Samuel Leão'
-          label='Nome'
-          defaultValue={user.name}
-          error={errors.name}
-          {...register("name")}
+          label='CEP'
+          defaultValue={cep}
+          error={errors.cep}
+          {...register("cep")}
         />
 
-        <Input
-          placeholder='Ex: samuel@kenzie.com.br'
-          label='Email'
-          type='email'
-          defaultValue={user.email}
-          error={errors.email}
-          {...register("email")}
-        />
-
-        <Input
-          placeholder='000.000.000-00'
-          label='CPF'
-          defaultValue={user.cpf}
-          error={errors.cpf}
-          {...register("cpf")}
-        />
-
-        <Input
-          placeholder='(DDD) 90000-0000'
-          label='Celular'
-          type='tel'
-          defaultValue={user.phoneNumber}
-          error={errors.phoneNumber}
-          {...register("phoneNumber")}
-        />
-
-        <Input
-          placeholder='00/00/00'
-          label='Data de nascimento'
-          type='date'
-          defaultValue={user.birthday.toString()}
-          error={errors.birthday}
-          {...register("birthday")}
-        />
-
-        <VStack w='100%'>
-          <Text
-            w='100%'
-            color='grey.1'
-            fontSize='14px'
-            fontWeight={500}
-            fontFamily='inter'
-            mb='0'
-            textAlign='left'
-          >
-            Descrição
-          </Text>
-
-          <Textarea
-            id='description'
-            variant='outline'
-            placeholder='Digitar descrição'
-            _hover={{ bgColor: "grey.8" }}
-            _placeholder={{ color: "grey.3" }}
-            _focus={{ bg: "grey.9" }}
-            borderRadius='4px'
-            fontSize='16px'
-            size='lg'
-            h='48px'
-            w='100%'
-            color='black'
-            borderColor='black'
-            {...register("description")}
+        <HStack>
+          <Input
+            label='Estado'
+            defaultValue={state}
+            error={errors.state}
+            {...register("state")}
           />
-        </VStack>
+
+          <Input
+            label='Cidade'
+            defaultValue={city}
+            error={errors.city}
+            {...register("city")}
+          />
+        </HStack>
+
+        <Input
+          label='Rua'
+          defaultValue={street}
+          error={errors.street}
+          {...register("street")}
+        />
+
+        <HStack>
+          <Input
+            label='Número'
+            type='number'
+            defaultValue={number}
+            error={errors.number}
+            {...register("number")}
+          />
+          <Input
+            label='Complemento'
+            defaultValue={complement}
+            error={errors.complement}
+            {...register("complement")}
+          />
+        </HStack>
       </VStack>
 
       <HStack
@@ -158,7 +121,7 @@ export const UpdateUserForm = ({ onCloseForm }: IUpdateUserFormProps) => {
           Cancelar
         </Button>
         <Button h='48px' type='submit' variant='brand1'>
-          Editar perfil
+          Salvar alterações
         </Button>
       </HStack>
     </Flex>

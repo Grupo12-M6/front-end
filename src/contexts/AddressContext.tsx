@@ -8,7 +8,9 @@ import {
   IAddressContextData,
 } from "../interfaces/address"
 
-const AddressContext = createContext<IAddressContextData>({} as IAddressContextData)
+const AddressContext = createContext<IAddressContextData>(
+  {} as IAddressContextData
+)
 
 const useAddress = () => {
   const context = useContext(AddressContext)
@@ -22,9 +24,9 @@ const useAddress = () => {
 const AddressProvider = ({ children }: IProviderProps) => {
   const { token } = useAuth()
 
-  const updateAddress= async (id: string, data: IUpdateAddressData) => {
+  const updateAddress = async (id: string, data: IUpdateAddressData) => {
     await api
-      .patch(`/address/${id}`, data, {
+      .patch(`/addresses/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

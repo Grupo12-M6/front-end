@@ -14,8 +14,6 @@ export const RegisterModal = ({
   onClose,
   onOpenDialog,
 }: IModalProps) => {
-  
-
   return (
     <ModalBasic isOpen={isOpen} onClose={onClose}>
       <VStack
@@ -28,7 +26,6 @@ export const RegisterModal = ({
         </Heading>
         <RegisterForm onOpenDialog={onOpenDialog} onCloseForm={onClose} />
       </VStack>
-
     </ModalBasic>
   )
 }

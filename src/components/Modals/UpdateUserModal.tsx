@@ -8,12 +8,7 @@ interface IModalProps {
   onClose: () => void
 }
 
-export const UpdateUserModal = ({
-  isOpen,
-  onClose,
-}: IModalProps) => {
-  
-
+export const UpdateUserModal = ({ isOpen, onClose }: IModalProps) => {
   return (
     <ModalBasic isOpen={isOpen} onClose={onClose}>
       <VStack
@@ -24,9 +19,8 @@ export const UpdateUserModal = ({
         <Heading fontFamily='Lexend' fontSize='sm' color='black'>
           Editar perfil
         </Heading>
-        <UpdateUserForm onCloseForm={onClose}/>
+        <UpdateUserForm onCloseForm={onClose} />
       </VStack>
-
     </ModalBasic>
   )
 }

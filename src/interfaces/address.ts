@@ -18,10 +18,10 @@ export interface IProviderProps {
 
 export interface IUpdateAddressData {
   cep?: string
-  estado?: string
-  cidade?: string
-  rua?: string
-  numero?: number
+  state?: string
+  city?: string
+  street?: string
+  number?: number
   complement?: string 
 }
 
