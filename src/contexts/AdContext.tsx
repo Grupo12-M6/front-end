@@ -100,6 +100,7 @@ const AdProvider = ({ children }: IProviderProps) => {
         }
       )
       .then((data) => {
+        setUpdate(update + 1);
         console.log(data.data);
       })
       .catch((err) => console.log(err));
