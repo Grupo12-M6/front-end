@@ -110,15 +110,23 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
 
     updateAds(id, {...updateAd})
     
-    // navigate(`/users/${user.id}`)
     setUpdate(update + 1)
 
     listAdsByUser(user.id!)
     listOneUser(user.id!)
 
-
-    
     onClose()
+  }
+
+  const handleDelete = (id: string) => {
+    deleteAd(id)
+
+    setUpdate(update + 1)
+
+    listAdsByUser(user.id!)
+    listOneUser(user.id!)
+
+    onExcludeMClose()
   }
 
   const options_1 = ["Venda", "Leilão"]
@@ -168,7 +176,7 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
             <Button onClick={() => onExcludeMClose()} variant='negative'>
               Cancelar
             </Button>
-            <Button onClick={() => deleteAd(id)} variant='alert'>
+            <Button onClick={() => handleDelete(id)} variant='alert'>
               Sim, excluir anúncio
             </Button>
           </HStack>
