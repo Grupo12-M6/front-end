@@ -146,6 +146,7 @@ const AdProvider = ({ children }: IProviderProps) => {
         },
       })
       .then((res) => {
+        setUpdate(update + 1);
         listAds();
       })
       .catch((err) => {
