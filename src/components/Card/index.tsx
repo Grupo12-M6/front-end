@@ -78,7 +78,12 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
       onMouseOver={() => setIsOnHover(true)}
       onMouseOut={() => setIsOnHover(false)}
       bgColor='transparent'
-      onClick={() => handleSeeMore()}
+      onClick={(e) => {
+        const element = e.target as HTMLElement
+        if (element.id != 'button-edit') {
+          handleSeeMore()
+        }
+      }}
     >
       {onProfile && !isMine && (
         <Box
@@ -185,6 +190,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
         {onProfile && isMine && (
           <CardFooter p='0' paddingTop='4' gap='2'>
             <Button
+              id='button-edit'
               fontSize='0.875rem'
               fontWeight='600'
               variant='outline1'
