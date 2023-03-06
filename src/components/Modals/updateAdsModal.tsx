@@ -20,27 +20,29 @@ import {
 } from "react-hook-form"
 import { ModalBasic } from "./baseModal"
 import { RadioCard } from "../Form/radio"
-import { IPropsModalUpdate, IUpdate } from "../../interfaces/ads"
+import { IAd, IPropsModalUpdate, IUpdate } from "../../interfaces/ads"
 import { Dialog } from "../Dialog"
 import { useAd } from "../../contexts/AdContext"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
+import { useEffect, useState } from "react"
+import { api } from "../../services/api"
+import { useUser } from "../../contexts/UserContext"
 
 
 export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
-  const { deleteAd, adsInfo, updateAds } = useAd()
+  
+  const { deleteAd, listAdsByUser, updateAds, update, setUpdate } = useAd()
+  const { listOneUser } = useUser()
   const { user } = useAuth()
+
+  const [adsInfo, setAdsInfo] = useState<IAd>({} as IAd)
+  const navigate = useNavigate()
 
   const {
     isOpen: isExcludeMOpen,
     onOpen,
     onClose: onExcludeMClose,
-  } = useDisclosure()
-
-  const navigate = useNavigate()
-
-  const {
-    onClose: onEditClose,
   } = useDisclosure()
 
   const {
@@ -56,16 +58,42 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
   })
 
   const ImageAdd = () => {
-    append(adsInfo.images)
+    append({
+      url: ""
+    })
   }
+
+  const loadData = async (idAd: string) => {
+    await api
+      .get(`/ads/${idAd}`)
+      .then((data) => {
+        setAdsInfo(data.data)
+        // setImgs(data.data.images)
+      })
+      .catch((err) => console.log(err))
+  }
+
+  useEffect(() => {
+    loadData(id)
+    listAdsByUser(user.id!)
+    listOneUser(user.id!)
+  }, [update])
 
   const handleUpdate = (data: IUpdate) => {
     if (data.adType == null) {
       data.adType = "Leilão"
     }
     if (data.motorType == null) {
-      data.motorType = "Carro"
+      data.motorType = "Moto"
     }
+
+    let arrImage: any = []
+    data.images?.map((image) => {
+      if(image.url !== "") {
+        arrImage.push(image)
+      }
+    })
+    data.images = arrImage
 
     const updateAd = {
       title: data.title || adsInfo.title,
@@ -81,18 +109,16 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
     console.log(data)
 
     updateAds(id, {...updateAd})
-
-    navigate(`/users/${user.id}`)
     
-    onEditClose()
-  }
+    // navigate(`/users/${user.id}`)
+    setUpdate(update + 1)
 
-  let urlCap = ""
-  let idCap = ""
+    listAdsByUser(user.id!)
+    listOneUser(user.id!)
 
-  if (adsInfo.images?.length > 0) {
-    urlCap = adsInfo.images[0].url
-    idCap = adsInfo.images[0].id
+
+    
+    onClose()
   }
 
   const options_1 = ["Venda", "Leilão"]
@@ -302,21 +328,20 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
             </Flex>
 
             <Input
-              key={idCap}
+              key={0}
               placeholder='Inserir URL da imagem'
               label='Imagem da capa'
               marginBottom='28px'
-              defaultValue={urlCap && urlCap}
               {...register(`images.${0}.url`)}
             />
 
             {fields.map((proc, index) => {
-              if (index >= 2) {
+              if (index >= 1) {
                 return (
                   <Input
-                    key={proc.id}
+                    key={index}
                     placeholder='Inserir URL da imagem'
-                    label={`${index - 1}° Imagem da galeria`}
+                    label={`${index}° Imagem da galeria`}
                     marginBottom='28px'
                     {...register(`images.${index}.url`)}
                   />

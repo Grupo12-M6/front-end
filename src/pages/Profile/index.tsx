@@ -16,7 +16,7 @@ import { useUser } from "../../contexts/UserContext"
 const Profile = () => {
   let { id } = useParams()
 
-  const { listAdsByUser, adsByUser } = useAd()
+  const { listAdsByUser, adsByUser, update } = useAd()
   const { listOneUser, currentUser } = useUser()
   
   const [, width] = UseGetScreenWidth()
@@ -24,7 +24,7 @@ const Profile = () => {
   useEffect(() => {
     listAdsByUser(id!)
     listOneUser(id!)
-  }, [])
+  }, [update])
   
   return (
     <Flex
