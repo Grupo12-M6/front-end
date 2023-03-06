@@ -8,7 +8,6 @@ import {
   useRadioGroup,
   useDisclosure,
   HStack,
-  InputProps,
 } from "@chakra-ui/react"
 
 import { Input } from "../Form/input"
@@ -26,11 +25,10 @@ import { Dialog } from "../Dialog"
 import { useAd } from "../../contexts/AdContext"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { updateAdsSchema } from "../../validators"
+
 
 export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
-  const { deleteAd, listOneAds, adsInfo, imgs, updateAds } = useAd()
+  const { deleteAd, adsInfo, updateAds } = useAd()
   const { user } = useAuth()
 
   const {

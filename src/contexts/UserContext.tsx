@@ -61,9 +61,24 @@ const UserProvider = ({ children }: IProviderProps) => {
       })
   }
 
+  const deleteUser = async (id: string) => {
+    await api
+      .delete(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <UserContext.Provider
-      value={{ register, listOneUser, updateUser, currentUser }}
+      value={{ register, listOneUser, updateUser, deleteUser, currentUser }}
     >
       {children}
     </UserContext.Provider>

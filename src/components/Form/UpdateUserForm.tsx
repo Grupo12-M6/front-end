@@ -12,10 +12,14 @@ import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
 
 interface IUpdateUserFormProps {
+  onOpenDialog: () => void
   onCloseForm: () => void
 }
 
-export const UpdateUserForm = ({ onCloseForm }: IUpdateUserFormProps) => {
+export const UpdateUserForm = ({
+  onOpenDialog,
+  onCloseForm,
+}: IUpdateUserFormProps) => {
   const { user, signOut } = useAuth()
   const { updateUser } = useUser()
 
@@ -58,6 +62,11 @@ export const UpdateUserForm = ({ onCloseForm }: IUpdateUserFormProps) => {
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  const handleDelete = () => {
+    onCloseForm()
+    onOpenDialog()
   }
 
   return (
@@ -154,8 +163,8 @@ export const UpdateUserForm = ({ onCloseForm }: IUpdateUserFormProps) => {
         paddingTop='6'
         alignSelf={["center", "flex-end", "flex-end", "flex-end"]}
       >
-        <Button onClick={() => onCloseForm()} h='48px' variant='negative'>
-          Cancelar
+        <Button onClick={() => handleDelete()} h='48px' variant='negative'>
+          Excluir
         </Button>
         <Button h='48px' type='submit' variant='brand1'>
           Salvar alterações
