@@ -1,4 +1,4 @@
-import { Box, Text, Badge, HStack, Button } from "@chakra-ui/react";
+import { Box, Text, Badge, HStack, Button, Link } from "@chakra-ui/react";
 
 interface IBoxInfoAd {
   title: string;
@@ -8,6 +8,12 @@ interface IBoxInfoAd {
 }
 
 const BoxInfoAd = ({ title, year, milles, price }: IBoxInfoAd) => {
+
+  // --- NUMERO E MENSAGEM PARA O WhatsApp 
+  // COLOCAR NUMERO SEM ESPAÇOS OU SÍMBOLOS, APENAS NÚMEROS
+  const phoneCompany = "1130042222"
+  const messageBuy = `Olá! Gostaria de comprar o produto: ${title}`
+
   return (
     <Box backgroundColor="grey.10" borderRadius="4px">
       <Text
@@ -56,19 +62,24 @@ const BoxInfoAd = ({ title, year, milles, price }: IBoxInfoAd) => {
           R$ {price}
         </Text>
       </HStack>
-      <Button
-        backgroundColor="brand.1"
-        color="#FFFFFF"
-        fontWeight="600"
-        fontSize="14px"
-        fontStyle="fonts.body"
-        marginLeft="22px"
-        marginRight="22px"
-        marginTop="28px"
-        marginBottom="28px"
+      <Link
+        href={`https://wa.me/55${phoneCompany}?text=${messageBuy}`}
+        target={"_blank"}
       >
-        Comprar
-      </Button>
+        <Button
+          backgroundColor="brand.1"
+          color="#FFFFFF"
+          fontWeight="600"
+          fontSize="14px"
+          fontStyle="fonts.body"
+          marginLeft="22px"
+          marginRight="22px"
+          marginTop="28px"
+          marginBottom="28px"
+        >
+          Comprar
+        </Button>
+      </Link>
     </Box>
   );
 };
