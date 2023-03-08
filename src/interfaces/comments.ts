@@ -5,5 +5,5 @@ export interface IComment {
   content: string;
   createdAt: Date;
   ad: string;
-  user: IUser[];
+  user: IUser;
 }

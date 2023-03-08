@@ -98,7 +98,7 @@ export const theme = extendTheme({
           fontWeight: "600",
           borderRadius: "4px",
         },
-        grey: {
+        grey1: {
           bg: "grey.0",
           color: "white",
           fontSize: "1rem",
@@ -106,7 +106,7 @@ export const theme = extendTheme({
           borderRadius: "4px",
           _hover: {
             bg: "grey.1",
-            cursor: 'pointer'
+            cursor: 'pointer',
           },
         },
         negative: {
@@ -117,7 +117,7 @@ export const theme = extendTheme({
           borderRadius: "4px",
           _hover: {
             bg: "grey.5",
-            cursor: 'pointer'
+            cursor: 'pointer',
           },
         },
         brand1: {
