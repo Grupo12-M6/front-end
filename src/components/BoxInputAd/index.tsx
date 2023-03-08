@@ -100,13 +100,13 @@ const BoxInputAd = ({ name, active }: IBoxInputComment) => {
               <Button
                 isDisabled
                 fontSize='12px'
-                right='8'
-                bottom='2'
-                borderRadius='4px'
+                position='absolute'
+                zIndex='10'
+                right='10'
+                bottom='10'
                 height='30px'
-                backgroundColor='brand.1'
                 type='submit'
-                color='grey.10'
+                variant='brand1'
               >
                 Comentar
               </Button>
