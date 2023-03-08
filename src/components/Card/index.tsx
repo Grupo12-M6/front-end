@@ -26,11 +26,12 @@ interface ICustomCardProps {
 }
 
 export const CustomCard = ({ ad }: ICustomCardProps) => {
+  const navigate = useNavigate()
+  
   const { id: urlId } = useParams()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { listOneAds } = useAd()
 
-  const navigate = useNavigate()
 
   const {
     description,
