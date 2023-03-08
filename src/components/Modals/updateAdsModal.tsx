@@ -75,8 +75,8 @@ export const ModalUpdateAds = ({ id, onClose, isOpen }: IPropsModalUpdate) => {
 
   useEffect(() => {
     loadData(id)
-    listAdsByUser(user.id!)
-    listOneUser(user.id!)
+    listAdsByUser(user?.id!)
+    listOneUser(user?.id!)
   }, [update])
 
   const handleUpdate = (data: IUpdate) => {

@@ -19,20 +19,21 @@ interface IBoxGalleryImagesProps {
 const BoxGalleryImages = ({ images }: IBoxGalleryImagesProps) => {
   return (
     <Box
+    w='100%'
+    p='8'
+    gap='6'
       borderRadius="4px"
       backgroundColor="grey.10"
       display="flex"
       flexDirection="column"
     >
       <Text
-        marginLeft="30px"
-        marginTop="20px"
-        marginBottom="22px"
         colorScheme="fonts.body"
-        fontSize="fontSizes.ls"
-        fontWeight="300"
-        fontStyle="normal"
-        color="grey.1"
+        fontSize='sm'
+        color='grey.1'
+        fontWeight='600'
+        fontFamily='Lexend'
+       
       >
         Fotos
       </Text>
@@ -44,9 +45,7 @@ const BoxGalleryImages = ({ images }: IBoxGalleryImagesProps) => {
           gap="5px"
           rowGap="30px"
           justifyContent="space-between"
-          marginLeft="22px"
-          marginRight="22px"
-          marginBottom="22px"
+          
         >
           {images.map((items, index) => {
             const { isOpen, onOpen, onClose } = useDisclosure();

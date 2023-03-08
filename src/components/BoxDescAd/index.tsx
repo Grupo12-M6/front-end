@@ -1,39 +1,34 @@
-import { Text, Box } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react"
 
 interface IBoxDescAd {
-  description: string;
+  description: string
 }
 
 const BoxDescAd = ({ description }: IBoxDescAd) => {
   return (
     <Box
-      backgroundColor="grey.10"
-      borderRadius="4px"
-      display="flex"
-      flexDirection="column"
-      gap="32px"
+      w='100%'
+      p='8'
+      backgroundColor='grey.10'
+      borderRadius='4px'
+      display='flex'
+      flexDirection='column'
+      gap='6'
     >
       <Text
-        marginLeft="22px"
-        marginRight="22px"
-        marginTop="36px"
-        fontStyle="fonts.heading"
-        color="grey.1"
-        fontWeight="600"
+        fontStyle='fonts.heading'
+        fontSize='sm'
+        color='grey.1'
+        fontWeight='600'
+        fontFamily='Lexend'
       >
         Descrição
       </Text>
-      <Text
-        fontWeight="400"
-        fontStyle="fonts.body"
-        marginLeft="22px"
-        marginRight="22px"
-        marginBottom="36px"
-      >
+      <Text fontWeight='400' fontStyle='fonts.body' lineHeight='28px'>
         {description}
       </Text>
     </Box>
-  );
-};
+  )
+}
 
-export default BoxDescAd;
+export default BoxDescAd
