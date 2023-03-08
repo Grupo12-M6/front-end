@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { IComment } from "./comments";
+import { IComment, ICommentUpdate } from "./comments";
 import { IImage } from "./images";
 import { IUser } from "./user";
 
@@ -39,6 +39,13 @@ export interface IAdContextData {
   createCommentForOneAd: (
     adId: string | undefined,
     content: string
+  ) => Promise<void>;
+  updateComment: (
+    data: ICommentUpdate,
+    id: string
+  ) => Promise<void>;
+  deleteComment: (
+    id: string
   ) => Promise<void>;
   update: number;
   setUpdate: any;

@@ -49,7 +49,7 @@ export const CardUserInfo = ({ userInfo }: ICardUserProps) => {
       <Text fontSize='xs' fontWeight='400' lineHeight='28px'>
         {userInfo.description}
       </Text>
-      {userInfo.id === user.id && (
+      {userInfo.id === user?.id && (
         <Button
           variant='outlineBrand1'
           fontSize='xs'

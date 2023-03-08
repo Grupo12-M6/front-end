@@ -7,3 +7,9 @@ export interface IComment {
   ad: string;
   user: IUser;
 }
+
+export interface ICommentUpdate{
+  content?: string;
+  
+}
+
