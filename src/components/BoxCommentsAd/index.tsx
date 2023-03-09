@@ -14,6 +14,15 @@ import { useAuth } from "../../contexts/AuthContext"
 import { UseGetScreenWidth } from "../../hooks"
 import { IComment } from "../../interfaces/comments"
 
+import TimeAgo from 'javascript-time-ago'
+
+import en from 'javascript-time-ago/locale/en.json'
+import br from 'javascript-time-ago/locale/br.json'
+import ReactTimeAgo from "react-time-ago"
+
+TimeAgo.addDefaultLocale(br)
+TimeAgo.addLocale(br)
+
 interface IBoxCommentsProduct {
   comments: IComment[]
 }
@@ -27,6 +36,15 @@ const BoxCommentsAd = ({ comments }: IBoxCommentsProduct) => {
 
   const { user } = useAuth()
   const { updateComment, deleteComment } = useAd()
+
+  const timeSince = (date: any) => {
+    
+    return (
+      <>
+        Há <ReactTimeAgo date={date} locale="br-PT" timeStyle = "twitter" />
+      </>
+    )
+  }
 
   const submitChange = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
@@ -56,9 +74,9 @@ const BoxCommentsAd = ({ comments }: IBoxCommentsProduct) => {
       </Text>
       {comments.length > 0 ? (
         comments.map((item, indice) => {
-          // console.log(item.createdAt);
-          let test = item.createdAt.toString()
-          let text = test.slice(0, 10)
+          
+          let test: any = item.createdAt
+          let text = timeSince(test)
 
           return (
             <Box display='flex' flexDirection='column' gap='16px' key={indice}>
@@ -76,7 +94,7 @@ const BoxCommentsAd = ({ comments }: IBoxCommentsProduct) => {
                         {item.user.name}
                       </Text>
                       {/* "•" */}
-                      <Text fontSize='.875rem'> • {text}</Text>
+                      <Text fontSize='.875rem'>{text}</Text>
                     </HStack>
                   </HStack>
                   {user?.id == item.user.id && (
