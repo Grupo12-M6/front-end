@@ -39,7 +39,6 @@ export const LoginForm = ({onClose}: IModalProps) => {
           isClosable: true,
           position: 'top-right',
           containerStyle: {
-            marginTop: "83px",
             marginRight: "20px",
           }
         })
@@ -57,7 +56,6 @@ export const LoginForm = ({onClose}: IModalProps) => {
             isClosable: true,
             position: 'top-right',
             containerStyle: {
-              marginTop: "83px",
               marginRight: "20px",
             }
           })
@@ -71,7 +69,6 @@ export const LoginForm = ({onClose}: IModalProps) => {
             isClosable: true,
             position: 'top-right',
             containerStyle: {
-              marginTop: "83px",
               marginRight: "20px",
             }
           })
@@ -79,13 +76,25 @@ export const LoginForm = ({onClose}: IModalProps) => {
         if(err?.response.data.message == "Account not found"){
           toast({
             title: 'Erro ao efetuar o login.',
-            description: "Usuário não encontrado",
+            description: "Email ou senha inválido",
             status: 'error',
             duration: 3000,
             isClosable: true,
             position: 'top-right',
             containerStyle: {
-              marginTop: "83px",
+              marginRight: "20px",
+            }
+          })
+        }
+        if(err?.response.data.message == "User has been deleted!"){
+          toast({
+            title: 'Erro ao efetuar o login.',
+            description: "Email ou senha inválido",
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+            position: 'top-right',
+            containerStyle: {
               marginRight: "20px",
             }
           })

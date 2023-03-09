@@ -80,7 +80,6 @@ const AdProvider = ({ children }: IProviderProps) => {
             isClosable: true,
             position: 'top-right',
             containerStyle: {
-              marginTop: "83px",
               marginRight: "20px",
             }
           })
@@ -172,7 +171,6 @@ const AdProvider = ({ children }: IProviderProps) => {
           isClosable: true,
           position: 'top-right',
           containerStyle: {
-            marginTop: "83px",
             marginRight: "20px",
           }
         })
@@ -248,7 +246,6 @@ const AdProvider = ({ children }: IProviderProps) => {
           isClosable: true,
           position: 'top-right',
           containerStyle: {
-            marginTop: "83px",
             marginRight: "20px",
           }
         })
