@@ -135,7 +135,7 @@ export const CustomCard = ({ ad }: ICustomCardProps) => {
           </Heading>
           <Text
             maxW='100%'
-            maxH='32px'
+            h='32px'
             lineHeight='16px'
             textAlign='left'
             fontSize='0.875rem'
