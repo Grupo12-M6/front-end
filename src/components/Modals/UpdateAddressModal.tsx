@@ -17,7 +17,7 @@ export const UpdateAddressModal = ({ isOpen, onClose }: IModalProps) => {
         justifyContent='space-between'
       >
         <Heading fontFamily='Lexend' fontSize='sm' color='black'>
-          Editar perfil
+          Editar endereço
         </Heading>
         <UpdateAddressForm onCloseForm={onClose} />
       </VStack>
