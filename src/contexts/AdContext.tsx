@@ -13,6 +13,7 @@ import {
 import { IComment, ICommentUpdate } from "../interfaces/comments"
 import { IUser } from "../interfaces/user"
 import jwt_decode from "jwt-decode"
+import { useToast } from "@chakra-ui/react"
 
 const AdContext = createContext<IAdContextData>({} as IAdContextData)
 
@@ -28,6 +29,7 @@ const useAd = () => {
 const AdProvider = ({ children }: IProviderProps) => {
   const [userInfo, setUserInfo] = useState<IUser>({} as IUser)
   const { token } = useAuth()
+  const toast = useToast()
 
   const [update, setUpdate] = useState(0)
   const [ads, setAds] = useState<IAd[]>([])
@@ -70,6 +72,18 @@ const AdProvider = ({ children }: IProviderProps) => {
           }
         )
         .then((resp) => {
+          toast({
+            title: 'Criação de Anúncio.',
+            description: "Anúncio criado com sucesso",
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+            position: 'top-right',
+            containerStyle: {
+              marginTop: "83px",
+              marginRight: "20px",
+            }
+          })
           console.log(resp.data)
         })
         .catch((err) => console.log(err))
@@ -147,7 +161,21 @@ const AdProvider = ({ children }: IProviderProps) => {
       })
       .then((res) => {
         setUpdate(update + 1)
+
         listAds()
+
+        toast({
+          title: 'Deleção de Anúncio.',
+          description: "Anúncio excluído com sucesso",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+          containerStyle: {
+            marginTop: "83px",
+            marginRight: "20px",
+          }
+        })
       })
       .catch((err) => {
         console.log(err)
@@ -211,6 +239,19 @@ const AdProvider = ({ children }: IProviderProps) => {
       })
       .then((res) => {
         setUpdate(update + 1)
+
+        toast({
+          title: 'Edição de Anúncio.',
+          description: "Anúncio alterado com sucesso",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right',
+          containerStyle: {
+            marginTop: "83px",
+            marginRight: "20px",
+          }
+        })
         // console.log("Criado", res.data);
         // setComments(res.data);
       })

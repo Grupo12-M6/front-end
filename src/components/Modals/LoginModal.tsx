@@ -20,7 +20,7 @@ export const LoginModal = ({ isOpen, onClose, onOpenRegister }: IModalProps) => 
         <Heading fontFamily='Lexend' fontSize='md' color='black'>
           Login
         </Heading>
-        <LoginForm />
+        <LoginForm onClose={onClose}/>
         <VStack gap='4' alignItems='center' w='100%'>
           <Text fontSize='0.875rem'>Ainda não possui conta?</Text>
           <Button
